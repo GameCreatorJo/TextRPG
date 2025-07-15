@@ -33,7 +33,7 @@ namespace TextRPG.Class.Manager
             Instance = this;
             _createManager = new CreateManager();
             _scene = new Scene(); // Initialize with a default scene
-            //battleManager = new BattleManager();
+            battleManager = new BattleManager();
         }
 
         public void StartGame()
@@ -66,6 +66,7 @@ namespace TextRPG.Class.Manager
                     case "2":
                         _scene = _createManager.SceneDatabase.SceneDictionary["DungeonScene"]; // Use SceneDatabase dictionary
                         _scene.Render(); // 상태창 씬 렌더링
+                        GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
                         Console.WriteLine("전투하기 선택됨.");
                         // 전투 호출
                         break;

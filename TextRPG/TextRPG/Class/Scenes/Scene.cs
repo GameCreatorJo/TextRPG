@@ -42,7 +42,8 @@ namespace TextRPG.Class.Scenes
                     RenderShopScene();
                     break;
                 case "DungeonScene":
-                    RenderDungeonScene();
+                    //RenderDungeonScene();
+                    GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
                     break;
                 default:
                     Console.WriteLine("알 수 없는 씬입니다.");
