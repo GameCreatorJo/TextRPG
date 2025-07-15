@@ -113,7 +113,7 @@ namespace TextRPG.Class.Manager
             }
 
             Console.WriteLine($"\n[내정보]");
-            Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player._job})");
+            Console.WriteLine($"Lv.{player._lv} {player.Name} ({player._job})");
             Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
         }
 
