@@ -66,9 +66,13 @@ namespace TextRPG.Class.UI
             {
                 QuestManager.Instance.SelectQuest(quest.Id);
             }
-            else
+            else if(choice == "2")
             {
                 Console.WriteLine(" 퀘스트 수락 취소됨.");
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
             }
         }
 
@@ -97,12 +101,16 @@ namespace TextRPG.Class.UI
             {
                 QuestManager.Instance.AbandonQuest();
             }
-            else
+            else if (input == "2")
             {
                 Console.WriteLine(" 퀘스트를 유지합니다.");
             }
+            else 
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+            }
         }
-
+        //진행도
         public void PromptKillProgress()
         {
             Console.WriteLine("\n 처치 이벤트 발생!");
