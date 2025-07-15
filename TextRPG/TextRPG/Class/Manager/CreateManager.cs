@@ -58,7 +58,7 @@ namespace TextRPG.Class.Manager
         }
 
         public void CreatePlayerData()
-        {
+        {//test
             string playerName = Console.ReadLine();
             player = new Player(playerName);
             Console.WriteLine("Player data created!");
