@@ -12,7 +12,7 @@ namespace TextRPG.Class.Manager
 {
     //BattleManager 2:33
     internal class BattleManager
-    {
+    {/*
         private List<Monster> monsters = new List<Monster>();
         private Random random = new Random();
         private Player player;
@@ -207,7 +207,7 @@ namespace TextRPG.Class.Manager
 
             Console.WriteLine("\n0. 다음");
             Console.ReadLine();
-        }
+        }*/
 
     }
 

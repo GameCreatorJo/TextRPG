@@ -34,6 +34,8 @@ namespace TextRPG.Class.Database.Player
             this._gold = 1500;
             this._exp = 0;
 
+            this._inventory = new List<Item>();
+
         }
         public override void ShowInfo()
         {

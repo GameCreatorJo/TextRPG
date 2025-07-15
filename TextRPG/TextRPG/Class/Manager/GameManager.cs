@@ -53,27 +53,30 @@ namespace TextRPG.Class.Manager
         }
         public void SelectAction()
         {
-            string input = Console.ReadLine();
-            switch (input)
+            while (true)
             {
-                case "1":
-                    Console.WriteLine("상태창 선택됨.");
-                    GameManager.Instance.CreateManager.Player.ShowInfo(); // 상태창 보기 메소드 호출
-                    GameManager.Instance.CreateManager.Player.ShowInventory(); // 인벤토리 보기 메소드 호출
-                    // 상태창 호출
-                    break;
-                case "2":
-                    Console.WriteLine("전투하기 선택됨.");
-                    // 전투 호출
-                    break;
-                case "3":
-                    Console.WriteLine("게임 종료 선택됨.");
-                    // 게임 종료
-                    break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다. 다시 시도하세요.");
-                    SelectAction();
-                    break;
+                Console.WriteLine("어떤 행동을 하시겠습니까?");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        Console.WriteLine("상태창 선택됨.");
+                        GameManager.Instance.CreateManager.Player.ShowInfo(); // 상태창 보기 메소드 호출
+                        GameManager.Instance.CreateManager.Player.ShowInventory(); // 인벤토리 보기 메소드 호출
+                        break;
+                    case "2":
+                        Console.WriteLine("전투하기 선택됨.");
+                        // 전투 호출
+                        break;
+                    case "3":
+                        Console.WriteLine("게임 종료 선택됨.");
+                        // 게임 종료
+                        break;
+                    default:
+                        Console.WriteLine("잘못된 입력입니다. 다시 시도하세요.");
+                        SelectAction();
+                        break;
+                }
             }
         }
     }

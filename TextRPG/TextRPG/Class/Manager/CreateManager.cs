@@ -64,8 +64,10 @@ namespace TextRPG.Class.Manager
 
         public void CreatePlayerData()
         {//test
+            Console.WriteLine("플레이어 이름을 입력해주세요!");
             string playerName = Console.ReadLine();
             player = new Player(playerName);
+            player.TakeItem();
             Console.WriteLine("Player data created!");
         }
         public void CreateGameWorld()
