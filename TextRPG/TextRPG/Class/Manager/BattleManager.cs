@@ -56,7 +56,7 @@ namespace TextRPG.Class.Manager
             Console.Clear();
             Console.WriteLine("전투 시작\n");
 
-            while (player.Hp > 0 && monsters.Any(m => !m.IsDead))
+            while (player._hp > 0 && monsters.Any(m => !m.IsDead))
             {
                 ShowStatus();
                 PlayerTurn();
@@ -113,7 +113,7 @@ namespace TextRPG.Class.Manager
             }
 
             Console.WriteLine($"\n[내정보]");
-            Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
+            Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player._job})");
             Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
         }
 
