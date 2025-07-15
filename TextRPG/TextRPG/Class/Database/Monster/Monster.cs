@@ -9,7 +9,8 @@ namespace TextRPG.Class.Database.Monster
 {
     internal class Monster : DefaultCharacter
     {
-        public Monster(int lv, string name, string job, int str, int plusStr, int armorPoint, int plusArmorPoint, int maxHp, int plusHp, int gold)
+        public Monster
+            (int lv, string name, string job, int str, int plusStr, int armorPoint, int plusArmorPoint, int maxHp, int plusHp, int gold, int criticalRate, int dodgeRate)
         {
             
         }

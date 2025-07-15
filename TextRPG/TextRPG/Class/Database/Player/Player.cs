@@ -14,6 +14,8 @@ namespace TextRPG.Class.Database.Player
     internal class Player : DefaultCharacter
     {
         private int _maxEXP = 50;
+        private string _weapon = "";
+        private string _armor = "";
 
         public Player(string inputName) 
         {
@@ -34,8 +36,10 @@ namespace TextRPG.Class.Database.Player
             this._gold = 1500;
             this._exp = 0;
 
-            this._inventory = new List<Item>();
+            this._criticalRate = 0;
+            this._dodgeRate = 0;
 
+            this._inventory = new List<Item>();
         }
         public override void ShowInfo()
         {
@@ -73,11 +77,34 @@ namespace TextRPG.Class.Database.Player
         public void Equip(Item item)
         {
             // 아이템 장착 메소드
+            if (item.PlusStr > 0 && item.PlusArmorPoint == 0)
+            {
+                this._weapon = item.Name;    
+            }
+            else if (item.PlusArmorPoint > 0 && item.PlusStr == 0)
+            {
+                this._armor = item.Name;
+            }
+
+            // 아이템을 장착함으로써 얻는 추가 스텟 설정
+            this.plusArmorPoint = item.PlusArmorPoint;
+            this.plusStr = item.PlusStr;
         }
 
         public void UnEquip(Item item) 
         {
             // 아아템 해제 메소드
+            if (this._weapon == item.Name)
+            {
+                this._weapon = "";
+            }
+            else if (this._armor == item.Name)
+            {
+                this._armor = "";
+            }
+
+            this.plusArmorPoint -= item.PlusArmorPoint;
+            this.plusStr -= item.PlusStr;
         }
 
         public void TakeEXP(int gainedExp)
@@ -92,16 +119,18 @@ namespace TextRPG.Class.Database.Player
             }
         }
 
-        public void TakeStat()
-        {
-            // 캐릭터 스탯 획득 메소드
-        }
-
         public void LevelUp()
         {
             // 레벨 업 메소드
-            this._exp = 0;
+            this._exp = ( _exp - _maxEXP );
             this._lv++;
+
+            // 레벨 업에 따른 기초 스텟 증가도 있어야하지 않을까?
+        }
+
+        public void TakeStat()
+        {
+            // 캐릭터 스탯 획득 메소드
         }
 
         public void SpendGold(int gold)
