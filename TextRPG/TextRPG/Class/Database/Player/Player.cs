@@ -10,7 +10,6 @@ namespace TextRPG.Class.Database.Player
 {
     internal class Player : DefaultCharacter, IPlayerData
     {
-        // 주용진
         public Player(string inputName) 
         {
             this._lv = 1;
