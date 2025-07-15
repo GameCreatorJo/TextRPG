@@ -8,7 +8,7 @@ using TextRPG.Class.Interface;
 
 namespace TextRPG.Class.Database.Player
 {
-    internal class Player : DefaultCharacter, IPlayerData
+    internal class Player : DefaultCharacter
     {
         public Player(string inputName) 
         {

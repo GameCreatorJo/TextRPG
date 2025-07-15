@@ -7,38 +7,29 @@ using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Database.Monster
 {
-    internal class MonsterDatabase : DefaultCharacter
+    internal class MonsterDatabase
     {
-        List<MonsterDatabase> monsterDatabaseList = new List<MonsterDatabase>();
-
-        Dictionary<string, MonsterDatabase> monsterDictionary = new Dictionary<string, MonsterDatabase>();
-
-        public MonsterDatabase(int lv, string name, string job, int str, int plusStr, int armorPoint, int plusArmorPoint, int maxHp, int plusHp, int gold)
+        private Dictionary<string, Monster> monsterDictionary;
+        public Dictionary<string, Monster> MonsterDictionary
         {
-            this._lv = lv;
-            this._name = name;
-            this._job = job;
-
-            this._str = str;
-            this.plusStr = plusStr;
-
-            this._armorPoint = armorPoint;
-            this.plusArmorPoint = plusArmorPoint;
-
-            this._maxHp = maxHp;
-            this._plusHp = plusHp;
-            this._hp = _maxHp;
-
-            this._gold = gold;
-
-            monsterDatabaseList.Add(this);
+            get { return monsterDictionary; }
         }
+        Monster 미니언 = new Monster(2, "미니언", "enemy", 3, 0, 1, 0, 15, 0, 1);
+        Monster 대포미니언 = new Monster(5, "대포 미니언", "enemy", 3, 0, 5, 0, 25, 0, 5);
+        Monster 공허충 = new Monster(3, "공허충", "enemy", 3, 0, 3, 0, 10, 0, 1);
+
+
+        public MonsterDatabase()
+        {
+            monsterDictionary = new Dictionary<string, Monster>();
+        }
+
 
         public void createMonster()
         {
-            monsterDictionary.Add("minion", new MonsterDatabase(2, "미니언", "enemy", 3, 0, 1, 0, 15, 0, 1));
-            monsterDictionary.Add("SiegeMinion", new MonsterDatabase(5, "대포 미니언", "enemy", 3, 0, 5, 0, 25, 0, 5));
-            monsterDictionary.Add("SiegeMinion", new MonsterDatabase(3, "공허충", "enemy", 3, 0, 3, 0, 10, 0, 1));
+            monsterDictionary.Add("minion",미니언);
+            monsterDictionary.Add("siegeMinion",대포미니언);
+            monsterDictionary.Add("siegeMinion2", 공허충);
         }
     }
 }

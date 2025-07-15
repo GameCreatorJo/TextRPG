@@ -16,36 +16,7 @@ namespace TextRPG.Class.Manager
         private Random random = new Random();
 
         private Player player;
-        
-        
-        private class Monster
-        {
-            public string Name { get; }
-            public int Hp { get; private set; }
-            public int Attack { get; }
-            public int Level { get; }
-
-            public bool IsDead => Hp <= 0;
-
-            public Monster(string name, int hp, int attack, int level)
-            {
-                Name = name;
-                Hp = hp;
-                Attack = attack;
-                Level = level;
-
-            }
-
-            public void TakeDamage(int damage)
-            {
-                Hp -= damage;
-                if (Hp < 0)
-                {
-                    Hp = 0;
-                }
-            }
-        }
-
+        /*
         public void Battle(Player player)
         {
             this.player = player;
@@ -54,7 +25,7 @@ namespace TextRPG.Class.Manager
             Console.Clear();
             Console.WriteLine("전투 시작\n");
 
-           /* while(player.Hp > 0 && monsters.Any(m => !m.IsDead))
+            while(player.Hp > 0 && monsters.Any(m => !m.IsDead))
             {
                 ShowStatus();
                 PlayerTurn();
@@ -65,37 +36,36 @@ namespace TextRPG.Class.Manager
 
                 EnemyTurn();
 
-            } */
+            } 
 
             EndBattle();
-        }
+        }*/
 
         private List<Monster> DungeonMonsters()
         {
-            var List = new List<Monster>();
             int count = random.Next(1, 5);
-
+            List<Monster> List = new List<Monster>();
             for (int i = 0; i < count; i++)
             {
                 int type = random.Next(1, 4);
                 switch (type)
                 {
                     case 1:
-                        List.Add(new Monster("미니언", 15, 5, 2));
+                        List.Add(GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary["minion"]);
                         break;
+                        
                     case 2:
-                        List.Add(new Monster("공허충", 10, 9, 3));
+                        List.Add(GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary["siegeMinion"]);
                         break;
                     case 3:
-                        List.Add(new Monster("대포미니언", 25, 8, 5));
+                        List.Add(GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary["siegeMinion2"]);
                         break;
-
                 }
             }
 
             return List;
         }
-
+        /*
         private void ShowStatus()
         {
             Console.Clear();
@@ -113,8 +83,8 @@ namespace TextRPG.Class.Manager
             Console.WriteLine($"\n[내정보]");
             //Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
             //Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
-        }
-
+        }*/
+        /*
 
         private void Attack()
         {
@@ -138,19 +108,19 @@ namespace TextRPG.Class.Manager
                 return;
             }
 
-           /* int damage = player.Str;
+            int damage = player.Str;
 
             target.TakeDamage(damage);
 
             Console.WriteLine($"\n{player.Name}의 공격!");
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
-           */
+           
             if (target.IsDead)
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
 
            
         }
-
+        */
         private void PlayerTurn()
         {
             Console.WriteLine("\n1. 공격");
@@ -162,7 +132,7 @@ namespace TextRPG.Class.Manager
             switch (input)
             {
                 case "1":
-                    Attack();
+                    //Attack();
                     break;
                 case "0":
                     Console.WriteLine("턴을 넘깁니다.");
@@ -173,7 +143,7 @@ namespace TextRPG.Class.Manager
                     break;
             }
         }
-
+        /*
         private void EnemyTurn()
         {
             foreach (var monster in monsters)
@@ -188,7 +158,7 @@ namespace TextRPG.Class.Manager
                 //Console.WriteLine($"\n{monster.Name}의 공격 {player.Name}에게 {damage}의 데미지");
             }
         }
-
+        */
         private void EndBattle()
         {
             Console.Clear();

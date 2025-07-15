@@ -4,16 +4,20 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
+using TextRPG.Class.Database.Monster;
+using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
 {
     internal class CreateManager
-    {/*
+    {
+
         private MonsterDatabase monsterDatabase;
         public MonsterDatabase MonsterDatabase
         {
             get { return monsterDatabase; }
         }
+        /*
         private ItemDatabase _itemDatabas;
         private ItemDatabase ItemDatabase
         {
@@ -28,9 +32,8 @@ namespace TextRPG.Class.Manager
 
         public CreateManager()
         {
-            //    monsterDatabase = new MonsterDatabase();
-            //    itemDatabase = new ItemDatabase();
-            //    mainScene = new MainScene("Main Scene", "This is the main scene of the game.");
+            monsterDatabase = new MonsterDatabase();
+            monsterDatabase.createMonster();
             Console.WriteLine("CreateManager initialized!");
         }
         public void CreateMonster()

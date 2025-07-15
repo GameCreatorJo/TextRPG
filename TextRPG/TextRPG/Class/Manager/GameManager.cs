@@ -14,14 +14,12 @@ namespace TextRPG.Class.Manager
         {
             get { return _createManager; }
         }
-        /*
         private BattleManager battleManager;
         public BattleManager BattleManager
         {
             get { return battleManager; }
         }
-        
-        */
+       
         private MainScene _mainScene;
         public MainScene MainScene
         {
@@ -59,16 +57,16 @@ namespace TextRPG.Class.Manager
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("상점에 가기 선택됨.");
-                    // 상점 로직 호출
+                    Console.WriteLine("상태창 선택됨.");
+                    // 상태창 호출
                     break;
                 case "2":
                     Console.WriteLine("전투하기 선택됨.");
-                    // 퀘스트 로직 호출
+                    // 전투 호출
                     break;
                 case "3":
                     Console.WriteLine("게임 종료 선택됨.");
-                    // 전투 로직 호출
+                    // 게임 종료
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다. 다시 시도하세요.");
