@@ -12,7 +12,13 @@ namespace TextRPG.Class.Database.Item
         public Item(int id, string name, string description, int plusStr, int plusArmorPoint, int gold)
             :base(id, name, description, plusStr, plusArmorPoint, gold)
         {
-           
+           // 아이템 생성자
+            _id = id;
+            _name = name;
+            _description = description;
+            _plusStr = plusStr;
+            _plusArmorPoint = plusArmorPoint;
+            _gold = gold;
         }
         // 아이템의 정보를 보여주는 메소드
         public void ShowInfo()
