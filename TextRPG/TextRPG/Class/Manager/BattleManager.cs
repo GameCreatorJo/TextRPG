@@ -34,6 +34,15 @@ namespace TextRPG.Class.Manager
             player = initPlayer;
             monsters = GenerateDungeonMonsters();
 
+            /*몬스터와 플레이어 HP 확인(테스트용
+            Console.WriteLine($"몬스터 수: {monsters.Count}");
+            foreach (var m in monsters)
+            {
+                Console.WriteLine($"{m.Name} HP: {m.Hp}/{m.MaxHp}");
+            }
+            Console.WriteLine($"플레이어 HP: {player.Hp}/{player.MaxHp}");
+            */
+
             //Console.Clear();
             Console.WriteLine("전투 시작\n");
             SearchHP(player, monsters[0]);
@@ -129,7 +138,7 @@ namespace TextRPG.Class.Manager
             //공격력 10% 오차처리
             int damage = random.Next(minDamage, maxDamage + 1);
 
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, player.CriticalRate);
 
             Console.WriteLine($"\n{player.Name}의 공격!");
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
@@ -171,7 +180,7 @@ namespace TextRPG.Class.Manager
 
                 int damage = monster.Str;
                 
-                player.TakeDamage(damage);
+                player.TakeDamage(damage, monster.CriticalRate);
                 Console.WriteLine($"\n{monster.Name}의 공격 {player.Name}에게 {damage}의 데미지");
             }
         }
