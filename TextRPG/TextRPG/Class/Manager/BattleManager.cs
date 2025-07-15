@@ -13,9 +13,9 @@ namespace TextRPG.Class.Manager
     internal class BattleManager
     {
         private List<Monster> monsters = new List<Monster>();
-        private bool isRun = false;
         private Random random = new Random();
 
+        //플레이어 정보
         private Player player;
         
         
@@ -47,6 +47,7 @@ namespace TextRPG.Class.Manager
             }
         }
 
+        //전투 실행
         public void Battle(Player player)
         {
             this.player = player;
@@ -54,8 +55,8 @@ namespace TextRPG.Class.Manager
 
             Console.Clear();
             Console.WriteLine("전투 시작\n");
-
-           /* while(player.Hp > 0 && monsters.Any(m => !m.IsDead))
+           
+           while(player.Hp > 0 && monsters.Any(m => !m.IsDead))
             {
                 ShowStatus();
                 PlayerTurn();
@@ -66,7 +67,7 @@ namespace TextRPG.Class.Manager
 
                 EnemyTurn();
 
-            } */
+            } 
 
             EndBattle();
         }
@@ -74,6 +75,7 @@ namespace TextRPG.Class.Manager
         private List<Monster> DungeonMonsters()
         {
             var List = new List<Monster>();
+            //1~4마리 생성
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
@@ -102,6 +104,7 @@ namespace TextRPG.Class.Manager
             Console.Clear();
             Console.WriteLine("전투 상태\n");
 
+            //몬스터 상태 죽으면 회색 글씨로 나옴
             for (int i = 0; i < monsters.Count; i++)
             {
                 var m = monsters[i];
@@ -112,8 +115,8 @@ namespace TextRPG.Class.Manager
             }
 
             Console.WriteLine($"\n[내정보]");
-            //Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
-            //Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
+            Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
+            Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
         }
 
 
@@ -139,13 +142,20 @@ namespace TextRPG.Class.Manager
                 return;
             }
 
-           /* int damage = player.Str;
+            //오차가 소수점이면 올림처리
+            double offset = Math.Ceiling(player.Str * 0.1);
+            
+            int minDamage = (int)(player.Str - offset);
+            int maxDamage = (int)(player.Str + offset);
+
+            //공격력 10% 오차
+            int damage = random.Next(minDamage, maxDamage + 1);
 
             target.TakeDamage(damage);
 
             Console.WriteLine($"\n{player.Name}의 공격!");
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
-           */
+           
             if (target.IsDead)
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
 
@@ -181,12 +191,11 @@ namespace TextRPG.Class.Manager
             {
                 if (monster.IsDead) continue;
 
-                
-                double offset = Math.Ceiling(monster.Attack * 0.1);
-                int damage = random.Next((int)(monster.Attack - offset), (int)(monster.Attack + offset) + 1);
 
-                //player.TakeDamage(damage);
-                //Console.WriteLine($"\n{monster.Name}의 공격 {player.Name}에게 {damage}의 데미지");
+                int damage = monster.Attack;
+
+                player.TakeDamage(damage);
+                Console.WriteLine($"\n{monster.Name}의 공격 {player.Name}에게 {damage}의 데미지");
             }
         }
 
@@ -194,16 +203,24 @@ namespace TextRPG.Class.Manager
         {
             Console.Clear();
             Console.WriteLine("\n전투결과\n");
+            
+            int defeatedCount = monsters.Count(m => m.IsDead);
 
-            /*if(player.Hp <= 0)
+            if(player.Hp <= 0)
             {
                 Console.WriteLine("패배했습니다.");
             }
             else
             {
                 Console.WriteLine("승리");
+                Console.WriteLine($"던전에서 몬스터 {defeatedCount}마리를 잡았습니다.\n");
             }
-            */
+            
+
+            Console.WriteLine($"Lv.{player.Lv} {player.Name}");
+            Console.WriteLine($"HP {player.MaxHp} -> {player.Hp}");
+            
+
             Console.WriteLine("\n0. 다음");
             Console.ReadLine();
         }
