@@ -9,6 +9,7 @@ using TextRPG.Class.Database.Monster;
 
 namespace TextRPG.Class.Manager
 {
+    //BattleManager test
     internal class BattleManager
     {
         private List<Monster> monsters = new List<Monster>();
