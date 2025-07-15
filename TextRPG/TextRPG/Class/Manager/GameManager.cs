@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TextRPG.Class.Scene;
+using System.Xml.Linq;
+using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
 {
@@ -19,28 +20,27 @@ namespace TextRPG.Class.Manager
         {
             get { return battleManager; }
         }
-       
-        private MainScene _mainScene;
-        public MainScene MainScene
+        private Scene _scene;
+        public Scene Scene
         {
-            get { return _mainScene; }
+            get { return _scene; }
         }
+
         public static GameManager Instance { get; private set; }
 
         public GameManager()
         {
             Instance = this;
             _createManager = new CreateManager();
-            _mainScene = new MainScene("메인 씬", "게임의 시작 화면입니다."); // 적절한 이름과 설명 입력
+            _scene = new Scene(); // Initialize with a default scene
             //battleManager = new BattleManager();
-
         }
 
         public void StartGame()
         {
             Console.WriteLine("Game started!");
             InitializeGame();
-            GameManager.Instance.MainScene.Render();
+            GameManager.Instance.Scene.Render();
             SelectAction();
 
             // Initialize game components here
@@ -55,28 +55,35 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("어떤 행동을 하시겠습니까?");
                 string input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
                         Console.WriteLine("상태창 선택됨.");
-                        GameManager.Instance.CreateManager.Player.ShowInfo(); // 상태창 보기 메소드 호출
-                        GameManager.Instance.CreateManager.Player.ShowInventory(); // 인벤토리 보기 메소드 호출
+                        _scene = _createManager.SceneDatabase.SceneDictionary["StatusScene"]; // Use SceneDatabase dictionary
+                        _scene.Render(); // 상태창 씬 렌더링
                         break;
                     case "2":
+                        _scene = _createManager.SceneDatabase.SceneDictionary["DungeonScene"]; // Use SceneDatabase dictionary
+                        _scene.Render(); // 상태창 씬 렌더링
                         Console.WriteLine("전투하기 선택됨.");
                         // 전투 호출
                         break;
                     case "3":
+                        _scene = _createManager.SceneDatabase.SceneDictionary["ShopScene"]; // Use SceneDatabase dictionary
+                        _scene.Render(); // 상태창 씬 렌더링
+                        Console.WriteLine("상점가기 선택됨.");
+                        break;
+                    case "4":
                         Console.WriteLine("게임 종료 선택됨.");
                         // 게임 종료
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다. 다시 시도하세요.");
-                        SelectAction();
-                        break;
+                        continue;
                 }
+                _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"]; // Use SceneDatabase dictionary
+                _scene.Render();
             }
         }
     }
