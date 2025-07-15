@@ -12,10 +12,10 @@ namespace TextRPG.Class.Database.Item
     {
         public static List<DefaultItem> DefaultItems { get; } = new ()
         {
-            new DefaultItem.Item(1, "초보?�의 갑옷", "초보?�의 ?�술??가죽갑?�이??", 5, 0, 100),
-            new DefaultItem.Item(2, "초보?�의 철�?", "초보?�의 조잡??철�??�다.", 0, 5, 150),
-            new DefaultItem.Item(3, "강철검", "강철�?만든 ???��???검?�다.", 10, 0, 200),
-            new DefaultItem.Item(4, "강철갑옷", "강철�?만든 ???��???갑옷?�다.", 0, 10, 250),
+            new DefaultItem.Item(1, "Basic Leather Armor", "It's a crude leather armor of a beginner", 5, 0, 100),
+            new DefaultItem.Item(2, "Basic Sword", "It's a crude iron sword of a beginner.", 0, 5, 150),
+            new DefaultItem.Item(3, "Short Sword", "It's a short sword.", 10, 0, 200),
+            new DefaultItem.Item(4, "Iron Mail", "It's a Iron mail.", 0, 10, 250),
 
 
         };
