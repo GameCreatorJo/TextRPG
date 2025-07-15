@@ -82,6 +82,10 @@ namespace TextRPG.Class.Manager
             }
 
         }
+        public Quest GetActiveQuest()
+        {
+            return _activeQuest;
+        }
 
     }
 
