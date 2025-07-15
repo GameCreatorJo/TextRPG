@@ -38,7 +38,7 @@ namespace TextRPG.Class.Database.Monster
         {
             monsterDictionary.Add("minion", new MonsterDatabase(2, "미니언", "enemy", 3, 0, 1, 0, 15, 0, 1));
             monsterDictionary.Add("SiegeMinion", new MonsterDatabase(5, "대포 미니언", "enemy", 3, 0, 5, 0, 25, 0, 5));
-            monsterDictionary.Add("SiegeMinion", new MonsterDatabase(3, "공허충", "enemy", 3, 0, 3, 0, 10, 0, 1));
+            monsterDictionary.Add("Voidling", new MonsterDatabase(3, "공허충", "enemy", 3, 0, 3, 0, 10, 0, 1));
         }
     }
 }
