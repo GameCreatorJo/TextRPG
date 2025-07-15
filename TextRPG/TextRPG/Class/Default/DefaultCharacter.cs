@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextRPG.Class.Database.ItemData;
 
 namespace TextRPG.Class.Data
 {
     internal abstract class DefaultCharacter
     {
         protected int _lv;
-        protected string _name = "";
-        protected string _job = "";
+        protected string _name;
+        protected string _job;
 
         // 기본 공격력
         protected int _str;
@@ -29,27 +30,85 @@ namespace TextRPG.Class.Data
         // 현재 체력
         protected int _hp;
 
+        // 현재 보유 골드
         protected int _gold;
+        // 캐릭터의 경험치
+        protected int _exp;
 
         // 캐릭터의 인벤토리
-        // private List<ItemData> _item;
+        protected List<Item> _inventory;
+        public List<Item> Inventory
+        {
+            get { return _inventory; }
+        }
+        public int Lv
+        {
+            get { return _lv; }
+        }
+        public string Name
+        {
+            get { return _name; }
+        }
+        public string Job
+        {
+            get { return _job; }
+        }
+        public int Str
+        {
+            get { return _str + plusStr; }
+        }
+        public int ArmorPoint
+        {
+            get { return _armorPoint + plusArmorPoint; }
+        }
+        public int MaxHp
+        {
+            get { return _maxHp + _plusHp; }
+        }
+        public int Hp
+        {
+            get { return _hp; }
+        }
+        public int Gold
+        {
+            get { return _gold; }
+        }
+        public int Exp
+        {
+            get { return _exp; }
+        }
+
+
 
         public DefaultCharacter()
         {
             
         }
 
-        public void ShowInfo()
+        public virtual void ShowInfo()
         {
             // 캐릭터의 능력치를 보여주는 메소드
+            Console.WriteLine("Lv. " + _lv);
+            Console.WriteLine("Chad ( " + _name + " )");
+            Console.WriteLine("공격력: " + _str);
+            Console.WriteLine("방어력: " + _armorPoint);
+            Console.WriteLine("체력: " + _maxHp);
+            Console.WriteLine("Gold: " + _gold + " G");
         }
 
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage)
         {
             // 캐릭터끼리 데미지를 주고받는 메소드
+            this._hp -= damage;
+
+            if (this._hp <= 0)
+            {
+                this._hp = 0;
+                Death();
+            }
         }
 
-        public void Death()
+        public virtual void Death()
         {
             // 캐릭터의 체력이 0이 되면 발생하는 메소드
         }

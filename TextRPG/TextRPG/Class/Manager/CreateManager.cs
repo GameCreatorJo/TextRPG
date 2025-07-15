@@ -4,9 +4,11 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
-using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Data;
+using TextRPG.Class.Database.ItemData;
+using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Database.Player;
+using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
 {
@@ -22,45 +24,46 @@ namespace TextRPG.Class.Manager
         {
             get { return monsterDatabase; }
         }
-        /*
-        private ItemDatabase _itemDatabas;
-        private ItemDatabase ItemDatabase
+        
+        private ItemDatabaseList _itemDatabas;
+        public ItemDatabaseList ItemDatabase
         {
             get { return _itemDatabas; }
         }
 
-        private MainScene mainScene;
-        public MainScene MainScene
-        {
-            get { return mainScene; }
-        }*/
+        public SceneDatabase SceneDatabase { get; private set; }
 
         public CreateManager()
         {
             monsterDatabase = new MonsterDatabase();
-            monsterDatabase.createMonster();
+            _itemDatabas = new ItemDatabaseList();
+            SceneDatabase = new SceneDatabase();
+
             Console.WriteLine("CreateManager initialized!");
         }
         public void CreateMonster()
         {
-            // 인스턴스 생성 메소드 호출
+            monsterDatabase.CreateMonster();
             Console.WriteLine("Monster database created!");
         }
         public void CreateItem()
         {
+            _itemDatabas.CreateItem();
             // 인스턴스 생성 메소드 호출
             Console.WriteLine("Item database created!");
         }
         public void CreateScene()
         {
-            // 인스턴스 생성 메소드 호출
+            SceneDatabase.CreateScene();
             Console.WriteLine("Scene created!");
         }
 
         public void CreatePlayerData()
-        {
+        {//test
+            Console.WriteLine("플레이어 이름을 입력해주세요!");
             string playerName = Console.ReadLine();
             player = new Player(playerName);
+            player.TakeItem();
             Console.WriteLine("Player data created!");
         }
         public void CreateGameWorld()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TextRPG.Class.Data;
 
 
-namespace TextRPG.Class.Database.Item
+namespace TextRPG.Class.Database.ItemData
 {
     internal class Apple : DefaultItem
     {
