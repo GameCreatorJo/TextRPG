@@ -38,12 +38,12 @@ namespace TextRPG.Class.Manager
             Console.Clear();
             Console.WriteLine("전투 시작\n");
 
-            while (player._hp > 0 && monsters.Any(m => !m.IsDead))
+            while (player.Hp > 0 && monsters.Any(m => m.Hp > 0))
             {
                 ShowBattleStatus();
                 PlayerTurn();
 
-                if (monsters.All(m => m.IsDead))
+                if (monsters.All(m => m.Hp <= 0))
                 {
                     break;
                 }
@@ -58,34 +58,26 @@ namespace TextRPG.Class.Manager
         private List<Monster> GenerateDungeonMonsters()
         {
             var dungeonMonsters = new List<Monster>();
-            //데이터베이스에서 가져오기
-            var monsterKeys = MonsterDatabase.MonsterDictionary.Keys.ToList();
+            var monsterDict = GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary;
+            var monsterKeys = monsterDict.Keys.ToList();
+
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
             {
                 string key = monsterKeys[random.Next(monsterKeys.Count)];
-                Monster original = monsterDatabase.MonsterDictionary[key];
+                
+                Monster original = monsterDict[key];
 
-                Monster monster = new Monster
-                (
-                 original._lv,
-                 original._name,
-                 original._job,
-                 original._str,
-                 original.plusStr,
-                 original._armorPoint,
-                 original.plusArmorPoint,
-                 original._maxHp,
-                 original._plusHp,
-                 original._gold
-                );
+               
+                dungeonMonsters.Add(original);
             }
 
             return dungeonMonsters;
         }
 
-        private void ShowStatus()
+
+        private void ShowBattleStatus()
         {
             Console.Clear();
             Console.WriteLine("전투 상태\n");
@@ -93,14 +85,14 @@ namespace TextRPG.Class.Manager
             for (int i = 0; i < monsters.Count; i++)
             {
                 var m = monsters[i];
-                if (m.IsDead)
+                if (m.Hp <= 0)
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($"{i + 1}. Lv.{m.Level} {m.Name} {(m.IsDead ? "Dead" : $"HP {m.Hp}")}");
+                Console.WriteLine($"{i + 1}. Lv.{m.Lv} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {m.Hp}")}");
                 Console.ResetColor();
             }
 
             Console.WriteLine($"\n[내정보]");
-            Console.WriteLine($"Lv.{player._lv} {player.Name} ({player._job})");
+            Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
             Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
         }
 
@@ -110,20 +102,22 @@ namespace TextRPG.Class.Manager
             Console.WriteLine("\n대상을 선택하세요.");
             for (int i = 0; i < monsters.Count; i++)
             {
-                if (!monsters[i].IsDead)
+                if (monsters[i].Hp > 0)
                     Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
             }
             Console.Write(">> ");
             if (!int.TryParse(Console.ReadLine(), out int index) || index < 1 || index > monsters.Count)
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Attack();
                 return;
             }
 
             Monster target = monsters[index - 1];
-            if (target.IsDead)
+            if (target.Hp <= 0)
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
+                Attack();
                 return;
             }
 
@@ -141,7 +135,7 @@ namespace TextRPG.Class.Manager
             Console.WriteLine($"\n{player.Name}의 공격!");
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
 
-            if (target.IsDead)
+            if (target.Hp <= 0)
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
 
 
@@ -174,21 +168,21 @@ namespace TextRPG.Class.Manager
         {
             foreach (var monster in monsters)
             {
-                if (monster.IsDead) continue;
+                if (monster.Hp <= 0) continue;
 
-                int damage = monster.Attack;
+                int damage = monster.Str;
                 
                 player.TakeDamage(damage);
                 Console.WriteLine($"\n{monster.Name}의 공격 {player.Name}에게 {damage}의 데미지");
             }
         }
 
-        private void EndBattle()
+        private void BattleResult()
         {
             Console.Clear();
             Console.WriteLine("\n전투결과\n");
 
-            int defeatedCount = monsters.Count(m => m.IsDead);
+            int defeatedCount = monsters.Count(m => m.Hp <= 0);
 
             if (player.Hp <= 0)
             {
