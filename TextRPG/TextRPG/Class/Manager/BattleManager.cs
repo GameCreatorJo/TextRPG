@@ -16,16 +16,11 @@ namespace TextRPG.Class.Manager
         private List<Monster> monsters = new List<Monster>();
         private Random random = new Random();
         private Player player;
-        private MonsterDatabase MonsterDatabase;
+        
 
-        public BattleManager(MonsterDatabase MonsterDatabase)
-        {
-            //monsterDatabase가 Null이면 예외 발생
-            this.MonsterDatabase =
-            MonsterDatabase ?? throw new ArgumentNullException(nameof(MonsterDatabase));
-        }
+        
 
-        public void Battle(Player player)
+        private void Battle(Player player)
         {
             if (player == null)
             {
