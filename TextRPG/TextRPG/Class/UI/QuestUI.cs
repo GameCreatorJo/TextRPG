@@ -110,6 +110,8 @@ namespace TextRPG.Class.UI
                 Console.WriteLine("잘못된 입력입니다.");
             }
         }
+        // 퀘스트 보상을 넣으면 좋을지도..?
+
         //진행도
         public void PromptKillProgress()
         {
