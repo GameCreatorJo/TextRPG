@@ -18,6 +18,7 @@ namespace TextRPG.Class.Default
             Description = "This is the default scene description.";
         }
 
+
         public DefaultScene(string name, string description)
         {
             Name = name;
