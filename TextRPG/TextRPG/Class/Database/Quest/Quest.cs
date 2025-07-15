@@ -6,43 +6,45 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Database.Quest
 {
-    internal class Quest
+    public class Quest
     {
         public int Id { get; }
-        public string Name { get; }
+        public string Title { get; }
         public string Description { get; }
         public int KillTarget { get; }
         public int KillCount { get; private set; }
         public bool IsCompleted { get; private set; }
-        public Quest(int id, string name, string description, int killTarget, int killCount)
+
+        public Quest(int id, string title, string description, int killTarget, int killCount)
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            KillTarget = killTarget;
-            KillCount = killCount;
-            IsCompleted = false;
+            Id = id;// 퀘스트 ID
+            Title = title;// 퀘스트 제목
+            Description = description;// 퀘스트 설명
+            KillTarget = killTarget;// 목표 처치 수
+            KillCount = killCount;// 현재 처치 수
+            IsCompleted = false;// 완료 여부
         }
-        public void UpdateKill()
+        public void UpdateKill()// 퀘스트 진행도 업데이트 메서드
         {
             if (!IsCompleted)
-            { 
+            {
                 KillCount++;
-                if (KillCount >= KillTarget )
+                if (KillCount >= KillTarget)
                 {
                     Complete();
                 }
             }
         }
-        public void Complete()
-        { 
+        public void Complete()// 퀘스트 완료 메서드
+        {
             IsCompleted = true;
-            Console.WriteLine($"퀘스트 '{Name}' 완료!");
+            Console.WriteLine($"퀘스트 '{Title}' 완료!");
             //보상 처리 메서드는 QuestManager에서 처리
         }
-        public string GetQuestInfo()
+        public string GetQuestInfo()// 퀘스트 정보 출력 메서드
         {
-            return $"퀘스트 ID: {Id}, 이름: {Name}, 설명: {Description}, 목표 처치 수: {KillTarget}, 현재 처치 수: {KillCount}, 완료 여부: {IsCompleted}";
+            return $"퀘스트 ID: {Id}, 이름: {Title}, 설명: {Description}, 목표 처치 수: {KillTarget}, 현재 처치 수: {KillCount}, 완료 여부: {IsCompleted}";
         }
     }
+
 }
