@@ -6,12 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Data;
+using TextRPG.Class.Database.Player;
 
 namespace TextRPG.Class.Manager
 {
     internal class CreateManager
     {
-
+        private Player player;
+        public Player Player
+        {
+            get { return player; }
+        }
         private MonsterDatabase monsterDatabase;
         public MonsterDatabase MonsterDatabase
         {
@@ -54,7 +59,8 @@ namespace TextRPG.Class.Manager
 
         public void CreatePlayerData()
         {
-            // 인스턴스 생성 메소드 호출
+            string playerName = Console.ReadLine();
+            player = new Player(playerName);
             Console.WriteLine("Player data created!");
         }
         public void CreateGameWorld()
@@ -63,7 +69,7 @@ namespace TextRPG.Class.Manager
             CreateItem();
             CreateScene();
             CreatePlayerData();
-        Console.WriteLine("Game world created!");
+            Console.WriteLine("Game world created!");
         }
 
     }
