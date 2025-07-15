@@ -33,60 +33,7 @@ namespace TextRPG.Class.Data
        
 
 
-        //// Item ID
-        //public int Id { get; }
-        //// Item Name
-        //public string Name { get; }
-        //// Item Description
-        //public string Description { get; }
-        //// Item's Plus Strength
-        //public int PlusStr { get; }
-        //// Item's Plus Armor Point
-        //public int PlusArmorPoint { get; }
-        //// Item's Gold Value
-        //public int Gold { get; }
-
-
-
-        //protected DefaultItem(int _id, string _name, string _description, int _plusStr, int _plusArmorPoint,  int _gold)
-        //{
-        //    Id = _id;
-        //    Name = _name;
-        //    Description = _description;
-        //    PlusStr = _plusStr;
-        //    PlusArmorPoint = _plusArmorPoint;
-
-        //    Gold = _gold;
-
-
-        //}
-        //public class Item : DefaultItem
-        //{
-
-        //    public Item(int _id, string _name, string _description, int _plusStr, int _plusArmorPoint, int _gold)
-        //        : base(_id, _name, _description, _plusStr, _plusArmorPoint, _gold)
-        //    {
-
-        //    }
-        //}
-        //public class Weapon : DefaultItem
-        //{
-
-        //    public Weapon(int _id, string _name, string _description, int _plusStr, int _plusArmorPoint, int _gold)
-        //        : base(_id, _name, _description,_plusStr, _plusArmorPoint, _gold)
-        //    {
-
-        //    }
-        //}
-        //public class Armor : DefaultItem
-        //{
-
-        //    public Armor( _id, string _name, string _description, int _plusStr,int _plusArmorPoint, int _gold)
-        //        : base(_id, _name, _description,_gold, _plusStr, _plusArmorPoint )
-        //    {
-
-        //    }
-        //}
+        
 
     }
 }
