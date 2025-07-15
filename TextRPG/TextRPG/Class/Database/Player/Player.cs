@@ -8,8 +8,11 @@ using TextRPG.Class.Interface;
 
 namespace TextRPG.Class.Database.Player
 {
+
     internal class Player : DefaultCharacter
     {
+        private int _maxEXP = 50;
+
         public Player(string inputName) 
         {
             this._lv = 1;
@@ -27,21 +30,29 @@ namespace TextRPG.Class.Database.Player
             this._hp = _maxHp;
 
             this._gold = 1500;
+            this._exp = 0;
         }
 
-        public void Equip(DefaultItem item)
+        public void Equip(DefaultItem.Item item)
         {
             // 아이템 장착 메소드
         }
 
-        public void UnEquip(DefaultItem item) 
+        public void UnEquip(DefaultItem.Item item) 
         {
             // 아아템 해제 메소드
         }
 
-        public void TakeEXP()
+        public void TakeEXP(int gainedExp)
         {
             // 경험치 획득 메소드
+            this._exp += gainedExp;
+            
+            // 경험치가 특정 경험치를 넘었다면 레벨업
+            if (this._exp > _maxEXP)
+            {
+                LevelUp();
+            }
         }
 
         public void TakeStat()
@@ -52,16 +63,20 @@ namespace TextRPG.Class.Database.Player
         public void LevelUp()
         {
             // 레벨 업 메소드
+            this._exp = 0;
+            this._lv++;
         }
 
         public void SpendGold(int gold)
         {
             // 골드 사용 메소드
+            this._gold -= gold;
         }
 
-        public void GetItem(string item)
+        public void GetItem(DefaultItem.Item item)
         {
             // 아이템 획득 메소드
+            this._inventory.Add(item);
         }
 
         public void Save()
