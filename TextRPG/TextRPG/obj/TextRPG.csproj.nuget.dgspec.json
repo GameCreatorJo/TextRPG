@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj": {}
+    "D:\\스파르타 유니티 11기\\18조\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj": {}
   },
   "projects": {
-    "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj": {
+    "D:\\스파르타 유니티 11기\\18조\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj",
+        "projectUniqueName": "D:\\스파르타 유니티 11기\\18조\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj",
         "projectName": "TextRPG",
-        "projectPath": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj",
-        "packagesPath": "C:\\Users\\주용진\\.nuget\\packages\\",
-        "outputPath": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\obj\\",
+        "projectPath": "D:\\스파르타 유니티 11기\\18조\\TextRPG\\TextRPG\\TextRPG\\TextRPG.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\스파르타 유니티 11기\\18조\\TextRPG\\TextRPG\\TextRPG\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\주용진\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

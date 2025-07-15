@@ -15,20 +15,20 @@
       "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\database\\monster\\monsterdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\default\\defaultitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\default\\defaultitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\database\\monster\\rabbit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\database\\monster\\rabbit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\database\\monster\\bear.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\database\\monster\\bear.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\interface\\iplayerdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\interface\\iplayerdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\database\\monster\\bear.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\database\\monster\\bear.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\default\\defaultitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\default\\defaultitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\database\\monster\\rabbit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\class\\database\\monster\\rabbit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4521A73A-2341-4042-A387-8B8D14543675}|TextRPG\\TextRPG.csproj|d:\\sparta\\textrpg\\textrpg\\textrpg\\textrpg\\class\\manager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "TextRPG\\Class\\Database\\Monster\\MonsterDatabase.cs",
               "ToolTip": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Database\\Monster\\MonsterDatabase.cs",
               "RelativeToolTip": "TextRPG\\Class\\Database\\Monster\\MonsterDatabase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvx8AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwBgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-14T11:15:24.585Z",
               "EditorCaption": ""
@@ -69,7 +69,7 @@
               "RelativeDocumentMoniker": "TextRPG\\Class\\Database\\Player\\Player.cs",
               "ToolTip": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Database\\Player\\Player.cs",
               "RelativeToolTip": "TextRPG\\Class\\Database\\Player\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-14T03:01:43.374Z",
               "EditorCaption": ""
@@ -82,14 +82,14 @@
               "RelativeDocumentMoniker": "TextRPG\\Class\\Default\\DefaultCharacter.cs",
               "ToolTip": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Default\\DefaultCharacter.cs",
               "RelativeToolTip": "TextRPG\\Class\\Default\\DefaultCharacter.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAADwvycAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-14T02:55:55.977Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Bear.cs",
               "DocumentMoniker": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Database\\Monster\\Bear.cs",
               "RelativeDocumentMoniker": "TextRPG\\Class\\Database\\Monster\\Bear.cs",
@@ -102,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Rabbit.cs",
               "DocumentMoniker": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Database\\Monster\\Rabbit.cs",
               "RelativeDocumentMoniker": "TextRPG\\Class\\Database\\Monster\\Rabbit.cs",
@@ -110,12 +110,11 @@
               "RelativeToolTip": "TextRPG\\Class\\Database\\Monster\\Rabbit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T02:50:06.889Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-14T02:50:06.889Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "IPlayerData.cs",
               "DocumentMoniker": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Interface\\IPlayerData.cs",
               "RelativeDocumentMoniker": "TextRPG\\Class\\Interface\\IPlayerData.cs",
@@ -140,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "DefaultItem.cs",
               "DocumentMoniker": "D:\\Sparta\\TextRPG\\TextRPG\\TextRPG\\TextRPG\\Class\\Default\\DefaultItem.cs",
               "RelativeDocumentMoniker": "TextRPG\\Class\\Default\\DefaultItem.cs",
@@ -148,8 +147,7 @@
               "RelativeToolTip": "TextRPG\\Class\\Default\\DefaultItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T02:39:59.737Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-14T02:39:59.737Z"
             },
             {
               "$type": "Document",

@@ -39,24 +39,8 @@ namespace TextRPG.Class.Data
 
             }
         }
-        //public class Weapon : DefaultItem
-        //{
+        // 아이템 클래스는 DefaultItem을 상속받아 구현합니다.
 
-        //    public Weapon(int _id, string _name, string _description, int _plusStr, int _plusArmorPoint, int _gold)
-        //        : base(_id, _name, _description,_plusStr, _plusArmorPoint, _gold)
-        //    {
-
-        //    }
-        //}
-        //public class Armor : DefaultItem
-        //{
-
-        //    public Armor( _id, string _name, string _description, int _plusStr,int _plusArmorPoint, int _gold)
-        //        : base(_id, _name, _description,_gold, _plusStr, _plusArmorPoint )
-        //    {
-
-        //    }
-        //}
 
     }
 }

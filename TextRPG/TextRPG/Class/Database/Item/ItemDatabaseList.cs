@@ -28,4 +28,5 @@ namespace TextRPG.Class.Database.Item
         
 
     }
+    // test 주석입니다
 }
