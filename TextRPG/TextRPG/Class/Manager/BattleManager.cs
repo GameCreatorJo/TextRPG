@@ -17,10 +17,7 @@ namespace TextRPG.Class.Manager
         private Random random = new Random();
         private Player player;
    
-        public BattleManager()
-        {
-
-        }
+        
 
         public void Battle(Player initPlayer)
         {/*
