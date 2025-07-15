@@ -25,7 +25,7 @@ namespace TextRPG.Class.Database.Monster
         }
 
 
-        public void createMonster()
+        public void CreateMonster()
         {
             monsterDictionary.Add("minion",미니언);
             monsterDictionary.Add("siegeMinion",대포미니언);
