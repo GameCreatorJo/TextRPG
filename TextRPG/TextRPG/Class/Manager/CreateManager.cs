@@ -4,9 +4,11 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
-using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Data;
+using TextRPG.Class.Database.Item;
+using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Database.Player;
+using TextRPG.Class.Scene;
 
 namespace TextRPG.Class.Manager
 {
@@ -22,9 +24,9 @@ namespace TextRPG.Class.Manager
         {
             get { return monsterDatabase; }
         }
-        /*
-        private ItemDatabase _itemDatabas;
-        private ItemDatabase ItemDatabase
+        
+        private ItemDatabaseList _itemDatabas;
+        private ItemDatabaseList ItemDatabase
         {
             get { return _itemDatabas; }
         }
@@ -33,7 +35,7 @@ namespace TextRPG.Class.Manager
         public MainScene MainScene
         {
             get { return mainScene; }
-        }*/
+        }
 
         public CreateManager()
         {
@@ -48,6 +50,8 @@ namespace TextRPG.Class.Manager
         }
         public void CreateItem()
         {
+            _itemDatabas = new ItemDatabaseList();
+            _itemDatabas.CreateItem();
             // 인스턴스 생성 메소드 호출
             Console.WriteLine("Item database created!");
         }
