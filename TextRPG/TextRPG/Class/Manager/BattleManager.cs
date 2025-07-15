@@ -65,11 +65,11 @@ namespace TextRPG.Class.Manager
             for (int i = 0; i < count; i++)
             {
                 string key = monsterKeys[random.Next(monsterKeys.Count)];
-                
                 Monster original = monsterDict[key];
+                var clone = new Monster(original);
                 Console.WriteLine($"몬스터 생성: {original.Name} (Lv.{original.Lv}){original.Hp},{original.MaxHp}");
 
-                dungeonMonsters.Add(original);
+                dungeonMonsters.Add(clone);
             }
 
             return dungeonMonsters;
