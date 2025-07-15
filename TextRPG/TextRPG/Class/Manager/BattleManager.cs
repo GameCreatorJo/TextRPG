@@ -6,60 +6,43 @@ using System.Threading;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.Player;
 using TextRPG.Class.Database.Monster;
+using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
 {
-    //BattleManager tt
+    //BattleManager 2:33
     internal class BattleManager
     {
         private List<Monster> monsters = new List<Monster>();
-        private bool isRun = false;
         private Random random = new Random();
-
-        //플레이어 정보
         private Player player;
+        private MonsterDatabase MonsterDatabase;
 
-
-        private class Monster
+        public BattleManager(MonsterDatabase MonsterDatabase)
         {
-            public string Name { get; }
-            public int Hp { get; private set; }
-            public int Attack { get; }
-            public int Level { get; }
-
-            public bool IsDead => Hp <= 0;
-
-            public Monster(string name, int hp, int attack, int level)
-            {
-                Name = name;
-                Hp = hp;
-                Attack = attack;
-                Level = level;
-
-            }
-
-            public void TakeDamage(int damage)
-            {
-                Hp -= damage;
-                if (Hp < 0)
-                {
-                    Hp = 0;
-                }
-            }
+            //monsterDatabase가 Null이면 예외 발생
+            this.MonsterDatabase =
+            MonsterDatabase ?? throw new ArgumentNullException(nameof(MonsterDatabase));
         }
 
         public void Battle(Player player)
         {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
             this.player = player;
-            monsters = DungeonMonsters();
+            monsters = GenerateDungeonMonsters();
 
             Console.Clear();
             Console.WriteLine("전투 시작\n");
 
             while (player._hp > 0 && monsters.Any(m => !m.IsDead))
             {
-                ShowStatus();
+                ShowBattleStatus();
                 PlayerTurn();
+
                 if (monsters.All(m => m.IsDead))
                 {
                     break;
@@ -69,33 +52,37 @@ namespace TextRPG.Class.Manager
 
             }
 
-            EndBattle();
+            BattleResult();
         }
 
-        private List<Monster> DungeonMonsters()
+        private List<Monster> GenerateDungeonMonsters()
         {
-            var List = new List<Monster>();
+            var dungeonMonsters = new List<Monster>();
+            //데이터베이스에서 가져오기
+            var monsterKeys = MonsterDatabase.MonsterDictionary.Keys.ToList();
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
             {
-                int type = random.Next(1, 4);
-                switch (type)
-                {
-                    case 1:
-                        List.Add(new Monster("미니언", 15, 5, 2));
-                        break;
-                    case 2:
-                        List.Add(new Monster("공허충", 10, 9, 3));
-                        break;
-                    case 3:
-                        List.Add(new Monster("대포미니언", 25, 8, 5));
-                        break;
+                string key = monsterKeys[random.Next(monsterKeys.Count)];
+                Monster original = monsterDatabase.MonsterDictionary[key];
 
-                }
+                Monster monster = new Monster
+                (
+                 original._lv,
+                 original._name,
+                 original._job,
+                 original._str,
+                 original.plusStr,
+                 original._armorPoint,
+                 original.plusArmorPoint,
+                 original._maxHp,
+                 original._plusHp,
+                 original._gold
+                );
             }
 
-            return List;
+            return dungeonMonsters;
         }
 
         private void ShowStatus()
