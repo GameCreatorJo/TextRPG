@@ -16,9 +16,9 @@ namespace TextRPG.Class.Database.Monster
             get { return monsterDictionary; }
         }
 
-        Monster 미니언 = new Monster(2, "미니언", "enemy", 3, 0, 1, 0, 15, 0, 1, 0, 0);
-        Monster 대포미니언 = new Monster(5, "대포 미니언", "enemy", 3, 0, 5, 0, 25, 0, 5, 0, 0);
-        Monster 공허충 = new Monster(3, "공허충", "enemy", 3, 0, 3, 0, 10, 0, 1, 0, 0);
+        Monster 미니언 = new Monster(2, "미니언", "enemy", 3, 0, 1, 0, 15, 1, 0, 0);
+        Monster 대포미니언 = new Monster(5, "대포 미니언", "enemy", 3, 0, 5, 0, 25, 5, 0, 0);
+        Monster 공허충 = new Monster(3, "공허충", "enemy", 3, 0, 3, 0, 10, 1, 0, 0);
 
         public MonsterDatabase()
         {
