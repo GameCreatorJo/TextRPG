@@ -16,7 +16,7 @@ namespace TextRPG.Class.Database.ItemData
         public Item(int id, string name, string description, int plusStr, int plusArmorPoint, int gold)
             :base(id, name, description, plusStr, plusArmorPoint, gold)
         {
-           
+          
         }
         // 아이템의 정보를 보여주는 메소드
         public void ShowInfo()
