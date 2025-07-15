@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Authentication;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TextRPG.Class.Manager
+{
+    internal class CreateManager
+    {/*
+        private MonsterDatabase monsterDatabase;
+        public MonsterDatabase MonsterDatabase
+        {
+            get { return monsterDatabase; }
+        }
+        private ItemDatabase _itemDatabas;
+        private ItemDatabase ItemDatabase
+        {
+            get { return _itemDatabas; }
+        }
+
+        private MainScene mainScene;
+        public MainScene MainScene
+        {
+            get { return mainScene; }
+        }*/
+
+        public CreateManager()
+        {
+            //    monsterDatabase = new MonsterDatabase();
+            //    itemDatabase = new ItemDatabase();
+            //    mainScene = new MainScene("Main Scene", "This is the main scene of the game.");
+            Console.WriteLine("CreateManager initialized!");
+        }
+        public void CreateMonster()
+        {
+            // 인스턴스 생성 메소드 호출
+            Console.WriteLine("Monster database created!");
+        }
+        public void CreateItem()
+        {
+            // 인스턴스 생성 메소드 호출
+            Console.WriteLine("Item database created!");
+        }
+        public void CreateScene()
+        {
+            // 인스턴스 생성 메소드 호출
+            Console.WriteLine("Scene created!");
+        }
+
+        public void CreatePlayerData()
+        {
+            // 인스턴스 생성 메소드 호출
+            Console.WriteLine("Player data created!");
+        }
+        public void CreateGameWorld()
+        {
+            CreateMonster();
+            CreateItem();
+            CreateScene();
+            CreatePlayerData();
+        Console.WriteLine("Game world created!");
+        }
+
+    }
+}
