@@ -8,7 +8,7 @@ using TextRPG.Class.Data;
 using TextRPG.Class.Database.ItemData;
 using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Database.Player;
-using TextRPG.Class.Scene;
+using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
 {
@@ -31,16 +31,13 @@ namespace TextRPG.Class.Manager
             get { return _itemDatabas; }
         }
 
-        private MainScene mainScene;
-        public MainScene MainScene
-        {
-            get { return mainScene; }
-        }
+        public SceneDatabase SceneDatabase { get; private set; }
 
         public CreateManager()
         {
             monsterDatabase = new MonsterDatabase();
             _itemDatabas = new ItemDatabaseList();
+            SceneDatabase = new SceneDatabase();
 
             Console.WriteLine("CreateManager initialized!");
         }
@@ -51,14 +48,13 @@ namespace TextRPG.Class.Manager
         }
         public void CreateItem()
         {
-            _itemDatabas = new ItemDatabaseList();
             _itemDatabas.CreateItem();
             // 인스턴스 생성 메소드 호출
             Console.WriteLine("Item database created!");
         }
         public void CreateScene()
         {
-            // 인스턴스 생성 메소드 호출
+            SceneDatabase.CreateScene();
             Console.WriteLine("Scene created!");
         }
 
