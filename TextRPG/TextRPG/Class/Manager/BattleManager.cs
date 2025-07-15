@@ -16,18 +16,20 @@ namespace TextRPG.Class.Manager
         private List<Monster> monsters = new List<Monster>();
         private Random random = new Random();
         private Player player;
-        
-
-        
-
-        private void Battle(Player player)
+   
+        public BattleManager()
         {
+
+        }
+
+        public void Battle(Player initPlayer)
+        {/*
             if (player == null)
             {
                 throw new ArgumentNullException(nameof(player));
-            }
+            }*/
 
-            this.player = player;
+            player = initPlayer;
             monsters = GenerateDungeonMonsters();
 
             Console.Clear();
@@ -50,7 +52,7 @@ namespace TextRPG.Class.Manager
             BattleResult();
         }
 
-        private List<Monster> GenerateDungeonMonsters()
+        public List<Monster> GenerateDungeonMonsters()
         {
             var dungeonMonsters = new List<Monster>();
             var monsterDict = GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary;
@@ -72,7 +74,7 @@ namespace TextRPG.Class.Manager
         }
 
 
-        private void ShowBattleStatus()
+        public void ShowBattleStatus()
         {
             Console.Clear();
             Console.WriteLine("전투 상태\n");
@@ -92,7 +94,7 @@ namespace TextRPG.Class.Manager
         }
 
 
-        private void Attack()
+        public void Attack()
         {
             Console.WriteLine("\n대상을 선택하세요.");
             for (int i = 0; i < monsters.Count; i++)
@@ -159,7 +161,7 @@ namespace TextRPG.Class.Manager
             }
         }
 
-        private void EnemyTurn()
+        public void EnemyTurn()
         {
             foreach (var monster in monsters)
             {
@@ -172,7 +174,7 @@ namespace TextRPG.Class.Manager
             }
         }
 
-        private void BattleResult()
+        public void BattleResult()
         {
             Console.Clear();
             Console.WriteLine("\n전투결과\n");
