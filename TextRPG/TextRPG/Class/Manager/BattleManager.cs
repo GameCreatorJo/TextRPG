@@ -17,11 +17,13 @@ namespace TextRPG.Class.Manager
         private Random random = new Random();
         private Player player;
    
-        public BattleManager()
+        
+
+        public void SearchHP(Player player, Monster monster)
         {
-
+            Console.WriteLine($"{player.Name}의 HP: {player.Hp}/{player.MaxHp}");
+            Console.WriteLine($"{monster.Name}의 HP: {monster.Hp}/{monster.MaxHp}");
         }
-
         public void Battle(Player initPlayer)
         {/*
             if (player == null)
@@ -32,9 +34,9 @@ namespace TextRPG.Class.Manager
             player = initPlayer;
             monsters = GenerateDungeonMonsters();
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("전투 시작\n");
-
+            SearchHP(player, monsters[0]);
             while (player.Hp > 0 && monsters.Any(m => m.Hp > 0))
             {
                 ShowBattleStatus();
@@ -63,11 +65,11 @@ namespace TextRPG.Class.Manager
             for (int i = 0; i < count; i++)
             {
                 string key = monsterKeys[random.Next(monsterKeys.Count)];
-                
                 Monster original = monsterDict[key];
+                var clone = new Monster(original);
+                Console.WriteLine($"몬스터 생성: {original.Name} (Lv.{original.Lv}){original.Hp},{original.MaxHp}");
 
-               
-                dungeonMonsters.Add(original);
+                dungeonMonsters.Add(clone);
             }
 
             return dungeonMonsters;
@@ -76,7 +78,7 @@ namespace TextRPG.Class.Manager
 
         public void ShowBattleStatus()
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("전투 상태\n");
 
             for (int i = 0; i < monsters.Count; i++)
@@ -176,7 +178,7 @@ namespace TextRPG.Class.Manager
 
         public void BattleResult()
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("\n전투결과\n");
 
             int defeatedCount = monsters.Count(m => m.Hp <= 0);
