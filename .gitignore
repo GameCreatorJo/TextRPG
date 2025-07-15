@@ -413,3 +413,10 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Visual Studio 및 빌드 임시 폴더 무시
+.vs/
+v17/
+obj/
+net8.0/
+
