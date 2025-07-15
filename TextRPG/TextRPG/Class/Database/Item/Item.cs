@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TextRPG.Class.Data;
 
-namespace TextRPG.Class.Database.Item
+namespace TextRPG.Class.Database.ItemData
 {
     internal class Item : DefaultItem
     {
+        public Item()
+        {
+            // 기본 생성자
+        }
         public Item(int id, string name, string description, int plusStr, int plusArmorPoint, int gold)
             :base(id, name, description, plusStr, plusArmorPoint, gold)
         {

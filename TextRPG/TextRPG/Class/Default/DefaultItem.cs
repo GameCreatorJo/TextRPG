@@ -21,6 +21,18 @@ namespace TextRPG.Class.Data
         // 아이템의 Gold Value
         protected int _gold;
 
+        public int Id => _id;
+        public string Name => _name;
+        public string Description => _description;
+        public int PlusStr => _plusStr;
+        public int PlusArmorPoint => _plusArmorPoint;
+        public int Gold => _gold;
+
+        public DefaultItem()
+        {
+            // 기본 생성자
+        }
+
         public DefaultItem(int id, string name, string description, int plusStr, int plusArmorPoint, int gold)
         {
             _id = id;

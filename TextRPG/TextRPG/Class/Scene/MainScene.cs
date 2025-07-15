@@ -20,7 +20,7 @@ namespace TextRPG.Class.Scene
         }
         public override void Render()
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine($"스파르타 마을에 오신걸 환영합니다.");
             Console.WriteLine($"어떤 행동을 하시겠습니까?");
             Console.WriteLine("1. 상태창 보기");

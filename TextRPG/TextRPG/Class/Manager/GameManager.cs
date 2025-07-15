@@ -47,7 +47,7 @@ namespace TextRPG.Class.Manager
         }
         public void InitializeGame()
         {
-            
+            _createManager.CreateGameWorld();
             Console.WriteLine("Game initialized!");
             // Load game settings, characters, etc.
         }
@@ -58,6 +58,8 @@ namespace TextRPG.Class.Manager
             {
                 case "1":
                     Console.WriteLine("상태창 선택됨.");
+                    GameManager.Instance.CreateManager.Player.ShowInfo(); // 상태창 보기 메소드 호출
+                    GameManager.Instance.CreateManager.Player.ShowInventory(); // 인벤토리 보기 메소드 호출
                     // 상태창 호출
                     break;
                 case "2":
