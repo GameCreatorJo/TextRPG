@@ -25,7 +25,6 @@ namespace TextRPG.Class.Database.Monster
             미니언 = new Monster(2, "미니언", "enemy", 3, 0, 1, 0, 15, 30, 0, 1);
             대포미니언 = new Monster(5, "대포 미니언", "enemy", 3, 0, 5, 0, 50, 25, 0, 5);
             공허충 = new Monster(3, "공허충", "enemy", 3, 0, 3, 0, 50, 10, 0, 1);
-
         }
 
         public void CreateMonster()
