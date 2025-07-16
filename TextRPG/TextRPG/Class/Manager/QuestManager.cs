@@ -227,6 +227,9 @@ namespace TextRPG.Class.Manager
                         Console.ReadLine();
                         break;
                     case "0":
+                        
+                        //메인씬으로 돌아가는 로직을 넣으면 어떨까? GameManager.Instance.Scene.ChangeScene("MainScene");
+                        //문제점. 위 코드를 사용해 메인씬으로 돌아가면 다음 행동이 실행되지 않음. 
                         return;
 
                     default:
