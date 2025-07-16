@@ -74,8 +74,13 @@ namespace TextRPG.Class.Scenes
             GameManager.Instance.CreateManager.Player.ShowInfo();
             GameManager.Instance.CreateManager.Player.ShowInventory();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("엔터를 눌러 돌아갑니다.");
-            Console.ReadLine();
+            Console.WriteLine("1번을 눌러 장착 관리, 엔터를 눌러 돌아갑니다.");
+            var input = int.Parse(Console.ReadLine());
+            if (input == 1)
+            {
+                GameManager.Instance.CreateManager.Player.ManageEquipment();
+                RenderStatusScene();
+            }
         }
 
         public void RenderShopScene()
