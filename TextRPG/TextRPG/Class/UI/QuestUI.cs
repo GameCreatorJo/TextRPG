@@ -118,6 +118,10 @@ namespace TextRPG.Class.UI
             Console.WriteLine("\n 처치 이벤트 발생!");
             QuestManager.Instance.UpdateQuestKillCount();
         }
+        
+
+
     }
+
 
 }

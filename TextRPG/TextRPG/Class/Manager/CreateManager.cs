@@ -9,6 +9,7 @@ using TextRPG.Class.Database.ItemData;
 using TextRPG.Class.Database.MapData;
 using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Database.PlayerData;
+using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
@@ -31,6 +32,12 @@ namespace TextRPG.Class.Manager
         {
             get { return _itemDatabas; }
         }
+        //퀘스트 매니저 추가
+        private QuestManager _questManager;
+        public QuestManager QuestManager
+        {
+            get { return _questManager; }
+        }
 
         public SceneDatabase SceneDatabase { get; private set; }
         private MapDatabase _mapDatabase;
@@ -45,6 +52,11 @@ namespace TextRPG.Class.Manager
             _itemDatabas = new ItemDatabaseList();
             SceneDatabase = new SceneDatabase();
             _mapDatabase = new MapDatabase();
+            //퀘스트시스템 초기화 추가
+            QuestDatabase questDatabase = new QuestDatabase();
+            _questManager = new QuestManager();
+            
+
             Console.WriteLine("CreateManager initialized!");
         }
         public void CreateMonster()
@@ -84,8 +96,17 @@ namespace TextRPG.Class.Manager
             CreateScene();
             CreatePlayerData();
             CreateMap();
+            //퀘스트 추가
+            CreateQuest();
             Console.WriteLine("Game world created!");
         }
-
+        //퀘스트관련
+        public void CreateQuest()
+        { 
+            QuestDatabase questDatabase = new QuestDatabase();
+            _questManager = QuestManager.Instance;
+            _questManager.Initialize(questDatabase);
+            Console.WriteLine("Quest database created and QuestManager initialized!");
+        }
     }
 }
