@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TextRPG.Class.Database.Quest;
+using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Manager;
 
 namespace TextRPG.Class.UI
@@ -31,7 +31,7 @@ namespace TextRPG.Class.UI
 
             if (int.TryParse(input, out int selectedId))
             {
-                Quest selectedQuest = _questDatabase.GetQuestById(selectedId);
+                QuestData selectedQuest = _questDatabase.GetQuestById(selectedId);
                 if (selectedQuest != null)
                 {
                     ConfirmQuest(selectedQuest);
@@ -43,7 +43,7 @@ namespace TextRPG.Class.UI
             }
         }
         //퀘스트 수락
-        private void ConfirmQuest(Quest quest)
+        private void ConfirmQuest(QuestData quest)
         {
             //Console.WriteLine($"\n 퀘스트 이름: {quest.Title}");
             //Console.WriteLine($" 설명: {quest.Description}");
@@ -79,7 +79,7 @@ namespace TextRPG.Class.UI
         public void ShowActiveQuest()
         {
             Console.WriteLine("\n [진행 중인 퀘스트]");
-            Quest active = QuestManager.Instance.GetActiveQuest();
+            QuestData active = QuestManager.Instance.GetActiveQuest();
                 
 
             if (active != null)
