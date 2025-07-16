@@ -12,7 +12,7 @@ namespace TextRPG.Class.Database.MonsterData
     {
 
         public Monster
-            (int lv, string name, string job, int str, int plusStr, int armorPoint, int plusArmorPoint, int maxHp, int gold, int criticalRate, int dodgeRate)
+            (int lv, string name, string job, int str, int plusStr, int armorPoint, int plusArmorPoint, int maxHp, int gold, int criticalRate, int dodgeRate, int exp)
         {
             _lv = lv;
             _name = name;
@@ -26,6 +26,7 @@ namespace TextRPG.Class.Database.MonsterData
             _gold = gold;
             _criticalRate = criticalRate;
             _dodgeRate = dodgeRate;
+            this._exp = exp;
         }
         public Monster(Monster other)
         {

@@ -79,25 +79,45 @@ namespace TextRPG.Class.Database.PlayerData
             Console.WriteLine("Lv. " + _lv);
             Console.WriteLine("Chad ( " + _name + " )");
 
-            if (this._armor == null || this._armor == "")
-            {
-                Console.WriteLine("공격력: " + _str);
-            }
-            else
+            if (plusStr > 0)
             {
                 Console.WriteLine("공격력: " + (_str + plusStr) + "( +" + plusStr + " )");
             }
-
-            if (this._weapon == null || this._weapon == "")
+            else if (plusStr == 0)
             {
-                Console.WriteLine("방어력: " + _armorPoint);
-                Console.WriteLine("최대 체력: " + _maxHp);
+                Console.WriteLine("공격력: " + _str);
             }
-            else
+
+            if (plusArmorPoint > 0)
             {
                 Console.WriteLine("방어력: " + (_armorPoint + plusArmorPoint) + "( +" + plusArmorPoint + " )");
                 Console.WriteLine("최대 체력: " + (_maxHp + _plusHp) + "( +" + _plusHp + " )");
             }
+            else if (plusArmorPoint == 0)
+            {
+                Console.WriteLine("방어력: " + _armorPoint);
+                Console.WriteLine("최대 체력: " + _maxHp);
+            }
+
+            //if (this._armor == null || this._armor == "")
+            //{
+            //    Console.WriteLine("공격력: " + _str);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("공격력: " + (_str + plusStr) + "( +" + plusStr + " )");
+            //}
+
+            //if (this._weapon == null || this._weapon == "")
+            //{
+            //    Console.WriteLine("방어력: " + _armorPoint);
+            //    Console.WriteLine("최대 체력: " + _maxHp);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("방어력: " + (_armorPoint + plusArmorPoint) + "( +" + plusArmorPoint + " )");
+            //    Console.WriteLine("최대 체력: " + (_maxHp + _plusHp) + "( +" + _plusHp + " )");
+            //}
             
             Console.WriteLine("현재 체력: " + _hp);
             Console.WriteLine("Gold: " + _gold + " G");
@@ -105,13 +125,136 @@ namespace TextRPG.Class.Database.PlayerData
         public void ShowInventory()
         {
             // 인벤토리 아이템을 보여주는 메소드
-            if (_inventory != null)
+            //if (_inventory != null)
+            //{
+            //    Console.WriteLine("인벤토리:");
+            //    foreach (Item item in _inventory)
+            //    {
+            //        Console.WriteLine($"- {item.Name} (ID: {item.Description})");
+            //    }
+            //}
+
+            Console.WriteLine("인벤토리: ");
+
+            if (this._inventory == null)
             {
-                Console.WriteLine("인벤토리:");
-                foreach (Item item in _inventory)
+                return;
+            }
+
+            int i = 1;
+            foreach (Item item in _inventory)
+            {
+                if (item.Name == this._armor || item.Name == this._weapon)
                 {
-                    Console.WriteLine($"- {item.Name} (ID: {item.Description})");
+                    Console.WriteLine(" - " + "[E]" + item.Name);
                 }
+                else
+                {
+                    Console.WriteLine(" - " + " " + item.Name);
+                }
+                i++;
+            }
+        }
+
+        public void ManageEquipment()
+        {
+            // 아이템 장착 관리 메소드
+            Console.WriteLine("인벤토리: ");
+
+            if (this._inventory == null)
+            {
+                return;
+            }
+
+            int i = 1;
+            foreach (Item item in _inventory)
+            {
+                if (item.Name == this._armor || item.Name == this._weapon)
+                {
+                    Console.WriteLine(" - " + i + " [E]" + item.Name);
+                }
+                else
+                {
+                    Console.WriteLine(" - " + i + " " + item.Name);
+                }
+                i++;
+            }
+
+            Console.WriteLine("장착/해제를 원하는 장비의 번호를 입력하세요.");
+            Console.Write(">>> ");
+            var input = int.Parse(Console.ReadLine());
+
+            if (input > 0)
+            {
+                if (_inventory[input - 1].PlusStr > 0 && _inventory[input - 1].PlusArmorPoint == 0)
+                {
+                    if (string.IsNullOrEmpty(this._weapon))
+                    {
+                        this._weapon = this._inventory[input - 1].Name;
+                        TakeStat(_inventory[input - 1], true);
+                    }
+                    else if (!string.IsNullOrEmpty(this._weapon) && this._weapon == this._inventory[input - 1].Name)
+                    {
+                        this._weapon = "";
+                        TakeStat(_inventory[input - 1], false);
+                    }
+                    else if (!string.IsNullOrEmpty(this._weapon) && this._weapon != this._inventory[input - 1].Name)
+                    {
+                        foreach (var item in _inventory)
+                        {
+                            if (item.Name == this._weapon)
+                            {
+                                this._weapon = "";
+                                TakeStat(item, false);
+                            }
+                        }
+
+                        this._weapon = this._inventory[input - 1].Name;
+                        TakeStat(_inventory[input - 1], true);
+                    }
+                }
+                else if (_inventory[input - 1].PlusArmorPoint > 0 && _inventory[input - 1].PlusStr == 0)
+                {
+                    if (string.IsNullOrEmpty(this._armor))
+                    {
+                        this._armor = this._inventory[input - 1].Name;
+                        TakeStat(_inventory[input - 1], true);
+                    }
+                    else if (!string.IsNullOrEmpty(this._armor) && this._armor == this._inventory[input - 1].Name)
+                    {
+                        this._armor = "";
+                        TakeStat(_inventory[input - 1], false);
+                    }
+                    else if (string.IsNullOrEmpty(this._armor) && this._armor != this._inventory[input - 1].Name)
+                    {
+                        foreach (var item in _inventory)
+                        {
+                            if (item.Name == this._armor)
+                            {
+                                this._armor = "";
+                                TakeStat(item, false);
+                            }
+                        }
+
+                        this._armor = this._inventory[input - 1].Name;
+                        TakeStat(_inventory[input - 1], true);
+                    }
+                }
+            }
+        }
+
+        public void TakeStat(Item item, bool isEquiped)
+        {
+            // 아이템 장착시 캐릭터 스탯 획득 메소드 -> 증가해야 하는 스탯 + / 감소해야하는 스탯을 -로 매개변수
+            if (isEquiped)
+            {
+                this.plusStr += item.PlusStr;
+                this.plusArmorPoint += item.PlusArmorPoint;
+            }
+            else if (!isEquiped)
+            {
+                this.plusStr -= item.PlusStr;
+                this.plusArmorPoint -= item.PlusArmorPoint;
             }
         }
 
@@ -177,11 +320,6 @@ namespace TextRPG.Class.Database.PlayerData
             this._lv++;
 
             // 레벨 업에 따른 기초 스텟 증가도 있어야하지 않을까?
-        }
-
-        public void TakeStat()
-        {
-            // 캐릭터 스탯 획득 메소드
         }
 
         public void SpendGold(int gold)
