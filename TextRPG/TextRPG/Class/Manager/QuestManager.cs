@@ -185,7 +185,7 @@ namespace TextRPG.Class.Manager
                                 string back = Console.ReadLine();
                                 if (back == "0")
                                 {
-                                    ShowQuestMenu();
+                                    break;
                                 }
                                 else
                                 {
@@ -206,7 +206,7 @@ namespace TextRPG.Class.Manager
                                 string back = Console.ReadLine();
                                 if (back == "0")
                                 {
-                                    ShowQuestMenu();
+                                    break;
                                 }
                                 else
                                 {
