@@ -176,7 +176,7 @@ namespace TextRPG.Class.Manager
                         Console.WriteLine("MP가 부족합니다.");
                         return;
                     }
-                    player.UseMp(10);
+                    player.ConsumeMp(10);
                     AlphaStrike();
                     break;
                 case "2":
@@ -185,7 +185,7 @@ namespace TextRPG.Class.Manager
                         Console.WriteLine("MP가 부족합니다.");
                         return;
                     }
-                    player.UseMp(15);
+                    player.ConsumeMp(15);
                     DoubleStrike();
                     break;
                 case "0":
