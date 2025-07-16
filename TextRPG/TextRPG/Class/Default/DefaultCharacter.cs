@@ -32,6 +32,13 @@ namespace TextRPG.Class.Data
         // 현재 체력
         protected int _hp;
 
+        // 기본 마나
+        protected int _maxMp;
+        // 아이템 장착 마나
+        protected int _plusMp;
+        // 현재 마나
+        protected int _mp;
+
         // 현재 보유 골드
         protected int _gold;
         // 캐릭터의 경험치
@@ -76,6 +83,14 @@ namespace TextRPG.Class.Data
         public int Hp
         {
             get { return _hp; }
+        }
+        public int MaxMp
+        {
+            get { return  (_maxMp + _plusMp); }
+        }
+        public int Mp
+        {
+            get { return _mp; }
         }
         public int Gold
         {
