@@ -13,6 +13,7 @@ namespace TextRPG.Class.Manager
     
     internal class BattleManager
     {
+        //4:22
         private List<Monster> monsters = new List<Monster>();
         private Random random = new Random();
         private Player player;
