@@ -31,7 +31,7 @@ namespace TextRPG.Class.Database.QuestData
         // 퀘스트 객체 미리 정의
         QuestData quest1 = new QuestData(1, "첫 번째 퀘스트", "미니언 5마리 처치", 5, 0);
         QuestData quest2 = new QuestData(2, "두 번째 퀘스트", "대포 미니언 처치", 1, 0);
-        QuestData quest3 = new QuestData(3, "고양이 찾기", "잃어버린 고양이를 찾아주세요.", 0, 0);
+        QuestData quest3 = new QuestData(3, "세 번째 퀘스트", "공허충 처치.", 10, 0);
 
         public QuestDatabase()
         {
