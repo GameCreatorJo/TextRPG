@@ -55,6 +55,7 @@ namespace TextRPG.Class.Manager
         //퀘스트 수락
         public void SelectQuest(int questId)
         {
+            AcceptQuest(questId);
             QuestData quest = _questDatabase.GetQuestById(questId);
             if (quest != null )
             {
@@ -69,30 +70,58 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine("퀘스트를 찾을 수 없습니다.");
             }
         }
-        
 
+        //퀘스트 중복수락 방지 로직
+        //public void AcceptQuest(int questId)
+        //{
+        //    var quest = _questDatabase.GetQuestById(questId);
+        //    if (quest == null)
+        //    {
+        //        Console.WriteLine("해당 ID의 퀘스트를 찾을 수 없습니다.");
+        //        return;
+        //    }
+
+        //    if (!_questDatabase.AcceptedQuests.ContainsKey(questId))
+        //    {
+        //        _questDatabase.AcceptedQuests[questId] = quest;
+        //        quest.State = QuestState.InProgress;
+        //        Console.WriteLine($"퀘스트 '{quest.Title}'을 수락했습니다.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("이미 수락한 퀘스트입니다.");
+        //    }
+        //}
         public void AcceptQuest(int questId)
         {
-            var quest = _questDatabase.GetQuestById(questId);
-            if (quest == null)
+            if (_questDatabase == null)
             {
-                Console.WriteLine("❌ 해당 ID의 퀘스트를 찾을 수 없습니다.");
+                Console.WriteLine("퀘스트 데이터베이스가 초기화되지 않았습니다.");
                 return;
             }
 
-            if (!_questDatabase.AcceptedQuests.ContainsKey(questId))
+            if (_questDatabase.IsQuestAccepted(questId))
             {
-                _questDatabase.AcceptedQuests[questId] = quest;
-                quest.State = QuestState.InProgress;
-                Console.WriteLine($"✅ 퀘스트 '{quest.Title}'을 수락했습니다.");
+                Console.WriteLine("이미 수락한 퀘스트입니다.");
+                return;
             }
-            else
+
+            var quest = _questDatabase.GetQuestById(questId);
+            if (quest == null)
             {
-                Console.WriteLine("⚠️ 이미 수락한 퀘스트입니다.");
+                Console.WriteLine($"퀘스트 ID {questId}에 해당하는 퀘스트를 찾을 수 없습니다.");
+                return;
             }
+
+            _questDatabase.AcceptedQuests[questId] = quest;
+            quest.State = QuestState.InProgress;
+            _activeQuest = quest;
+
+            Console.WriteLine($"퀘스트 '{quest.Title}'을 수락했습니다.");
         }
 
-       
+
+
 
 
 

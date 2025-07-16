@@ -58,6 +58,7 @@ namespace TextRPG.Class.Manager
             QuestUI questUI = new QuestUI(questDatabase);
             QuestManager.Instance.Initialize(questDatabase, questUI);
 
+
             Console.WriteLine("CreateManager initialized!");
         }
         public void CreateMonster()

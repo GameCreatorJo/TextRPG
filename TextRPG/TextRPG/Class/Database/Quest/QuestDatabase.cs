@@ -11,7 +11,7 @@ namespace TextRPG.Class.Database.QuestData
 {
     public class QuestDatabase
     {
-        
+
 
         //전체 퀘스트 목록
         private Dictionary<int, QuestData> _questDictionary;
@@ -67,7 +67,7 @@ namespace TextRPG.Class.Database.QuestData
             }
             else
             {
-                Console.WriteLine($"⚠️ 퀘스트 ID {id}를 찾을 수 없습니다.");
+                Console.WriteLine($"퀘스트 ID {id}를 찾을 수 없습니다.");
                 return null;
             }
         }
@@ -77,7 +77,7 @@ namespace TextRPG.Class.Database.QuestData
             return _questDictionary;
         }
 
-        
+
 
         public QuestData GetActiveQuest(int id)
         {
@@ -92,9 +92,15 @@ namespace TextRPG.Class.Database.QuestData
         {
             return _acceptedQuests.ContainsKey(id);
         }
-        
+        public void AddAcceptedQuest(QuestData quest)
+        {
+            if (!IsQuestAccepted(quest.Id))
+            {
+                _acceptedQuests[quest.Id] = quest;
+            }
 
 
+
+        }
     }
-
 }
