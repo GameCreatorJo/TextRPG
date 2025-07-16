@@ -8,5 +8,6 @@ namespace TextRPG.Class.Interface
 {
     internal class IPlayerData
     {
+
     }
 }

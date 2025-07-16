@@ -208,10 +208,6 @@ namespace TextRPG.Class.Manager
             Console.WriteLine("\n0. 다음");
             Console.ReadLine();
         }
-
     }
-
-
-
 }
 
