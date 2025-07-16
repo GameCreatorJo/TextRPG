@@ -31,9 +31,13 @@ namespace TextRPG.Class.Database.PlayerData
                 this._armorPoint = 5;
                 this.plusArmorPoint = 0;
 
-                this._maxHp = 100;
-                this._plusHp = 0;
-                this._hp = _maxHp;
+            this._maxHp = 100;
+            this._plusHp = 0;
+            this._hp = _maxHp + _plusHp;
+
+            this._maxMp = 100;
+            this._plusMp = 0;
+            this._mp = _maxMp + _plusMp;
 
                 this._gold = 1500;
                 this._exp = 0;

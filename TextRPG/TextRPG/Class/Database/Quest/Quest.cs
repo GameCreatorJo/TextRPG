@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TextRPG.Class.Database.Quest
+namespace TextRPG.Class.Database.QuestData
 {
-    public class Quest
+    public class QuestData
     {
         public int Id { get; }
         public string Title { get; }
@@ -15,7 +15,7 @@ namespace TextRPG.Class.Database.Quest
         public int KillCount { get; private set; }
         public bool IsCompleted { get; private set; }
 
-        public Quest(int id, string title, string description, int killTarget, int killCount)
+        public QuestData(int id, string title, string description, int killTarget, int killCount)
         {
             Id = id;// 퀘스트 ID
             Title = title;// 퀘스트 제목
