@@ -44,11 +44,31 @@ namespace TextRPG.Class.Database.PlayerData
         public override void ShowInfo()
         {
             // 캐릭터의 능력치를 보여주는 메소드
+            // 무기 칸이나 방어구 칸에 이름이 있다면 장비를 착용 중인 것으로 판별
             Console.WriteLine("Lv. " + _lv);
             Console.WriteLine("Chad ( " + _name + " )");
-            Console.WriteLine("공격력: " + _str);
-            Console.WriteLine("방어력: " + _armorPoint);
-            Console.WriteLine("체력: " + _maxHp);
+
+            if (this._armor == null || this._armor == "")
+            {
+                Console.WriteLine("공격력: " + _str);
+            }
+            else
+            {
+                Console.WriteLine("공격력: " + (_str + plusStr) + "( +" + plusStr + " )");
+            }
+
+            if (this._weapon == null || this._weapon == "")
+            {
+                Console.WriteLine("방어력: " + _armorPoint);
+                Console.WriteLine("최대 체력: " + _maxHp);
+            }
+            else
+            {
+                Console.WriteLine("방어력: " + (_armorPoint + plusArmorPoint) + "( +" + plusArmorPoint + " )");
+                Console.WriteLine("최대 체력: " + (_maxHp + _plusHp) + "( +" + _plusHp + " )");
+            }
+            
+            Console.WriteLine("현재 체력: " + _hp);
             Console.WriteLine("Gold: " + _gold + " G");
         }
         public void ShowInventory()
