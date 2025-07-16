@@ -92,7 +92,9 @@ namespace TextRPG.Class.Manager
                         _scene.Render();
                         break;
                     case "5":
-                        QuestManager.Instance.ShowQuestMenu();
+                        _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
+                        _scene.Render();
+                        //QuestManager.Instance.ShowQuestMenu();
                         break;
                     case "6":
                         Console.WriteLine("게임 종료");

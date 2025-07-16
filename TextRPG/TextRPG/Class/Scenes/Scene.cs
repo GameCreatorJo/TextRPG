@@ -45,6 +45,9 @@ namespace TextRPG.Class.Scenes
                     //RenderDungeonScene();
                     GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
                     break;
+                case "QuestScene":
+                    RenderQuestScene();
+                    break;
                 default:
                     Console.WriteLine("알 수 없는 씬입니다.");
                     break;
@@ -110,6 +113,20 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("+======================================+");
             Console.WriteLine("엔터를 눌러 돌아갑니다.");
             Console.ReadLine();
+        }
+        //퀘스트씬 작업
+        public void RenderQuestScene()
+        {
+            Console.Clear();
+            Console.WriteLine("+======================================+");
+            Console.WriteLine("|           📜 퀘스트 관리소 📜           |");
+            Console.WriteLine("+======================================+");
+
+            QuestManager.Instance.ShowQuestMenu();
+
+            
+
+
         }
     }
 }

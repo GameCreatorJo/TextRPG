@@ -164,11 +164,11 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("\n╔══════ 📜 퀘스트 메뉴 ══════╗");
-                Console.WriteLine("║ 1. 진행 중인 퀘스트 보기      ║");
-                Console.WriteLine("║ 2. 전체 퀘스트 목록           ║");
-                Console.WriteLine("║ 0. 뒤로가기                   ║");
-                Console.WriteLine("╚═════════════════════════════╝");
+                Console.WriteLine("╔══════════ 📜 퀘스트 메뉴 ══════════╗");
+                Console.WriteLine("║ 1. 진행 중인 퀘스트 보기            ║");
+                Console.WriteLine("║ 2. 전체 퀘스트 목록                 ║");
+                Console.WriteLine("║ 0. 뒤로가기                         ║");
+                Console.WriteLine("╚═════════════════════════════════════╝");
                 Console.WriteLine("\n1. 진행중인 퀘스트 보기 2. 전체 퀘스트 목록 0. 뒤로가기");
                 string input = Console.ReadLine();
                 switch (input)
@@ -185,7 +185,7 @@ namespace TextRPG.Class.Manager
                                 string back = Console.ReadLine();
                                 if (back == "0")
                                 {
-                                    ShowQuestMenu();
+                                    break;
                                 }
                                 else
                                 {
@@ -206,7 +206,7 @@ namespace TextRPG.Class.Manager
                                 string back = Console.ReadLine();
                                 if (back == "0")
                                 {
-                                    ShowQuestMenu();
+                                    break;
                                 }
                                 else
                                 {
