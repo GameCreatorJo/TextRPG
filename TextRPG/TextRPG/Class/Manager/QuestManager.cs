@@ -7,6 +7,7 @@ using TextRPG.Class.Database.Quest;
 
 namespace TextRPG.Class.Manager
 {
+
     public class QuestManager
     {
         private static QuestManager _instance;

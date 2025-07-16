@@ -8,7 +8,7 @@ using TextRPG.Class.Interface;
 using TextRPG.Class.Database.ItemData;
 using TextRPG.Class.Manager;
 
-namespace TextRPG.Class.Database.Player
+namespace TextRPG.Class.Database.PlayerData 
 {
 
     internal class Player : DefaultCharacter

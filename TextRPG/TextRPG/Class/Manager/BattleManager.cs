@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TextRPG.Class.Database.Player;
+using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Data;
 
@@ -17,8 +17,6 @@ namespace TextRPG.Class.Manager
         private Random random = new Random();
         private Player player;
    
-        
-
         public void SearchHP(Player player, Monster monster)
         {
             Console.WriteLine($"{player.Name}의 HP: {player.Hp}/{player.MaxHp}");

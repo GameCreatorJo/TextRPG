@@ -8,7 +8,7 @@ using TextRPG.Class.Data;
 using TextRPG.Class.Database.ItemData;
 using TextRPG.Class.Database.MapData;
 using TextRPG.Class.Database.MonsterData;
-using TextRPG.Class.Database.Player;
+using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager

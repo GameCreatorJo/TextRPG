@@ -23,7 +23,8 @@ namespace TextRPG.Class.Database.MapData
         // 던전 출구 정보 추가 (포탈 역할)
         public static readonly List<BuildingInfo> DungeonBuildings = new()
         {
-            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit", "Town", 10, 10)
+            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit", "Town", 10, 10),
+            new BuildingInfo(10, 10, BuildingInfo.MonsterPattern, "Monster", "Battle")
         };
 
         public static readonly List<BuildingInfo> ShopBuildings = new()
