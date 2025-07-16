@@ -10,7 +10,7 @@ using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
 {
-    //BattleManager 2:33
+    
     internal class BattleManager
     {
         private List<Monster> monsters = new List<Monster>();
@@ -100,6 +100,7 @@ namespace TextRPG.Class.Manager
             Console.WriteLine($"\n[내정보]");
             Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
             Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
+            Console.WriteLine($"MP {player.Mp}/{player.MaxMp}");
         }
 
 
@@ -147,9 +148,127 @@ namespace TextRPG.Class.Manager
 
         }
 
+        public void SkillMenu()
+        {
+            Console.WriteLine("\n1. 알파 스트라이크 - MP 10");
+            Console.WriteLine("   공격력 * 2 로 하나의 적을 공격합니다.");
+            Console.WriteLine("2. 더블 스트라이크 - MP 15");
+            Console.WriteLine("   공격력 * 1.5 로 2명의 적을 랜덤으로 공격합니다.");
+            Console.WriteLine("0. 취소");
+
+            Console.Write("\n원하시는 행동을 입력해주세요 >>");
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    if (player.Mp < 10)
+                    {
+                        Console.WriteLine("MP가 부족합니다.");
+                        return;
+                    }
+                    player.UseMp(10);
+                    AlphaStrike();
+                    break;
+                case "2":
+                    if(player.Mp < 15)
+                    {
+                        Console.WriteLine("MP가 부족합니다.");
+                        return;
+                    }
+                    player.UseMp(15);
+                    DoubleStrike();
+                    break;
+                case "0":
+                    Console.WriteLine("스킬 사용을 취소하셨습니다");
+                    break;
+                default:
+                    Console.WriteLine("잘못된 입력입니다.");
+                    SkillMenu();
+                    break;
+
+            }
+        }
+
+        public void AlphaStrike()
+        {
+            Console.WriteLine("\n대상을 선택하세요.");
+            for(int i = 0; i < monsters.Count; i++)
+            {
+                if(monsters[i].Hp > 0)
+                {
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
+                }
+            }
+            Console.Write(">> ");
+            if(!int.TryParse(Console.ReadLine(), out int index) || index < 1 || index > monsters.Count)
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                AlphaStrike();
+                return;
+            }
+
+            Monster target = monsters[index - 1];
+            if(target.Hp <= 0)
+            {
+                Console.WriteLine("이미 죽은 몬스터입니다.");
+                AlphaStrike();
+                return;
+            }
+
+
+            int damage = (int)(player.Str * 2);
+
+            target.TakeDamage(damage, player.CriticalRate);
+
+            Console.WriteLine($"\n스킬 : 알파 스트라이크을(를) 사용했다!");
+            Console.WriteLine($"{target.Name}에게 {damage}의 피해를 입혔다.");
+
+            if (target.Hp <= 0)
+            {
+                Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
+            }
+                
+        }
+
+        public void DoubleStrike()
+        {
+            var aliveMonsters = monsters.Where(m => m.Hp > 0).ToList();
+            if(aliveMonsters.Count == 0)
+            {
+                Console.WriteLine("공격할 대상이 없습니다");
+                return;
+            }
+
+            Console.WriteLine($"\n스킬 : 더블 스트라이크을(를) 사용했다!");
+
+            for(int i = 0; i < 2;  i++)
+            {
+                if(aliveMonsters.Count == 0)
+                {
+                    break;
+                }
+                int index = random.Next(aliveMonsters.Count);
+                Monster target = aliveMonsters[index];
+
+                int damage = (int)(player.Str * 1.5);
+
+                target.TakeDamage(damage, player.CriticalRate);
+
+                Console.WriteLine($"{target.Name}에게 {damage}의 피해를 입혔다.");
+
+                if(target.Hp <= 0)
+                {
+                    Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
+                    aliveMonsters.RemoveAt(index);
+                }
+            }
+        }
+
         private void PlayerTurn()
         {
             Console.WriteLine("\n1. 공격");
+            Console.WriteLine("2. 스킬");
             Console.WriteLine("0. 대기");
 
             Console.Write("\n행동을 선택하세요 >> ");
@@ -159,6 +278,9 @@ namespace TextRPG.Class.Manager
             {
                 case "1":
                     Attack();
+                    break;
+                case "2":
+                    SkillMenu();
                     break;
                 case "0":
                     Console.WriteLine("턴을 넘깁니다.");
@@ -183,6 +305,11 @@ namespace TextRPG.Class.Manager
             }
         }
 
+        public void UseMP(int Use)
+        {
+
+        }
+
         public void BattleResult()
         {
             //Console.Clear();
@@ -203,7 +330,7 @@ namespace TextRPG.Class.Manager
 
             Console.WriteLine($"Lv.{player.Lv} {player.Name}");
             Console.WriteLine($"HP {player.MaxHp} -> {player.Hp}");
-
+            Console.WriteLine($"MP {player.MaxMp} -> {player.Mp}");
 
             Console.WriteLine("\n0. 다음");
             Console.ReadLine();
