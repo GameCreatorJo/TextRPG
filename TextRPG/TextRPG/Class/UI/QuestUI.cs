@@ -71,22 +71,6 @@ namespace TextRPG.Class.UI
 
             }
 
-
-
-            //if (choice == "1")
-            //{
-            //    return true;//QuestManager.Instance.SelectQuest(quest.Id);
-            //}
-            //else if(choice == "2")
-            //{
-            //    return false;
-            //    Console.WriteLine(" 퀘스트 수락 취소됨.");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("잘못된 입력입니다.");
-            //    return false;
-            //}
         }
 
         public void ShowActiveQuest()

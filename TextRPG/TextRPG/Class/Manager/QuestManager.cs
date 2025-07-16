@@ -43,7 +43,7 @@ namespace TextRPG.Class.Manager
 
 
         }
-        private QuestUI _questUI;
+        private QuestUI? _questUI;
 
         public void Initialize(QuestDatabase database, QuestUI questUI)
         {
@@ -56,8 +56,9 @@ namespace TextRPG.Class.Manager
         public void SelectQuest(int questId)
         {
             QuestData quest = _questDatabase.GetQuestById(questId);
-            if (quest != null)
+            if (quest != null )
             {
+                
                 _activeQuest = quest;
                 Console.WriteLine($"퀘스트 '{_activeQuest.Title}'을(를) 수락했습니다.");
                 //Console.WriteLine("Enter를 누르면 퀘스트 메뉴로 돌아갑니다.");
@@ -68,23 +69,7 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine("퀘스트를 찾을 수 없습니다.");
             }
         }
-        //퀘스트 포기
-        //public void AbandonQuest()
-        //{
-        //    if (_activeQuest != null && !_activeQuest.IsCompleted)
-        //    {
-        //        Console.WriteLine($"퀘스트 '{_activeQuest.Title}'을(를) 포기했습니다.");
-        //        _activeQuest = null;
-        //    }
-        //    else if (_activeQuest?.IsCompleted == true)
-        //    {
-        //        Console.WriteLine("완료된 퀘스트는 포기할 수 없습니다.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("진행 중인 퀘스트가 없습니다.");
-        //    }
-        //}
+        
 
         public void AcceptQuest(int questId)
         {
@@ -107,20 +92,7 @@ namespace TextRPG.Class.Manager
             }
         }
 
-        //public void AbandonQuest(int questId)
-        //{
-        //    if (_questDatabase.AcceptedQuests.ContainsKey(questId))
-        //    {
-        //        QuestData quest = _questDatabase.AcceptedQuests[questId];
-        //        _questDatabase.AcceptedQuests.Remove(questId);
-        //        quest.State = QuestState.None;
-        //        Console.WriteLine($"❌ 퀘스트 '{quest.Title}'을 포기했습니다.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("⚠️ 진행 중인 퀘스트가 없습니다.");
-        //    }
-        //}
+       
 
 
 
@@ -229,7 +201,7 @@ namespace TextRPG.Class.Manager
                         return;
 
                     default:
-                        Console.WriteLine("⚠️ 올바르지 않은 선택입니다.");
+                        Console.WriteLine("잘못된 선택입니다.");
                         break;
                 }
             }
@@ -274,7 +246,7 @@ namespace TextRPG.Class.Manager
             }
             else
             {
-                Console.WriteLine("⚠️ 올바르지 않은 입력입니다.");
+                Console.WriteLine("잘못된 입력입니다.");
             }
         }
 
