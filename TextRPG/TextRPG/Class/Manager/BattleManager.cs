@@ -148,7 +148,7 @@ namespace TextRPG.Class.Manager
 
         }
 
-        public void SkillMenu()
+        /*public void SkillMenu()
         {
             Console.WriteLine("\n1. 알파 스트라이크 - MP 10");
             Console.WriteLine("   공격력 * 2 로 하나의 적을 공격합니다.");
@@ -264,7 +264,7 @@ namespace TextRPG.Class.Manager
                 }
             }
         }
-
+        */
         private void PlayerTurn()
         {
             Console.WriteLine("\n1. 공격");
@@ -279,9 +279,10 @@ namespace TextRPG.Class.Manager
                 case "1":
                     Attack();
                     break;
-                case "2":
+                /*case "2":
                     SkillMenu();
                     break;
+                */
                 case "0":
                     Console.WriteLine("턴을 넘깁니다.");
                     break;
