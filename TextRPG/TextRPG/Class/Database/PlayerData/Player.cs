@@ -344,6 +344,12 @@ namespace TextRPG.Class.Database.PlayerData
             // 데이터 불러오기 메소드
         }
 
+        public void ConsumeMp(int requireMp)
+        {
+            // 스킬 사용시 마나 소모 메소드
+            this._mp -= requireMp;
+        }
+
         //public void Addstat(Defaultitem item.value)
         //{
         //    아이템의 스텟을 플레이어 스텟에 추가하는 메소드
