@@ -11,6 +11,7 @@ using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Scenes;
+using TextRPG.Class.UI;
 
 namespace TextRPG.Class.Manager
 {
@@ -54,8 +55,8 @@ namespace TextRPG.Class.Manager
             _mapDatabase = new MapDatabase();
             //퀘스트시스템 초기화 추가
             QuestDatabase questDatabase = new QuestDatabase();
-            _questManager = new QuestManager();
-            
+            QuestUI questUI = new QuestUI(questDatabase);
+            QuestManager.Instance.Initialize(questDatabase, questUI);
 
             Console.WriteLine("CreateManager initialized!");
         }

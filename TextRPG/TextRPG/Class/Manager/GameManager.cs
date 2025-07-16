@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using TextRPG.Class.Database.MapData;
+using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Scenes;
+
 
 namespace TextRPG.Class.Manager
 {
@@ -53,6 +55,9 @@ namespace TextRPG.Class.Manager
 
         public void InitializeGame()
         {
+            // 퀘스트 매니저 초기화
+            QuestManager.Instance.Initialize(new QuestDatabase());
+
             _createManager.CreateGameWorld();
             Console.WriteLine("Game initialized!");
         }

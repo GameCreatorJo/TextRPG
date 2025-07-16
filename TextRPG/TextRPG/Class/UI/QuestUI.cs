@@ -43,13 +43,9 @@ namespace TextRPG.Class.UI
             }
         }
         //퀘스트 수락
-        private void ConfirmQuest(QuestData quest)
+        public bool ConfirmQuest(QuestData quest)
         {
-            //Console.WriteLine($"\n 퀘스트 이름: {quest.Title}");
-            //Console.WriteLine($" 설명: {quest.Description}");
-            //Console.WriteLine($" 목표: {quest.KillTarget}마리 처치");
             
-            //Console.WriteLine("\n1. 수락   2. 거절");
 
             Console.WriteLine("╔════════════════════════════════════════════╗");
             Console.WriteLine("║             📜 퀘스트 정보               ║");
@@ -60,20 +56,37 @@ namespace TextRPG.Class.UI
             Console.WriteLine($"║ 수락 여부  : 1. 수락   2. 거절".PadRight(42) + "║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
 
-            string choice = Console.ReadLine();
+            string questAccept = Console.ReadLine();
+            switch (questAccept)
+            {
+                case "1":
+                    return true;
+                    
+                case "2":
+                    return false;
+                default:
+                    Console.WriteLine("잘못된 입력입니다. ");
+                    return false;
 
-            if (choice == "1")
-            {
-                QuestManager.Instance.SelectQuest(quest.Id);
+
             }
-            else if(choice == "2")
-            {
-                Console.WriteLine(" 퀘스트 수락 취소됨.");
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-            }
+
+
+
+            //if (choice == "1")
+            //{
+            //    return true;//QuestManager.Instance.SelectQuest(quest.Id);
+            //}
+            //else if(choice == "2")
+            //{
+            //    return false;
+            //    Console.WriteLine(" 퀘스트 수락 취소됨.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("잘못된 입력입니다.");
+            //    return false;
+            //}
         }
 
         public void ShowActiveQuest()
@@ -91,25 +104,7 @@ namespace TextRPG.Class.UI
                 Console.WriteLine(" 진행 중인 퀘스트가 없습니다.");
             }
         }
-
-        public void PromptAbandonQuest()
-        {
-            Console.WriteLine("\n 퀘스트를 포기하시겠습니까?");
-            Console.WriteLine("1. 포기   2. 유지");
-            string input = Console.ReadLine();
-            if (input == "1")
-            {
-                QuestManager.Instance.AbandonQuest();
-            }
-            else if (input == "2")
-            {
-                Console.WriteLine(" 퀘스트를 유지합니다.");
-            }
-            else 
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-            }
-        }
+        
         // 퀘스트 보상을 넣으면 좋을지도..?
 
         //진행도
