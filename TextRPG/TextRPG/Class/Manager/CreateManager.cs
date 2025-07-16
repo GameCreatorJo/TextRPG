@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TextRPG.Class.Data;
 using TextRPG.Class.Database.ItemData;
-using TextRPG.Class.Database.Monster;
+using TextRPG.Class.Database.MapData;
+using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Database.Player;
 using TextRPG.Class.Scenes;
 
@@ -32,13 +33,18 @@ namespace TextRPG.Class.Manager
         }
 
         public SceneDatabase SceneDatabase { get; private set; }
+        private MapDatabase _mapDatabase;
+        public MapDatabase MapDatabase
+        {
+            get { return _mapDatabase; }
+        }
 
         public CreateManager()
         {
             monsterDatabase = new MonsterDatabase();
             _itemDatabas = new ItemDatabaseList();
             SceneDatabase = new SceneDatabase();
-
+            _mapDatabase = new MapDatabase();
             Console.WriteLine("CreateManager initialized!");
         }
         public void CreateMonster()
@@ -57,6 +63,11 @@ namespace TextRPG.Class.Manager
             SceneDatabase.CreateScene();
             Console.WriteLine("Scene created!");
         }
+        public void CreateMap()
+        {
+            _mapDatabase.CreateMap();
+            Console.WriteLine("Map created!");
+        }
 
         public void CreatePlayerData()
         {//test
@@ -72,6 +83,7 @@ namespace TextRPG.Class.Manager
             CreateItem();
             CreateScene();
             CreatePlayerData();
+            CreateMap();
             Console.WriteLine("Game world created!");
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.Player;
-using TextRPG.Class.Database.Monster;
+using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
