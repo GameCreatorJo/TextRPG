@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TextRPG.Class.Data;
 
-namespace TextRPG.Class.Database.Monster
+namespace TextRPG.Class.Database.MonsterData
 {
-    internal class Bear : DefaultCharacter
+    internal class Rabbit : DefaultCharacter
     {
-
     }
 }

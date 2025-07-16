@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using TextRPG.Class.Data;
 
-namespace TextRPG.Class.Database.Monster
+namespace TextRPG.Class.Database.MonsterData
 {
     internal class Monster : DefaultCharacter
     {

@@ -57,10 +57,11 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("+======================================+");
             Console.WriteLine("|         🌟 스파르타 마을 🌟         |");
             Console.WriteLine("+======================================+");
-            Console.WriteLine("| 1. 상태창 보기                       |\");                    |");
+            Console.WriteLine("| 1. 상태창 보기                         |");
             Console.WriteLine("| 2. 던전으로 이동                       |");
-            Console.WriteLine("| 3. 상점으로 이동                     |");
-            Console.WriteLine("| 4. 게임 종료                         |");
+            Console.WriteLine("| 3. 상점으로 이동                       |");
+            Console.WriteLine("| 4. 맵으로 이동                        |");
+            Console.WriteLine("| 5. 종료                               |");
             Console.WriteLine("+======================================+");
         }
 

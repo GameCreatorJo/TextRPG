@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TextRPG.Class.Data;
-using TextRPG.Class.Database.Monster;
 using TextRPG.Class.Database.Player;
-using static System.Net.Mime.MediaTypeNames;
+using TextRPG.Class.Database.MonsterData;
+using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
 {
@@ -137,37 +136,15 @@ namespace TextRPG.Class.Manager
             int maxDamage = (int)(player.Str + offset);
 
             //공격력 10% 오차처리
-            int baseDamage = random.Next(minDamage, maxDamage + 1);
+            int damage = random.Next(minDamage, maxDamage + 1);
 
-            int crit = player.CriticalDamage(player.CriticalRate);
-            int avoid = target.AvoidDamage();
+            target.TakeDamage(damage, player.CriticalRate);
 
-            if (avoid == 0)
-            {
-                Console.WriteLine($"\n{player.Name}의 공격!");
-                Console.WriteLine($"Lv.{target.Name}을(를) 공격했지만 아무일도 일어나지 않았습니다.");
-            }
-            else
-            {
-                int damage = baseDamage * crit;
-                target.TakeDamage(damage, player.CriticalRate);
+            Console.WriteLine($"\n{player.Name}의 공격!");
+            Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
 
-                Console.WriteLine($"\n{player.Name}의 공격!");
-                Console.WriteLine($"Lv.{target.Lv} {target.Name} 을(를) 맞췄습니다. [데미지 : {damage}]");
-
-                if (crit > 1)
-                {
-                    Console.Write("- 치명타 공격!!");
-                }
-                   
-
-                if (target.Hp <= 0)
-                {
-                    Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
-                }
-                    
-            }
-            
+            if (target.Hp <= 0)
+                Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
 
 
         }
