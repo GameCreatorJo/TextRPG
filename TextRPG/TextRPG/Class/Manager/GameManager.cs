@@ -66,7 +66,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 퀘스트 목록 6: 종료");
+                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 퀘스트 메뉴 6: 종료");
                 string input = Console.ReadLine();
                 switch (input)
                 {
