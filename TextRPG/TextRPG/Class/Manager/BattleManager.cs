@@ -17,6 +17,8 @@ namespace TextRPG.Class.Manager
         private List<Monster> monsters = new List<Monster>();
         private Random random = new Random();
         private Player player;
+        private int totalGoldReward = 0;
+        private int totalExpReward = 0;
    
         public void SearchHP(Player player, Monster monster)
         {
@@ -144,12 +146,18 @@ namespace TextRPG.Class.Manager
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
 
             if (target.Hp <= 0)
+            {
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
+                //처치하면 전투결과때 얻을 골드와 경험치가 늘어남
+                totalGoldReward += target.Gold;
+                totalExpReward += target.Exp;
+            }
+                
 
 
         }
 
-        /*public void SkillMenu()
+       /* public void SkillMenu()
         {
             Console.WriteLine("\n1. 알파 스트라이크 - MP 10");
             Console.WriteLine("   공격력 * 2 로 하나의 적을 공격합니다.");
@@ -228,6 +236,8 @@ namespace TextRPG.Class.Manager
             if (target.Hp <= 0)
             {
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
+                totalGoldReward += target.Gold;
+                totalExpReward += target.Exp;
             }
                 
         }
@@ -262,6 +272,8 @@ namespace TextRPG.Class.Manager
                 {
                     Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
                     aliveMonsters.RemoveAt(index);
+                    totalGoldReward += target.Gold;
+                    totalExpReward += target.Exp;
                 }
             }
         }
@@ -327,12 +339,23 @@ namespace TextRPG.Class.Manager
             {
                 Console.WriteLine("승리");
                 Console.WriteLine($"던전에서 몬스터 {defeatedCount}마리를 잡았습니다.\n");
+
+                Console.WriteLine("[캐릭터 정보]");
+                Console.WriteLine($"Lv.{player.Lv} {player.Name}");
+                Console.WriteLine($"HP {player.MaxHp} -> {player.Hp}");
+                Console.WriteLine($"MP {player.MaxMp} -> {player.Mp}");
+
+                Console.WriteLine("[획득한 보상]");
+                Console.WriteLine($"{totalGoldReward} Gold");
+                Console.WriteLine($"{totalExpReward} Exp\n");
+
+                //전투가 끝나고 한번에 골드와 경험치가 들어감
+                //player.AddGold(totalGoldReward);
+                player.TakeEXP(totalExpReward);
             }
 
 
-            Console.WriteLine($"Lv.{player.Lv} {player.Name}");
-            Console.WriteLine($"HP {player.MaxHp} -> {player.Hp}");
-            Console.WriteLine($"MP {player.MaxMp} -> {player.Mp}");
+           
 
             Console.WriteLine("\n0. 다음");
             Console.ReadLine();
