@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using TextRPG.Class.Database.MapData;
+using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Scenes;
+
 
 namespace TextRPG.Class.Manager
 {
@@ -20,6 +22,10 @@ namespace TextRPG.Class.Manager
         private MapManager _mapManager;
         public MapManager MapManager => _mapManager;
 
+        //퀘스트 매니저 삽입
+        private QuestManager _questManager;
+        public QuestManager QuestManager => _questManager;
+
         private Scene _scene;
         public Scene Scene => _scene;
 
@@ -32,6 +38,8 @@ namespace TextRPG.Class.Manager
             _battleManager = new BattleManager();
             _scene = new Scene();
             _mapManager = new MapManager();
+            //퀘스트 매니저 삽입
+            _questManager = new QuestManager();
         }
 
         public void StartGame()
@@ -47,6 +55,9 @@ namespace TextRPG.Class.Manager
 
         public void InitializeGame()
         {
+            // 퀘스트 매니저 초기화
+            QuestManager.Instance.Initialize(new QuestDatabase());
+
             _createManager.CreateGameWorld();
             Console.WriteLine("Game initialized!");
         }
@@ -55,7 +66,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 종료");
+                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 퀘스트 메뉴 6: 종료");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -81,6 +92,9 @@ namespace TextRPG.Class.Manager
                         _scene.Render();
                         break;
                     case "5":
+                        QuestManager.Instance.ShowQuestMenu();
+                        break;
+                    case "6":
                         Console.WriteLine("게임 종료");
                         return;
                     default:

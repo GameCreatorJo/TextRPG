@@ -14,7 +14,15 @@ namespace TextRPG.Class.Database.QuestData
         public int KillTarget { get; }
         public int KillCount { get; private set; }
         public bool IsCompleted { get; private set; }
+        public QuestState State { get; set; }
+        public enum QuestState
+        { 
+            None,
+            InProgress,
+            Completed,
+            Failed
 
+        }
         public QuestData(int id, string title, string description, int killTarget, int killCount)
         {
             Id = id;// 퀘스트 ID

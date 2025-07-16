@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.QuestData;
+using TextRPG.Class.UI;
+using static TextRPG.Class.Database.QuestData.QuestData;
+
+
 
 namespace TextRPG.Class.Manager
 {
@@ -28,46 +32,98 @@ namespace TextRPG.Class.Manager
             }
 
         }
-        private QuestData _activeQuest;
-        private QuestDatabase _questDatabase;
+        private QuestData? _activeQuest;
+        private QuestDatabase? _questDatabase;
 
 
         public void Initialize(QuestDatabase database)
         {
             _questDatabase = database;
+            _questDatabase.CreateQuest(); // 누락된 초기 퀘스트 등록
+
 
         }
+        private QuestUI? _questUI;
+
+        public void Initialize(QuestDatabase database, QuestUI questUI)
+        {
+            _questDatabase = database;
+            _questUI = questUI;
+            _questDatabase.CreateQuest();
+        }
+
         //퀘스트 수락
         public void SelectQuest(int questId)
         {
+            AcceptQuest(questId);
             QuestData quest = _questDatabase.GetQuestById(questId);
-            if (quest != null)
+            if (quest != null )
             {
+                
                 _activeQuest = quest;
                 Console.WriteLine($"퀘스트 '{_activeQuest.Title}'을(를) 수락했습니다.");
+                //Console.WriteLine("Enter를 누르면 퀘스트 메뉴로 돌아갑니다.");
+                ShowQuestList();
             }
             else
             {
                 Console.WriteLine("퀘스트를 찾을 수 없습니다.");
             }
         }
-        //퀘스트 포기
-        public void AbandonQuest()
+
+        //퀘스트 중복수락 방지 로직
+        //public void AcceptQuest(int questId)
+        //{
+        //    var quest = _questDatabase.GetQuestById(questId);
+        //    if (quest == null)
+        //    {
+        //        Console.WriteLine("해당 ID의 퀘스트를 찾을 수 없습니다.");
+        //        return;
+        //    }
+
+        //    if (!_questDatabase.AcceptedQuests.ContainsKey(questId))
+        //    {
+        //        _questDatabase.AcceptedQuests[questId] = quest;
+        //        quest.State = QuestState.InProgress;
+        //        Console.WriteLine($"퀘스트 '{quest.Title}'을 수락했습니다.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("이미 수락한 퀘스트입니다.");
+        //    }
+        //}
+        public void AcceptQuest(int questId)
         {
-            if (_activeQuest != null && !_activeQuest.IsCompleted)
+            if (_questDatabase == null)
             {
-                Console.WriteLine($"퀘스트 '{_activeQuest.Title}'을(를) 포기했습니다.");
-                _activeQuest = null;
+                Console.WriteLine("퀘스트 데이터베이스가 초기화되지 않았습니다.");
+                return;
             }
-            else if (_activeQuest?.IsCompleted == true)
+
+            if (_questDatabase.IsQuestAccepted(questId))
             {
-                Console.WriteLine("완료된 퀘스트는 포기할 수 없습니다.");
+                Console.WriteLine("이미 수락한 퀘스트입니다.");
+                return;
             }
-            else
+
+            var quest = _questDatabase.GetQuestById(questId);
+            if (quest == null)
             {
-                Console.WriteLine("진행 중인 퀘스트가 없습니다.");
+                Console.WriteLine($"퀘스트 ID {questId}에 해당하는 퀘스트를 찾을 수 없습니다.");
+                return;
             }
+
+            _questDatabase.AcceptedQuests[questId] = quest;
+            quest.State = QuestState.InProgress;
+            _activeQuest = quest;
+
+            Console.WriteLine($"퀘스트 '{quest.Title}'을 수락했습니다.");
         }
+
+
+
+
+
 
         //퀘스트 진행도
         public void UpdateQuestKillCount()
@@ -76,6 +132,13 @@ namespace TextRPG.Class.Manager
             {
                 _activeQuest.UpdateKill();
                 Console.WriteLine(_activeQuest.GetQuestInfo());
+                if (_activeQuest.IsCompleted)
+                {
+                    Console.WriteLine($"퀘스트 '{_activeQuest.Title}' 완료!");
+                    // 여기서 보상 지급 로직 삽입 가능!
+                    // 예: Player.AddItem("rewardItemId");
+                }
+
             }
             else
             {
@@ -86,6 +149,159 @@ namespace TextRPG.Class.Manager
         public QuestData GetActiveQuest()
         {
             return _activeQuest;
+        }
+
+        public Dictionary<int, QuestData> GetAllQuests()
+        {
+            return _questDatabase.GetAllQuests();
+        }
+        public QuestData[] GetAvailableQuests()
+        {
+            return _questDatabase.GetAllQuests().Values.ToArray();
+        }
+
+        public void ShowQuestMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine("\n╔══════ 📜 퀘스트 메뉴 ══════╗");
+                Console.WriteLine("║ 1. 진행 중인 퀘스트 보기      ║");
+                Console.WriteLine("║ 2. 전체 퀘스트 목록           ║");
+                Console.WriteLine("║ 0. 뒤로가기                   ║");
+                Console.WriteLine("╚═════════════════════════════╝");
+                Console.WriteLine("\n1. 진행중인 퀘스트 보기 2. 전체 퀘스트 목록 0. 뒤로가기");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        QuestData active = QuestManager.Instance.GetActiveQuest();
+                        Console.WriteLine("\n[진행 중인 퀘스트]");
+                        if (active != null)
+                        {
+                            Console.WriteLine(active.GetQuestInfo()); //퀘스트 정보출력
+                            do
+                            {
+                                Console.WriteLine("0. 돌아가기");
+                                string back = Console.ReadLine();
+                                if (back == "0")
+                                {
+                                    ShowQuestMenu();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요");
+
+
+                                }
+                            } while (true);
+                            
+                        }
+                        else
+                        { 
+                            Console.WriteLine("진행 중인 퀘스트가 없습니다.\n퀘스트를 수락해주세요.");
+
+                            do 
+                            {
+                                Console.WriteLine("0. 돌아가기");
+                                string back = Console.ReadLine();
+                                if (back == "0")
+                                {
+                                    ShowQuestMenu();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("잘못된 입력입니다.");
+
+
+                                }
+                            } while (true);
+                            
+                        }
+                            
+                        
+                        break;
+
+                    case "2":
+                        ShowQuestList();
+                        
+                        Console.ReadLine();
+                        break;
+                    case "0":
+                        return;
+
+                    default:
+                        Console.WriteLine("잘못된 선택입니다.");
+                        break;
+                }
+            }
+        }
+        public void HandleQuestSelection()
+        {
+            Console.WriteLine("\n[수락 가능한 퀘스트 목록]");
+            foreach (var questPair in _questDatabase.GetAllQuests())
+            {
+                if (!_questDatabase.IsQuestAccepted(questPair.Key))
+                {
+                    //퀘스트 ID와 해당 퀘스트 데이터 가져오기
+                    Console.WriteLine($"[{questPair.Key}] {questPair.Value.Title} - {questPair.Value.Description}");
+                }
+            }
+            
+            Console.Write("\n퀘스트 ID를 입력해 상세보기: ");
+            if (int.TryParse(Console.ReadLine(), out int questId))
+            {
+                QuestData quest = _questDatabase.GetQuestById(questId);
+                if (quest != null)
+                {
+                    if (_questUI.ConfirmQuest(quest))
+                    {
+                        Console.WriteLine("퀘스트를 수락합니다.");
+                        SelectQuest(questId);
+                    }
+                    else
+                    {
+                        Console.WriteLine("퀘스트를 거절했습니다.");
+                        //퀘스트 목록 호출
+                        ShowQuestList();
+                    }
+                        //_questUI.ConfirmQuest(quest); // 정보 확인 + 수락/거절 입력
+                        Console.WriteLine();
+                    
+                }
+                else
+                {
+                    Console.WriteLine("❌ 해당 퀘스트가 존재하지 않습니다.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+            }
+        }
+
+        public void ShowQuestList()
+        {
+            Console.WriteLine("\n[퀘스트 목록]");
+            foreach (QuestData quest in GetAvailableQuests())
+            {
+                Console.WriteLine($"[{quest.Id}] {quest.Title} - {quest.Description}");
+            }
+            Console.WriteLine("1. 퀘스트 선택 0. 돌아가기\n");
+            string questChoice = Console.ReadLine();
+            switch (questChoice)
+            {
+                case "1":
+                    Console.Write("\n선택할 퀘스트 ID 입력: ");
+                    QuestManager.Instance.HandleQuestSelection();
+                    Console.WriteLine();
+                    break;
+                case "0":
+                    ShowQuestMenu();
+                    break;
+                default:
+                    Console.WriteLine("⚠️ 올바르지 않은 선택입니다.");
+                    break;
+            }
         }
 
     }
