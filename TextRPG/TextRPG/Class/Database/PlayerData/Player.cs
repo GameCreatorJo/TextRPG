@@ -8,7 +8,7 @@ using TextRPG.Class.Interface;
 using TextRPG.Class.Database.ItemData;
 using TextRPG.Class.Manager;
 
-namespace TextRPG.Class.Database.Player
+namespace TextRPG.Class.Database.PlayerData 
 {
 
     internal class Player : DefaultCharacter
@@ -17,30 +17,61 @@ namespace TextRPG.Class.Database.Player
         private string _weapon = "";
         private string _armor = "";
 
-        public Player(string inputName) 
+        public Player(string inputName, string input) 
         {
-            this._lv = 1;
-            this._name = inputName;
-            this._job = "전사";
+            if (input == "1")
+            {
+                this._lv = 1;
+                this._name = inputName;
+                this._job = "전사";
 
-            this._str = 10;
-            this.plusStr = 0;
+                this._str = 10;
+                this.plusStr = 0;
 
-            this._armorPoint = 5;
-            this.plusArmorPoint = 0;
+                this._armorPoint = 5;
+                this.plusArmorPoint = 0;
 
             this._maxHp = 100;
             this._plusHp = 0;
-            this._hp = _maxHp;
+            this._hp = _maxHp + _plusHp;
 
-            this._gold = 1500;
-            this._exp = 0;
+            this._maxMp = 100;
+            this._plusMp = 0;
+            this._mp = _maxMp + _plusMp;
 
-            this._criticalRate = 0;
-            this._dodgeRate = 0;
+                this._gold = 1500;
+                this._exp = 0;
 
-            this._inventory = new List<Item>();
-        }
+                this._criticalRate = 0;
+                this._dodgeRate = 0;
+
+                this._inventory = new List<Item>();
+            }
+            else if (input == "2")
+            {
+                this._lv = 1;
+                this._name = inputName;
+                this._job = "마법사";
+
+                this._str = 10;
+                this.plusStr = 0;
+
+                this._armorPoint = 5;
+                this.plusArmorPoint = 0;
+
+                this._maxHp = 100;
+                this._plusHp = 0;
+                this._hp = _maxHp;
+
+                this._gold = 1500;
+                this._exp = 0;
+
+                this._criticalRate = 0;
+                this._dodgeRate = 0;
+
+                this._inventory = new List<Item>();
+            }
+            }
         public override void ShowInfo()
         {
             // 캐릭터의 능력치를 보여주는 메소드

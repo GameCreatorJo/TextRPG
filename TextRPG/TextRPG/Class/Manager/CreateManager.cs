@@ -8,7 +8,7 @@ using TextRPG.Class.Data;
 using TextRPG.Class.Database.ItemData;
 using TextRPG.Class.Database.MapData;
 using TextRPG.Class.Database.MonsterData;
-using TextRPG.Class.Database.Player;
+using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
@@ -73,7 +73,10 @@ namespace TextRPG.Class.Manager
         {//test
             Console.WriteLine("플레이어 이름을 입력해주세요!");
             string playerName = Console.ReadLine();
-            player = new Player(playerName);
+            Console.WriteLine("직업을 선택해주세요!");
+            Console.WriteLine("1. 전사 2. 마법사");
+            string inputJob = Console.ReadLine();
+            player = new Player(playerName, inputJob);
             player.TakeItem();
             Console.WriteLine("Player data created!");
         }

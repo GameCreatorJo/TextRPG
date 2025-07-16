@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TextRPG.Class.Database.Quest;
+using TextRPG.Class.Database.QuestData;
 
 namespace TextRPG.Class.Manager
 {
+
     public class QuestManager
     {
         private static QuestManager _instance;
@@ -27,7 +28,7 @@ namespace TextRPG.Class.Manager
             }
 
         }
-        private Quest _activeQuest;
+        private QuestData _activeQuest;
         private QuestDatabase _questDatabase;
 
 
@@ -39,7 +40,7 @@ namespace TextRPG.Class.Manager
         //퀘스트 수락
         public void SelectQuest(int questId)
         {
-            Quest quest = _questDatabase.GetQuestById(questId);
+            QuestData quest = _questDatabase.GetQuestById(questId);
             if (quest != null)
             {
                 _activeQuest = quest;
@@ -82,7 +83,7 @@ namespace TextRPG.Class.Manager
             }
 
         }
-        public Quest GetActiveQuest()
+        public QuestData GetActiveQuest()
         {
             return _activeQuest;
         }

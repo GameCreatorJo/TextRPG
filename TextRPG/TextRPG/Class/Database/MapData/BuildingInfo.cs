@@ -78,5 +78,12 @@ namespace TextRPG.Class.Database.MapData
 
         };
 
+        public static readonly char[,] MonsterPattern = new char[3, 3]
+        {
+        { ' ', '^', ' ' },
+        { '(', 'o', ')' },
+        { ' ', '@', ' ' }
+        };
+
     }
 }

@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Default;
 using TextRPG.Class.Manager;
+using TextRPG.Class.Database.PlayerData;
 
 namespace TextRPG.Class.Database.MapData
 {
     public class Map : DefaultMap
     {
+        private bool isInBattle = false;
+        private Monster currentBattleMonster = null;
+        private string battleMessage = "";
+        private int battleMenuCursor = 0;
+
         private readonly List<BuildingInfo> buildings;
         private readonly HashSet<(int x, int y)> portalEntrances = new();
 
         private readonly List<Monster> spawnTable;
         private readonly Random spawnRng = new Random();
+        private int _inventoryCursor = 0;
 
         public Map(int width, int height, double encounterRate, List<BuildingInfo> buildings)
             : base(width, height, encounterRate)
@@ -110,6 +117,10 @@ namespace TextRPG.Class.Database.MapData
                         spawnX = 10; spawnY = 16; // Town 던전 입구 위치로 귀환
                         return "Town";
                     }
+                    else if (playerX == 10 && playerY == 11)
+                    {
+                        return "Battle";
+                    }
                     break;
             }
 
@@ -125,9 +136,15 @@ namespace TextRPG.Class.Database.MapData
             return new Monster(spawnTable[template]);
         }
 
-        public override void Draw()
+        public void Draw(int inventoryCursor)
         {
             var player = GameManager.Instance.CreateManager.Player;
+
+            if (isInBattle)
+            {
+                DrawBattleScreen(player);
+                return;
+            }
 
             string[] statLines = new string[Height];
             statLines[0] = "=== Status ===";
@@ -138,9 +155,18 @@ namespace TextRPG.Class.Database.MapData
             statLines[5] = $"Gold  : {player.Gold}";
             statLines[6] = $"Job   : {player.Job}";
             statLines[7] = $"Name  : {player.Name}";
+            statLines[8] = $"Inventory";
 
-            for (int i = 8; i < Height; i++)
+            int inventoryStartLine = 9;
+            for (int i = 0; i < player.Inventory.Count && (inventoryStartLine + i) < Height; i++)
+            {
+                string prefix = (i == inventoryCursor) ? "> " : "  ";
+                statLines[inventoryStartLine + i] = prefix + player.Inventory[i].Name;
+            }
+
+            for (int i = inventoryStartLine + player.Inventory.Count; i < Height; i++)
                 statLines[i] = "";
+
             for (int y = 0; y < Height; y++)
             {
                 Console.SetCursorPosition(0, y);
@@ -159,13 +185,18 @@ namespace TextRPG.Class.Database.MapData
 
                     Console.Write(x == PlayerX && y == PlayerY ? '♥' : c);
                 }
+
                 Console.Write(" │ ");
                 if (y < statLines.Length && !string.IsNullOrEmpty(statLines[y]))
                     Console.Write(statLines[y].PadRight(18));
                 else
                     Console.Write(new string(' ', 18));
             }
+
+            if (inventoryCursor >= 0)
+                Console.SetCursorPosition(21, inventoryStartLine + inventoryCursor);
         }
+
 
         private char GetBuildingPatternChar(int x, int y)
         {
@@ -179,12 +210,85 @@ namespace TextRPG.Class.Database.MapData
                 int dy = y - startY;
                 if (dx >= 0 && dx < patternCols && dy >= 0 && dy < patternRows)
                 {
-                    char symbol = b.Pattern[dy, dx];
-                    if (symbol != ' ')
-                        return symbol == '@' ? '.' : symbol;
+                        char symbol = b.Pattern[dy, dx];
+                        if (symbol != ' ')
+                            return symbol == '@' ? '.' : symbol;
                 }
             }
             return 'B';
         }
+
+        private void StartBattle(Monster monster)
+        {
+            isInBattle = true;
+            currentBattleMonster = monster;
+            battleMessage = "";
+            battleMenuCursor = 0;
+        }
+        public void EndBattle()
+        {
+            isInBattle = false;
+            currentBattleMonster = null;
+            battleMessage = "";
+            battleMenuCursor = 0;
+        }
+
+        private void DrawBattleScreen(Player player)
+        {
+            int leftWidth = BuildingInfo.MonsterPattern.GetLength(1) + 2;  // 몬스터 아스키 너비 + 여유공간
+            int rightStartX = leftWidth + 3;
+
+            // 1) 왼쪽 몬스터 아스키 (BuildingInfo.MonsterPattern 참조)
+            if (currentBattleMonster != null)
+            {
+                for (int y = 0; y < BuildingInfo.MonsterPattern.GetLength(0); y++)
+                {
+                    Console.SetCursorPosition(0, y);
+                    for (int x = 0; x < BuildingInfo.MonsterPattern.GetLength(1); x++)
+                    {
+                        char c = BuildingInfo.MonsterPattern[y, x];
+                        Console.Write(c);
+                    }
+                }
+
+                // 몬스터 HP바
+                int hpBarLength = 20;
+                int hpFilled = (int)((double)currentBattleMonster.Hp / currentBattleMonster.MaxHp * hpBarLength);
+                string hpBar = new string('█', hpFilled) + new string(' ', hpBarLength - hpFilled);
+                Console.SetCursorPosition(0, BuildingInfo.MonsterPattern.GetLength(0) + 1);
+                Console.WriteLine($"HP: [{hpBar}] {currentBattleMonster.Hp} / {currentBattleMonster.MaxHp}");
+            }
+
+            // 2) 오른쪽 플레이어 상태창
+            Console.SetCursorPosition(rightStartX, 0);
+            Console.WriteLine("=== Status ===");
+            Console.SetCursorPosition(rightStartX, 1);
+            Console.WriteLine($"Player: {player.Name} Lv.{player.Lv}");
+            Console.SetCursorPosition(rightStartX, 2);
+            Console.WriteLine($"HP    : {player.Hp} / {player.MaxHp}");
+            Console.SetCursorPosition(rightStartX, 3);
+            Console.WriteLine($"MP    : 10 / 10"); // 임시
+            Console.SetCursorPosition(rightStartX, 4);
+            Console.WriteLine($"Gold  : {player.Gold}");
+            Console.SetCursorPosition(rightStartX, 5);
+            Console.WriteLine($"Job   : {player.Job}");
+
+            // 3) 하단 행동 선택 메뉴 (예: 공격, 도망)
+            int bottomStartY = Math.Max(BuildingInfo.MonsterPattern.GetLength(0), 7) + 4; // 몬스터 아스키 높이나 상태창 높이 고려
+            Console.SetCursorPosition(0, bottomStartY);
+            Console.WriteLine("행동 선택:");
+            Console.SetCursorPosition(0, bottomStartY + 1);
+            Console.WriteLine(battleMenuCursor == 0 ? "> 1. 공격" : "  1. 공격");
+            Console.SetCursorPosition(0, bottomStartY + 2);
+            Console.WriteLine(battleMenuCursor == 1 ? "> 2. 도망치기" : "  2. 도망치기");
+
+            // 4) 메시지 출력 (데미지 등)
+            if (!string.IsNullOrEmpty(battleMessage))
+            {
+                Console.SetCursorPosition(0, bottomStartY + 4);
+                Console.WriteLine(battleMessage);
+            }
+        }
+
     }
 }

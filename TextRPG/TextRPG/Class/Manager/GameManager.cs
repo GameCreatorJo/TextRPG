@@ -17,6 +17,9 @@ namespace TextRPG.Class.Manager
         private BattleManager _battleManager;
         public BattleManager BattleManager => _battleManager;
 
+        private MapManager _mapManager;
+        public MapManager MapManager => _mapManager;
+
         private Scene _scene;
         public Scene Scene => _scene;
 
@@ -28,7 +31,7 @@ namespace TextRPG.Class.Manager
             _createManager = new CreateManager();
             _battleManager = new BattleManager();
             _scene = new Scene();
-
+            _mapManager = new MapManager();
         }
 
         public void StartGame()
@@ -70,61 +73,9 @@ namespace TextRPG.Class.Manager
                         _scene.Render();
                         break;
                     case "4":
-                        var mapDb = _createManager.MapDatabase;
-                        Map currentMap = mapDb.GetMap("Town");
-                        currentMap.Initialize();
-                        currentMap.BuildBuildings();
-
-                        // 최초 플레이어 위치 중앙 또는 원하는 위치 지정
-                        currentMap.PlayerX = currentMap.Width / 2;
-                        currentMap.PlayerY = currentMap.Height / 2;
-
-                        Console.Clear();
-
-                        while (true)
-                        {
-                            currentMap.Draw();
-                            Console.SetCursorPosition(0, currentMap.Height + 1);
-                            Console.WriteLine("화살표 이동, Q: 종료");
-                            var key = Console.ReadKey(true).Key;
-                            if (key == ConsoleKey.Q) break;
-
-                            bool moved = currentMap.TryMove(key);
-
-                            if (moved)
-                            {
-                                string nextMap = currentMap.GetAutoTransferTarget(
-                                    mapDb.Maps.FirstOrDefault(x => x.Value == currentMap).Key,
-                                    currentMap.PlayerX,
-                                    currentMap.PlayerY,
-                                    out int? spawnX,
-                                    out int? spawnY);
-
-                                if (!string.IsNullOrEmpty(nextMap))
-                                {
-                                    currentMap = mapDb.GetMap(nextMap);
-                                    currentMap.Initialize();
-                                    currentMap.BuildBuildings();
-
-                                    if (spawnX.HasValue && spawnY.HasValue)
-                                    {
-                                        currentMap.PlayerX = spawnX.Value;
-                                        currentMap.PlayerY = spawnY.Value;
-                                    }
-                                    else
-                                    {
-                                        currentMap.PlayerX = currentMap.Width / 2;
-                                        currentMap.PlayerY = currentMap.Height / 2;
-                                    }
-
-                                    Console.Clear();
-                                    Console.WriteLine($"{nextMap} 맵으로 이동!");
-                                    continue;
-                                }
-
-                                // Encounter 처리 등은 여기에 추가 가능
-                            }
-                        }
+                        var mapManager = new MapManager();
+                        mapManager.StartMap("Town");
+                        mapManager.RunMapLoop();
 
                         _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"];
                         _scene.Render();
