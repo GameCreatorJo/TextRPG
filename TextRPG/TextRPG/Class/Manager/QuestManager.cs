@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.UI;
 using static TextRPG.Class.Database.QuestData.QuestData;
@@ -108,40 +110,37 @@ namespace TextRPG.Class.Manager
 
 
         //퀘스트 진행도
-        public void UpdateQuestKillCount()
+        public void UpdateQuestKillCount(string monsterName)
         {
-            if (_activeQuest != null && !_activeQuest.IsCompleted)
-            {
-                _activeQuest.UpdateKill();
-                Console.WriteLine(_activeQuest.GetQuestInfo());
-                if (_activeQuest.IsCompleted)
-                {
-                    Console.WriteLine($"퀘스트 '{_activeQuest.Title}' 완료!");
-                    // 여기서 보상 지급 로직 삽입 가능!
-                    // 예: Player.AddItem("rewardItemId");
-                }
+            var activeQuests = GetActiveQuests();
 
-            }
-            else
+            foreach (var quest in activeQuests.Values)
             {
-                Console.WriteLine("진행 중인 퀘스트가 없습니다.");
+                if (!quest.IsCompleted && quest.TargetMonsterKey == monsterName)
+                {
+                    quest.UpdateKill();
+                    Console.WriteLine($"퀘스트 '{quest.Title}' 진행도: {quest.KillCount}/{quest.KillTarget}");
+
+                    if (quest.IsCompleted)
+                    {
+                        Console.WriteLine($"🎉 퀘스트 '{quest.Title}' 완료!");
+                        // 보상 지급 로직 추가 가능
+                    }
+                }
             }
+
+
+           
 
         }
-        //public QuestData GetActiveQuests()
-        //{
-        //    return _activeQuest;
-        //}
+        
+
         public Dictionary<int, QuestData> GetActiveQuests()
         {
             return _questDatabase.GetAcceptedQuests();
         }
 
-
-        public Dictionary<int, QuestData> GetAllQuests()
-        {
-            return _questDatabase.GetAllQuests();
-        }
+              
         public QuestData[] GetAvailableQuests()
         {
             return _questDatabase.GetAllQuests().Values.ToArray();
@@ -230,7 +229,18 @@ namespace TextRPG.Class.Manager
                 }
             }
         }
-       
+        public void PromptKillProgress(Monster? monster)
+        {
+            if (monster == null)
+            {
+                Console.WriteLine("몬스터 정보가 없습니다.");
+                return;
+            }
+
+            Console.WriteLine("\n처치 이벤트 발생!");
+            UpdateQuestKillCount(monster.Name); // 또는 monster.Job, monster.Key
+        }
+
 
         public void HandleQuestSelection()
         {

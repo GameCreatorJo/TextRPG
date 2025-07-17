@@ -60,12 +60,12 @@ namespace TextRPG.Class.Scenes
         public void RenderMainScene()
         {
             Console.Clear();
-            Console.WriteLine("+======================================+");
-            Console.WriteLine("|         🌟 스파르타 마을 🌟         |");
-            Console.WriteLine("+======================================+");
-            Console.WriteLine("| 1. 상태창 보기                         |");
-            Console.WriteLine("| 2. 던전으로 이동                       |");
-            Console.WriteLine("| 3. 상점으로 이동                       |");
+            Console.WriteLine("+=======================================+");
+            Console.WriteLine("|            스파르타 마을              |");
+            Console.WriteLine("+=======================================+");
+            Console.WriteLine("| 1. 상태창 보기                        |");
+            Console.WriteLine("| 2. 던전으로 이동                      |");
+            Console.WriteLine("| 3. 상점으로 이동                      |");
             Console.WriteLine("| 4. 맵으로 이동                        |");
             Console.WriteLine("| 5. 퀘스트 메뉴                        |");
             Console.WriteLine("| 6. 종료                               |");
@@ -76,7 +76,7 @@ namespace TextRPG.Class.Scenes
         {
             Console.Clear();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("|            🛡 상태창 🛡            |");
+            Console.WriteLine("|               상태창                 |");
             Console.WriteLine("+======================================+");
             GameManager.Instance.CreateManager.Player.ShowInfo();
             GameManager.Instance.CreateManager.Player.ShowInventory();
@@ -117,7 +117,7 @@ namespace TextRPG.Class.Scenes
         {
             Console.Clear();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("|             🛒 상점 🛒             |");
+            Console.WriteLine("|                 상점                 |");
             Console.WriteLine("+======================================+");
             Console.WriteLine("| - 포션: 50G                          |");
             Console.WriteLine("| - 강화석: 100G                       |");
@@ -130,9 +130,9 @@ namespace TextRPG.Class.Scenes
         {
             Console.Clear();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("|             🏨 여관 🏨             |");
+            Console.WriteLine("|                여관                  |");
             Console.WriteLine("+======================================+");
-            Console.WriteLine("| 1. 휴식: 100G                          |");
+            Console.WriteLine("| 1. 휴식: 100G                        |");
             Console.WriteLine("| 2. 저장: 0G                          |");
             Console.WriteLine("+======================================+");
             Console.WriteLine("1. 휴식 2. 저장 3. 나가기");
@@ -171,9 +171,9 @@ namespace TextRPG.Class.Scenes
         public void RenderDungeonScene()
         {
             Console.Clear();
-            Console.WriteLine("+======================================+");
-            Console.WriteLine("|           ⚔ 던전 입구 ⚔           |");
-            Console.WriteLine("+======================================+");
+            Console.WriteLine("+=======================================+");
+            Console.WriteLine("|               던전 입구               |");
+            Console.WriteLine("+=======================================+");
             Console.WriteLine("| 1. 쉬운 난이도                        |");
             Console.WriteLine("| 2. 보통 난이도                        |");
             Console.WriteLine("| 3. 어려운 난이도                      |");
@@ -187,7 +187,7 @@ namespace TextRPG.Class.Scenes
         {
             Console.Clear();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("|           📜 퀘스트 관리소 📜           |");
+            Console.WriteLine("|           퀘스트 관리소              |");
             Console.WriteLine("+======================================+");
 
             //QuestManager.Instance.ShowQuestMenu();

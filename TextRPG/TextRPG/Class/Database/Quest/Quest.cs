@@ -14,6 +14,8 @@ namespace TextRPG.Class.Database.QuestData
         public int KillTarget { get; }
         public int KillCount { get; private set; }
         public bool IsCompleted { get; private set; }
+
+        public string TargetMonsterKey;
         public QuestState State { get; set; }
         public enum QuestState
         { 
