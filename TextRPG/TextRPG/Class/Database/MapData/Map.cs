@@ -29,13 +29,6 @@ namespace TextRPG.Class.Database.MapData
             this.spawnTable = new List<Monster>();
         }
 
-        public Map(int width, int height, double encounterRate, List<Monster> monsters)
-            : base(width, height, encounterRate)
-        {
-            this.buildings = new List<BuildingInfo>();
-            this.spawnTable = monsters ?? new List<Monster>();
-        }
-
         public void BuildBuildings()
         {
             portalEntrances.Clear();
@@ -143,7 +136,6 @@ namespace TextRPG.Class.Database.MapData
                         break;
                     }
                     break;
-                    break;
 
                 case "Dungeon":
                     if (playerX == 10 && playerY == 18)
@@ -180,7 +172,7 @@ namespace TextRPG.Class.Database.MapData
             return null;
         }
 
-
+        /*
         public Monster GetRandomEncounter()
         {
             if (spawnTable == null || spawnTable.Count == 0)
@@ -188,7 +180,7 @@ namespace TextRPG.Class.Database.MapData
             var template = spawnRng.Next(spawnTable.Count);
             return new Monster(spawnTable[template]);
         }
-
+        */
         public void Draw(int inventoryCursor)
         {
             var player = GameManager.Instance.CreateManager.Player;
