@@ -229,7 +229,18 @@ namespace TextRPG.Class.Manager
                 }
             }
         }
-       
+        public void PromptKillProgress(Monster? monster)
+        {
+            if (monster == null)
+            {
+                Console.WriteLine("몬스터 정보가 없습니다.");
+                return;
+            }
+
+            Console.WriteLine("\n처치 이벤트 발생!");
+            UpdateQuestKillCount(monster.Name); // 또는 monster.Job, monster.Key
+        }
+
 
         public void HandleQuestSelection()
         {
