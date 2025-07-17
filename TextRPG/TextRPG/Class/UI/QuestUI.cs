@@ -45,17 +45,17 @@ namespace TextRPG.Class.UI
         //퀘스트 수락
         public bool ConfirmQuest(QuestData quest)
         {
+
+            int titleWidth = 45;
+            Console.WriteLine("+===========================================+");
+            Console.WriteLine("|             📜 퀘스트 정보               |");
+            Console.WriteLine("|-------------------------------------------|");
+            Console.WriteLine($"| 제목       : {quest.Title}               |");
+            Console.WriteLine($"| 설명       : {quest.Description}         |");
+            Console.WriteLine($"| 목표 처치  : {quest.KillTarget}마리                 |");
+            Console.WriteLine($"| 수락 여부  : 1. 수락   2. 거절           |");
+            Console.WriteLine("+===========================================+");
             
-
-            Console.WriteLine("╔════════════════════════════════════════════╗");
-            Console.WriteLine("║             📜 퀘스트 정보               ║");
-            Console.WriteLine("║────────────────────────────────────────────║");
-            Console.WriteLine($"║ 제목       : {quest.Title}".PadRight(42) + "║");
-            Console.WriteLine($"║ 설명       : {quest.Description}".PadRight(42) + "║");
-            Console.WriteLine($"║ 목표 처치  : {quest.KillTarget} 마리".PadRight(42) + "║");
-            Console.WriteLine($"║ 수락 여부  : 1. 수락   2. 거절".PadRight(42) + "║");
-            Console.WriteLine("╚════════════════════════════════════════════╝");
-
             string questAccept = Console.ReadLine();
             switch (questAccept)
             {
@@ -76,12 +76,16 @@ namespace TextRPG.Class.UI
         public void ShowActiveQuest()
         {
             Console.WriteLine("\n [진행 중인 퀘스트]");
-            QuestData active = QuestManager.Instance.GetActiveQuest();
+            var activeQuests = QuestManager.Instance.GetActiveQuests();
                 
 
-            if (active != null)
+            if (activeQuests != null)
             {
-                Console.WriteLine(active.GetQuestInfo());
+                foreach (var quest in activeQuests.Values)
+                { 
+                    Console.WriteLine(quest.GetQuestInfo()); 
+                }
+                
             }
             else
             {
