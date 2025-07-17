@@ -76,13 +76,13 @@ namespace TextRPG.Class.Manager
                         _scene.ChangeScene("ShopScene");
                         break;
                     case "4":
-                        var mapManager = new MapManager();
-                        mapManager.StartMap("Town");
-                        mapManager.RunMapLoop();
+                        _mapManager.StartMap("Town");
+                        _mapManager.RunMapLoop();
 
                         _scene.ChangeScene("MainScene");
                         break;
                     case "5":
+                        _scene.ChangeScene("QuestScene");
 
                         _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
                         _scene.Render();
