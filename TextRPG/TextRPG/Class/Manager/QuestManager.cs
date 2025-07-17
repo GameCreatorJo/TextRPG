@@ -38,16 +38,10 @@ namespace TextRPG.Class.Manager
         private QuestDatabase? _questDatabase;
 
 
-        public void Initialize(QuestDatabase database)
-        {
-            _questDatabase = database;
-            _questDatabase.CreateQuest(); // 누락된 초기 퀘스트 등록
-
-
-        }
+        
         private QuestUI? _questUI;
 
-        public void Initialize(QuestDatabase database, QuestUI questUI)
+        public void Initialize(QuestDatabase database, QuestUI? questUI = null)
         {
             _questDatabase = database;
             _questUI = questUI;
