@@ -24,27 +24,30 @@ namespace TextRPG.Class.Database.MapData
             NextMapSpawnY = nextMapSpawnY;
         }
 
-        // 각 빌딩 타입별 아스키아트 패턴(여기서 관리)
-        public static readonly char[,] InnPattern = new char[7, 6]
+        public static readonly char[,] BuildingPattern = new char[4, 3]
         {
-            { ' ', ' ', '▲', ' ', ' ', ' ' },
-            { ' ', '▲', '▲', '▲', ' ', ' ' },
-            { '▲', '▲', '▲', '▲', '▲', ' ' },
-            { '▣', '▣', '▣', '▣', '▣', ' ' },
-            { '▣', '▣', '▣', '▣', '▣', 'I' },
-            { '▣', '▣', '@', '▣', '▣', 'N' },
-            { '▣', '▣', '@', '▣', '▣', 'N' }
+            {' ', '▲', ' '},
+            {'▲', '▲', '▲'},
+            { '▣','@','▣'},
+            { '▣','@','▣'}
+        };
+        public static readonly char[,] InnPannelPattern = new char[1, 3]
+        {
+            {'I', 'N', 'N'},
         };
 
-        public static readonly char[,] ShopPattern = new char[7, 6]
+        public static readonly char[,] ShopPannelPattern = new char[1, 4]
         {
-            { ' ', ' ', '▲', ' ', ' ', ' ' },
-            { ' ', '▲', '▲', '▲', ' ', ' ' },
-            { '▲', '▲', '▲', '▲', '▲', ' ' },
-            { '▣', '▣', '▣', '▣', '▣', 'S' },
-            { '▣', '▣', '▣', '▣', '▣', 'H' },
-            { '▣', '▣', '@', '▣', '▣', 'O' },
-            { '▣', '▣', '@', '▣', '▣', 'P' }
+            {'S', 'H', 'O','P'},
+        };
+
+        public static readonly char[,] GuildPannelPattern = new char[1, 5]
+        {
+            {'G', 'U', 'I','L','D'},
+        };
+        public static readonly char[,] DungeonPannelPattern = new char[1, 7]
+        {
+            {'D', 'U', 'N','G','E','O','N'},
         };
 
         public static readonly char[,] PortalCavePattern = new char[3, 7]
@@ -52,6 +55,16 @@ namespace TextRPG.Class.Database.MapData
             { ' ', ' ', '○', '○', '○', ' ', ' ' },
             { ' ', '○', '●', '●', '●', '○', ' ' },
             { '○', '●', '●', '@', '●', '●', '○' },
+        };
+
+        public static readonly char[,] PortalCave2Pattern = new char[6, 7]
+        {
+            { '╔', '═', '╦','╦', '╦', '═', '╗' },
+            { '║', '█', '║','║', '║', '█', '║' },
+            { '║', '█', '║','@', '║', '█', '║' },
+            { '║', '█', '║','@', '║', '█', '║' },
+            { '║', '█', '║','@', '║', '█', '║' },
+            { '╚', '═', '╩','@', '╩', '═', '╝' },
         };
         public static readonly char[,] DungeonExitPattern = new char[1, 1]
         {
@@ -68,6 +81,16 @@ namespace TextRPG.Class.Database.MapData
             { '|', '-', '-', '-', '-','-', '|' }
 
         };
+        public static readonly char[,] GuildInPattern = new char[4, 7]
+{
+
+
+            { '|', '○', ' ', ' ', ' ', '○','|' },
+            { '|', '○', ' ', ' ', ' ', '○','|' },
+            { '|', '○', '○', '@', '○', '○','|' },
+            { '|', '-', '-', '-', '-','-', '|' }
+
+};
         public static readonly char[,] InnInPattern = new char[4, 7]
         {
 

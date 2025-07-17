@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Interface
 {
-    internal class IDungeon
+    public class IDungeon
     {
     }
 }

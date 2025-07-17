@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using TextRPG.Class.Database.MonsterData;
+using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Default;
 using TextRPG.Class.Manager;
-using TextRPG.Class.Database.PlayerData;
+using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Database.MapData
 {
@@ -28,7 +29,7 @@ namespace TextRPG.Class.Database.MapData
             this.spawnTable = new List<Monster>();
         }
 
-        internal Map(int width, int height, double encounterRate, List<Monster> monsters)
+        public Map(int width, int height, double encounterRate, List<Monster> monsters)
             : base(width, height, encounterRate)
         {
             this.buildings = new List<BuildingInfo>();
@@ -79,42 +80,86 @@ namespace TextRPG.Class.Database.MapData
             switch (currentMapName)
             {
                 case "Town":
-                    if (playerX == 6 && playerY == 8)
+                    if (playerX == 3 && playerY == 5)
                     {
                         spawnX = 10; spawnY = 17; // Inn 시작 좌표
                         return "Inn";
                     }
-                    else if (playerX == 14 && playerY == 8)
+                    else if (playerX == 8 && playerY == 5)
                     {
                         spawnX = 10; spawnY = 17; // Shop 시작 좌표
                         return "Shop";
                     }
-                    else if (playerX == 10 && playerY == 16)
+                    else if (playerX == 15 && playerY == 5)
+                    {
+                        spawnX = 10; spawnY = 17; // Guild 시작 좌표
+                        return "Guild";
+                    }
+                    else if (playerX == 4 && playerY == 16)
                     {
                         spawnX = 10; spawnY = 17; // Dungeon 시작 좌표
                         return "Dungeon";
+                    }
+                    else if (playerX == 15 && playerY == 17)
+                    {
+                        spawnX = 10; spawnY = 17; // Dungeon 시작 좌표
+                        return "Dungeon2";
                     }
                     break;
 
                 case "Inn":
                     if (playerX == 10 && playerY == 18)
                     {
-                        spawnX = 6; spawnY = 9;
+                        spawnX = 2; spawnY = 6;
                         return "Town";
+                    }
+                    else if (playerX == 10 && playerY == 10)
+                    {
+                        GameManager.Instance.Scene.ChangeScene("InnScene");
+                        break;
                     }
                     break;
                 case "Shop":
                     if (playerX == 10 && playerY == 18)
                     {
-                        spawnX = 14; spawnY = 9;
+                        spawnX = 8; spawnY = 6;
                         return "Town";
                     }
+                    else if (playerX == 10 && playerY == 10)
+                    {
+                        GameManager.Instance.Scene.ChangeScene("ShopScene");
+                        break;
+                    }
+                    break;
+                case "Guild":
+                    if (playerX == 10 && playerY == 18)
+                    {
+                        spawnX = 15; spawnY = 6;
+                        return "Town";
+                    }
+                    else if (playerX == 10 && playerY == 10)
+                    {
+                        GameManager.Instance.Scene.ChangeScene("QuestScene");
+                        break;
+                    }
+                    break;
                     break;
 
                 case "Dungeon":
                     if (playerX == 10 && playerY == 18)
                     {
-                        spawnX = 10; spawnY = 16; // Town 던전 입구 위치로 귀환
+                        spawnX = 4; spawnY = 18; // Town 던전 입구 위치로 귀환
+                        return "Town";
+                    }
+                    else if (playerX == 10 && playerY == 11)
+                    {
+                        return "Battle";
+                    }
+                    break;
+                case "Dungeon2":
+                    if (playerX == 10 && playerY == 18)
+                    {
+                        spawnX = 15; spawnY = 18; // Town 던전 입구 위치로 귀환
                         return "Town";
                     }
                     else if (playerX == 10 && playerY == 11)
@@ -128,7 +173,7 @@ namespace TextRPG.Class.Database.MapData
         }
 
 
-        internal Monster GetRandomEncounter()
+        public Monster GetRandomEncounter()
         {
             if (spawnTable == null || spawnTable.Count == 0)
                 throw new InvalidOperationException("스폰 테이블 비어있음");
@@ -142,7 +187,7 @@ namespace TextRPG.Class.Database.MapData
 
             if (isInBattle)
             {
-                DrawBattleScreen(player);
+                //DrawBattleScreen(player);
                 return;
             }
 
@@ -155,7 +200,7 @@ namespace TextRPG.Class.Database.MapData
             statLines[5] = $"Gold  : {player.Gold}";
             statLines[6] = $"Job   : {player.Job}";
             statLines[7] = $"Name  : {player.Name}";
-            statLines[8] = $"Inventory";
+            statLines[8] = $"Inventory {player.Inventory.Count} {player.Inventory[1].Name}";
 
             int inventoryStartLine = 9;
             for (int i = 0; i < player.Inventory.Count && (inventoryStartLine + i) < Height; i++)
@@ -217,7 +262,7 @@ namespace TextRPG.Class.Database.MapData
             }
             return 'B';
         }
-
+        /*
         private void StartBattle(Monster monster)
         {
             isInBattle = true;
@@ -288,7 +333,7 @@ namespace TextRPG.Class.Database.MapData
                 Console.SetCursorPosition(0, bottomStartY + 4);
                 Console.WriteLine(battleMessage);
             }
-        }
+        }*/
 
     }
 }

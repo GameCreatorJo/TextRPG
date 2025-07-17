@@ -7,7 +7,7 @@ using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Database.MonsterData
 {
-    internal class MonsterDatabase
+    public class MonsterDatabase
     {
         private List<Monster> monsterDatabaseList = new List<Monster>();
         private Dictionary<string, Monster> monsterDictionary = new Dictionary<string, Monster>();

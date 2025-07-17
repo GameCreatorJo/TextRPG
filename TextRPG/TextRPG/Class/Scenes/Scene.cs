@@ -4,7 +4,7 @@ using TextRPG.Class.Manager;
 
 namespace TextRPG.Class.Scenes
 {
-    internal class Scene : DefaultScene
+    public class Scene : DefaultScene
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -48,6 +48,9 @@ namespace TextRPG.Class.Scenes
                 case "QuestScene":
                     RenderQuestScene();
                     break;
+                case "InnScene":
+                    RenderInnScene();
+                    break;
                 default:
                     Console.WriteLine("알 수 없는 씬입니다.");
                     break;
@@ -78,12 +81,35 @@ namespace TextRPG.Class.Scenes
             GameManager.Instance.CreateManager.Player.ShowInfo();
             GameManager.Instance.CreateManager.Player.ShowInventory();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("1번을 눌러 장착 관리, 엔터를 눌러 돌아갑니다.");
-            var input = int.Parse(Console.ReadLine());
-            if (input == 1)
+            Console.WriteLine("1번을 눌러 장착 관리, 0번을 눌러 돌아갑니다.");
+
+            bool isInput = false;
+            while (!isInput)
             {
-                GameManager.Instance.CreateManager.Player.ManageEquipment();
-                RenderStatusScene();
+                string rawInput = Console.ReadLine();
+                int input;
+
+                if (int.TryParse(rawInput, out input))
+                {
+                    switch (input)
+                    {
+                        case 0:
+                            isInput = true;
+                            break;
+                        case 1:
+                            isInput = true;
+                            GameManager.Instance.CreateManager.Player.ManageEquipment();
+                            RenderStatusScene();
+                            break;
+                        default:
+                            Console.WriteLine("잘못된 입력입니다. 올바른 번호를 입력해주세요.\n");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
+                }
             }
         }
 
@@ -99,6 +125,47 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("+======================================+");
             Console.WriteLine("엔터를 눌러 돌아갑니다.");
             Console.ReadLine();
+        }
+        public void RenderInnScene()
+        {
+            Console.Clear();
+            Console.WriteLine("+======================================+");
+            Console.WriteLine("|             🏨 여관 🏨             |");
+            Console.WriteLine("+======================================+");
+            Console.WriteLine("| 1. 휴식: 100G                          |");
+            Console.WriteLine("| 2. 저장: 0G                          |");
+            Console.WriteLine("+======================================+");
+            Console.WriteLine("1. 휴식 2. 저장 3. 나가기");
+            string input = Console.ReadLine();
+            switch(input)
+            {
+                case "1":
+                    if (GameManager.Instance.CreateManager.Player.Gold >= 100)
+                    {
+                        GameManager.Instance.CreateManager.Player.SpendGold(100);
+                        GameManager.Instance.CreateManager.Player.TakeDamage(-(GameManager.Instance.CreateManager.Player.MaxHp- GameManager.Instance.CreateManager.Player.Hp), 0);
+                        Console.WriteLine("휴식을 취했습니다. 체력이 회복되었습니다.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("골드가 부족합니다.");
+                    }
+                    break;
+                case "2":
+                    GameManager.Instance.CreateManager.CreateSave();
+                    Console.WriteLine("게임이 저장되었습니다.");
+					Console.WriteLine("enter를 눌러 나갑니다.");
+					string nt = Console.ReadLine();
+
+					break;
+                case "3":
+                    Console.WriteLine("여관을 나갑니다.");
+                    break;
+                default:
+                    Console.WriteLine("잘못된 입력입니다. 다시 시도하세요.");
+                    break;
+
+            }
         }
 
         public void RenderDungeonScene()

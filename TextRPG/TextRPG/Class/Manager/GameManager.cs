@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
 {
-    internal class GameManager
+    public class GameManager
     {
         private CreateManager _createManager;
         public CreateManager CreateManager => _createManager;
@@ -71,25 +71,20 @@ namespace TextRPG.Class.Manager
                 switch (input)
                 {
                     case "1":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["StatusScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("StatusScene");
                         break;
                     case "2":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["DungeonScene"];
-                        _scene.Render();
-                        _battleManager.Battle(_createManager.Player);GameManager.Instance.CreateManager.Player.ShowInfo();
+                        _scene.ChangeScene("DungeonScene");
                         break;
                     case "3":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["ShopScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("ShopScene");
                         break;
                     case "4":
                         var mapManager = new MapManager();
                         mapManager.StartMap("Town");
                         mapManager.RunMapLoop();
 
-                        _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("MainScene");
                         break;
                     case "5":
 
