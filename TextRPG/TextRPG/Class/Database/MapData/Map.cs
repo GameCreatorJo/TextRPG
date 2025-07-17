@@ -157,12 +157,20 @@ namespace TextRPG.Class.Database.MapData
                     }
                     break;
                 case "Dungeon2":
-                    if (playerX == 10 && playerY == 18)
+                    if (playerX == 5 && playerY == 11)
                     {
                         spawnX = 15; spawnY = 18; // Town 던전 입구 위치로 귀환
-                        return "Town";
+                        return "Battle";
                     }
-                    else if (playerX == 10 && playerY == 11)
+                    else if (playerX == 5 && playerY == 6)
+                    {
+                        return "Battle";
+                    }
+                    else if (playerX == 15 && playerY == 6)
+                    {
+                        return "Battle";
+                    }
+                    else if (playerX == 15 && playerY == 11)
                     {
                         return "Battle";
                     }

@@ -22,7 +22,6 @@ namespace TextRPG.Class.Manager
         private MapManager _mapManager;
         public MapManager MapManager => _mapManager;
 
-        //í€˜ìŠ¤íŠ¸ ë§¤ë‹ˆì € ì‚½ì…
         private QuestManager _questManager;
         public QuestManager QuestManager => _questManager;
 
@@ -38,7 +37,6 @@ namespace TextRPG.Class.Manager
             _battleManager = new BattleManager();
             _scene = new Scene();
             _mapManager = new MapManager();
-            //í€˜ìŠ¤íŠ¸ ë§¤ë‹ˆì € ì‚½ì…
             _questManager = new QuestManager();
         }
 
@@ -46,7 +44,6 @@ namespace TextRPG.Class.Manager
         {
             Console.WriteLine("Game started!");
             InitializeGame();
-            // ì´ˆê¸° ì”¬
             _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"];
             _scene.Render();
             SelectAction();
@@ -55,7 +52,6 @@ namespace TextRPG.Class.Manager
 
         public void InitializeGame()
         {
-            // í€˜ìŠ¤íŠ¸ ë§¤ë‹ˆì € ì´ˆê¸°í™”
             QuestManager.Instance.Initialize(new QuestDatabase());
 
             _createManager.CreateGameWorld();
@@ -66,7 +62,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: ìƒíƒœì°½, 2: ë˜ì „, 3: ìƒì , 4: ë§µ ì´ë™, 5: í€˜ìŠ¤íŠ¸ ë©”ë‰´ 6: ì¢…ë£Œ");
+                Console.WriteLine("1: »óÅÂÃ¢ 2: ´øÀü, 3: »óÁ¡, 4: ¸ÊÀ¸·Î ÀÌµ¿, 5: Äù½ºÆ® 6: °ÔÀÓÁ¾·á");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -80,13 +76,13 @@ namespace TextRPG.Class.Manager
                         _scene.ChangeScene("ShopScene");
                         break;
                     case "4":
-                        var mapManager = new MapManager();
-                        mapManager.StartMap("Town");
-                        mapManager.RunMapLoop();
+                        _mapManager.StartMap("Town");
+                        _mapManager.RunMapLoop();
 
                         _scene.ChangeScene("MainScene");
                         break;
                     case "5":
+                        _scene.ChangeScene("QuestScene");
 
                         _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
                         _scene.Render();
@@ -97,10 +93,10 @@ namespace TextRPG.Class.Manager
 
                         break;
                     case "6":
-                        Console.WriteLine("ê²Œì„ ì¢…ë£Œ");
+                        Console.WriteLine("°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù.");
                         return;
                     default:
-                        Console.WriteLine("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
+                        Console.WriteLine("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
                         break;
                 }
             }
