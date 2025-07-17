@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,8 +87,14 @@ namespace TextRPG.Class.Manager
                         _scene.ChangeScene("MainScene");
                         break;
                     case "5":
-                        _scene.ChangeScene("QuestScene");
+
+                        _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
+                        _scene.Render();
                         //QuestManager.Instance.ShowQuestMenu();
+
+                        _scene.ChangeScene("QuestScene");
+                        QuestManager.Instance.ShowQuestMenu();
+
                         break;
                     case "6":
                         Console.WriteLine("게임 종료");
