@@ -139,7 +139,7 @@ namespace TextRPG.Class.Manager
         {
             return _questDatabase.GetAllQuests().Values.ToArray();
         }
-
+        //퀘스트 메뉴 진행되는 메서드
         public void ShowQuestMenu()
         {
             while (true)
