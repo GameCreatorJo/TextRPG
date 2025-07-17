@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using TextRPG.Class.Database.MonsterData;
 using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Default;
@@ -151,7 +152,6 @@ namespace TextRPG.Class.Database.MapData
                 case "Dungeon2":
                     if (playerX == 5 && playerY == 11)
                     {
-                        spawnX = 15; spawnY = 18; // Town 던전 입구 위치로 귀환
                         return "Battle";
                     }
                     else if (playerX == 5 && playerY == 6)
@@ -166,9 +166,13 @@ namespace TextRPG.Class.Database.MapData
                     {
                         return "Battle";
                     }
+                    else if (playerX == 10 && playerY == 18)
+                    {
+                        spawnX = 10; spawnY = 18; // Town 던전 입구 위치로 귀환
+                        return "Town";
+                    }
                     break;
             }
-
             return null;
         }
 

@@ -43,7 +43,6 @@ namespace TextRPG.Class.Scenes
                     break;
                 case "DungeonScene":
                     RenderDungeonScene();
-                    GameManager.Instance.BattleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
                     break;
                 case "QuestScene":
                     GameManager.Instance.QuestManager.ShowQuestMenu();
