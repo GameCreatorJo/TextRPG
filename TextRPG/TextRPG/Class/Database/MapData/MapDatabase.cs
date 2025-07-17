@@ -52,11 +52,13 @@ namespace TextRPG.Class.Database.MapData
             new BuildingInfo(10, 8, BuildingInfo.GuildInPattern, "Guild"),
             new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
         };
-        public static readonly List<BuildingInfo> Dungeon2Buildings = new()
+        public static List<BuildingInfo> Dungeon2Buildings = new()
         {
             new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit"),
             new BuildingInfo(5, 5, BuildingInfo.MonsterPattern, "Monster", "Battle"),
-            new BuildingInfo(5, 10, BuildingInfo.MonsterPattern, "Monster", "Battle")
+            new BuildingInfo(5, 10, BuildingInfo.MonsterPattern, "Monster", "Battle"),
+            new BuildingInfo(15, 5, BuildingInfo.MonsterPattern, "Monster", "Battle"),
+            new BuildingInfo(15, 10, BuildingInfo.MonsterPattern, "Monster", "Battle")
         };
 
 
