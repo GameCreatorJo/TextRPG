@@ -16,19 +16,19 @@ namespace TextRPG.Class.Data
 			Armor = 1
 		}
 
-		// ������ �ĺ���
+		//아이템 아이디
 		protected int _id;
-        // ������ �̸�
+        // 아이템 이름
         protected string _name = "";
-        // ������ ����
+        // 아이템 설명
         protected string _description = "";
-        // �������� Plus Strength
+        // 아이템 공격력 Plus Strength
         protected int _plusStr;
-        // �������� Plus Armor Point
+        // 아이템 방어력 Plus Armor Point
         protected int _plusArmorPoint;
-        // �������� Gold Value
+        // 아이템 가격 Gold Value
         protected int _gold;
-        // ������ ���� �ĺ���
+        // 아이템 종류ID
         protected ItemID _itemID;
 
         public int Id => _id;
@@ -41,7 +41,7 @@ namespace TextRPG.Class.Data
 
         public DefaultItem()
         {
-            // �⺻ ������
+            // 기본 생성자
         }
 
         public DefaultItem(int id, string name, string description, int plusStr, int plusArmorPoint, int gold, ItemID itemID)
