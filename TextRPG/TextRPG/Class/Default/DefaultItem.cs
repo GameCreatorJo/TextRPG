@@ -10,7 +10,9 @@ namespace TextRPG.Class.Data
     {
 		public enum ItemID
 		{
+			// 무기
 			Weapon = 0,
+			// 방어구
 			Armor = 1
 		}
 

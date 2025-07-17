@@ -46,7 +46,7 @@ namespace TextRPG.Class.Scenes
                     GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
                     break;
                 case "QuestScene":
-                    GameManager.Instance.QuestManager.ShowQuestMenu();
+                    RenderQuestScene();
                     break;
                 case "InnScene":
                     RenderInnScene();

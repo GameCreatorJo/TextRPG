@@ -62,7 +62,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 퀘스트 메뉴 6: 종료");
+                Console.WriteLine("1: 상태창 2: 던전 3: 상점 4: 맵 진입 5: 퀘스트 메뉴 6: 게임 종료");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -93,10 +93,10 @@ namespace TextRPG.Class.Manager
 
                         break;
                     case "6":
-                        Console.WriteLine("게임 종료");
+                        Console.WriteLine("������ �����մϴ�.");
                         return;
                     default:
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("�߸��� �Է��Դϴ�.");
                         break;
                 }
             }

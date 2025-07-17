@@ -29,7 +29,6 @@ namespace TextRPG.Class.Manager
             if (!mapDatabase.Maps.ContainsKey(mapName))
                 throw new ArgumentException($"맵 '{mapName}' 없음");
 
-            //맵 초기화
             CurrentMap = mapDatabase.GetMap(mapName);
             CurrentMap.Initialize();
             CurrentMap.BuildBuildings();

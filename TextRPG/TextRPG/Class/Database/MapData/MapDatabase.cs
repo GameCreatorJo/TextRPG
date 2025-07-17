@@ -8,9 +8,9 @@ namespace TextRPG.Class.Database.MapData
 {
     public class MapDatabase
     {
-        private Dictionary<string, Map> maps;
-        public Dictionary<string, Map> Maps => maps;
-        public static (int x, int y) DungeonSpawn = (1, 1);
+        private readonly Dictionary<string, Map> maps;
+        public IReadOnlyDictionary<string, Map> Maps => maps;
+        public static readonly (int x, int y) DungeonSpawn = (1, 1);
 
         // Town 빌딩/포탈 정보(중심좌표, 패턴, 타입, 다음맵, 다음맵 등장좌표)
         public static readonly List<BuildingInfo> TownBuildings = new()
