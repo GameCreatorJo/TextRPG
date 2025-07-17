@@ -10,9 +10,7 @@ namespace TextRPG.Class.Data
     {
 		public enum ItemID
 		{
-			// ����
 			Weapon = 0,
-			// ��
 			Armor = 1
 		}
 
