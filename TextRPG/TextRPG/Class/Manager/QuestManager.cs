@@ -71,27 +71,7 @@ namespace TextRPG.Class.Manager
             }
         }
 
-        //퀘스트 중복수락 방지 로직
-        //public void AcceptQuest(int questId)
-        //{
-        //    var quest = _questDatabase.GetQuestById(questId);
-        //    if (quest == null)
-        //    {
-        //        Console.WriteLine("해당 ID의 퀘스트를 찾을 수 없습니다.");
-        //        return;
-        //    }
-
-        //    if (!_questDatabase.AcceptedQuests.ContainsKey(questId))
-        //    {
-        //        _questDatabase.AcceptedQuests[questId] = quest;
-        //        quest.State = QuestState.InProgress;
-        //        Console.WriteLine($"퀘스트 '{quest.Title}'을 수락했습니다.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("이미 수락한 퀘스트입니다.");
-        //    }
-        //}
+       
         public void AcceptQuest(int questId)
         {
             if (_questDatabase == null)
