@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +10,25 @@ namespace TextRPG.Class.Data
     {
 		public enum ItemID
 		{
-			// ¹«±â
+			// ï¿½ï¿½ï¿½ï¿½
 			Weapon = 0,
-			// ¹æ¾î±¸
+			// ï¿½ï¿½î±¸
 			Armor = 1
 		}
 
-		// ¾ÆÀÌÅÛ ½Äº°ÀÚ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ï¿½ï¿½
 		protected int _id;
-        // ¾ÆÀÌÅÛ ÀÌ¸§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
         protected string _name = "";
-        // ¾ÆÀÌÅÛ ¼³¸í
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         protected string _description = "";
-        // ¾ÆÀÌÅÛÀÇ Plus Strength
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Plus Strength
         protected int _plusStr;
-        // ¾ÆÀÌÅÛÀÇ Plus Armor Point
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Plus Armor Point
         protected int _plusArmorPoint;
-        // ¾ÆÀÌÅÛÀÇ Gold Value
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Gold Value
         protected int _gold;
-        // ¾ÆÀÌÅÛ Á¾·ù ½Äº°ÀÚ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ï¿½ï¿½
         protected ItemID _itemID;
 
         public int Id => _id;
@@ -41,7 +41,7 @@ namespace TextRPG.Class.Data
 
         public DefaultItem()
         {
-            // ±âº» »ý¼ºÀÚ
+            // ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
         public DefaultItem(int id, string name, string description, int plusStr, int plusArmorPoint, int gold, ItemID itemID)

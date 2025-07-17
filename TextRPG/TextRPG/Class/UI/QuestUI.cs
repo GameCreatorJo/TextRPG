@@ -49,7 +49,7 @@ namespace TextRPG.Class.UI
 
             int titleWidth = 45;
             Console.WriteLine("+===========================================+");
-            Console.WriteLine("|             📜 퀘스트 정보               |");
+            Console.WriteLine("|                 퀘스트 정보               |");
             Console.WriteLine("|-------------------------------------------|");
             Console.WriteLine($"| 제목       : {quest.Title}               |");
             Console.WriteLine($"| 설명       : {quest.Description}         |");
