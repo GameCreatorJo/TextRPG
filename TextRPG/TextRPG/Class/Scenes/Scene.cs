@@ -77,12 +77,35 @@ namespace TextRPG.Class.Scenes
             GameManager.Instance.CreateManager.Player.ShowInfo();
             GameManager.Instance.CreateManager.Player.ShowInventory();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("1번을 눌러 장착 관리, 엔터를 눌러 돌아갑니다.");
-            var input = int.Parse(Console.ReadLine());
-            if (input == 1)
+            Console.WriteLine("1번을 눌러 장착 관리, 0번을 눌러 돌아갑니다.");
+
+            bool isInput = false;
+            while (!isInput)
             {
-                GameManager.Instance.CreateManager.Player.ManageEquipment();
-                RenderStatusScene();
+                string rawInput = Console.ReadLine();
+                int input;
+
+                if (int.TryParse(rawInput, out input))
+                {
+                    switch (input)
+                    {
+                        case 0:
+                            isInput = true;
+                            break;
+                        case 1:
+                            isInput = true;
+                            GameManager.Instance.CreateManager.Player.ManageEquipment();
+                            RenderStatusScene();
+                            break;
+                        default:
+                            Console.WriteLine("잘못된 입력입니다. 올바른 번호를 입력해주세요.\n");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
+                }
             }
         }
 

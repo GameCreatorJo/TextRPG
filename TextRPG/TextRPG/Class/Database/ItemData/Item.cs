@@ -13,8 +13,8 @@ namespace TextRPG.Class.Database.ItemData
         {
             // 기본 생성자
         }
-        public Item(int id, string name, string description, int plusStr, int plusArmorPoint, int gold)
-            :base(id, name, description, plusStr, plusArmorPoint, gold)
+        public Item(int id, string name, string description, int plusStr, int plusArmorPoint, int gold, ItemID itemID)
+            :base(id, name, description, plusStr, plusArmorPoint, gold, itemID)
         {
           
         }
