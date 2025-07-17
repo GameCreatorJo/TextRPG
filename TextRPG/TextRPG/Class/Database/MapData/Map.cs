@@ -136,7 +136,6 @@ namespace TextRPG.Class.Database.MapData
                         break;
                     }
                     break;
-                    break;
 
                 case "Dungeon":
                     if (playerX == 10 && playerY == 18)
