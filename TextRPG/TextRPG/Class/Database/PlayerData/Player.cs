@@ -11,7 +11,7 @@ using TextRPG.Class.Manager;
 namespace TextRPG.Class.Database.PlayerData 
 {
 
-    internal class Player : DefaultCharacter
+    public class Player : DefaultCharacter
     {
         private int _maxEXP = 50;
         private string _weapon = "";

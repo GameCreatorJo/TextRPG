@@ -8,7 +8,7 @@ using TextRPG.Class.Database.ItemData;
 
 namespace TextRPG.Class.Scenes
 {
-    internal class SceneDatabase
+    public class SceneDatabase
     {
         private Dictionary<string, Scene> _sceneDictionary;
         public Dictionary<string, Scene> SceneDictionary

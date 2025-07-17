@@ -4,7 +4,7 @@ using TextRPG.Class.Manager;
 
 namespace TextRPG.Class.Scenes
 {
-    internal class Scene : DefaultScene
+    public class Scene : DefaultScene
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -7,7 +7,7 @@ using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Database.ItemData
 {
-    internal class Item : DefaultItem
+    public class Item : DefaultItem
     {
         public Item()
         {

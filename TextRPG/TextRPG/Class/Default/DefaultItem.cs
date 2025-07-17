@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Data
 {
-    internal abstract class DefaultItem
+    public abstract class DefaultItem
     {
         // 아이템 식별자
         protected int _id;

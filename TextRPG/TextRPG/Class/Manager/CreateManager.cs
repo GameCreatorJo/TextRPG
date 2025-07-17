@@ -15,7 +15,7 @@ using TextRPG.Class.UI;
 
 namespace TextRPG.Class.Manager
 {
-    internal class CreateManager
+    public class CreateManager
     {
         private Player player;
         public Player Player

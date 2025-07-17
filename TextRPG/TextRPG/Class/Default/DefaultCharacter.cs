@@ -7,7 +7,7 @@ using TextRPG.Class.Database.ItemData;
 
 namespace TextRPG.Class.Data
 {
-    internal abstract class DefaultCharacter
+    public abstract class DefaultCharacter
     {
         private Random random = new Random();
 
