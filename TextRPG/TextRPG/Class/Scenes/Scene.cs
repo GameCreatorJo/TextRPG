@@ -42,8 +42,8 @@ namespace TextRPG.Class.Scenes
                     RenderShopScene();
                     break;
                 case "DungeonScene":
-                    //RenderDungeonScene();
-                    GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
+                    RenderDungeonScene();
+                    GameManager.Instance.BattleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
                     break;
                 case "QuestScene":
                     GameManager.Instance.QuestManager.ShowQuestMenu();
@@ -180,7 +180,6 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("| 0. 마을로 돌아가기                    |");
             Console.WriteLine("+======================================+");
             Console.WriteLine("엔터를 눌러 돌아갑니다.");
-            Console.ReadLine();
         }
         //퀘스트씬 작업
         public void RenderQuestScene()
@@ -190,7 +189,7 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("|           퀘스트 관리소              |");
             Console.WriteLine("+======================================+");
 
-            //QuestManager.Instance.ShowQuestMenu();
+            QuestManager.Instance.ShowQuestMenu();
 
             
 

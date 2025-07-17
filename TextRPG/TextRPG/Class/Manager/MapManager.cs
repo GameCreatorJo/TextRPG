@@ -155,7 +155,7 @@ namespace TextRPG.Class.Manager
         private void StartBattleScene()
         {
             var battleManager = GameManager.Instance.BattleManager;
-            battleManager.Battle(GameManager.Instance.CreateManager.Player);
+            battleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
             Console.WriteLine("전투가 종료되었습니다. 아무 키나 눌러 계속...");
             Console.ReadKey(true);
         }
