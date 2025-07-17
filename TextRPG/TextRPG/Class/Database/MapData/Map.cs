@@ -29,7 +29,7 @@ namespace TextRPG.Class.Database.MapData
             this.spawnTable = new List<Monster>();
         }
 
-        internal Map(int width, int height, double encounterRate, List<Monster> monsters)
+        public Map(int width, int height, double encounterRate, List<Monster> monsters)
             : base(width, height, encounterRate)
         {
             this.buildings = new List<BuildingInfo>();
@@ -80,7 +80,7 @@ namespace TextRPG.Class.Database.MapData
             switch (currentMapName)
             {
                 case "Town":
-                    if (playerX == 2 && playerY == 5)
+                    if (playerX == 3 && playerY == 5)
                     {
                         spawnX = 10; spawnY = 17; // Inn 시작 좌표
                         return "Inn";
@@ -173,7 +173,7 @@ namespace TextRPG.Class.Database.MapData
         }
 
 
-        internal Monster GetRandomEncounter()
+        public Monster GetRandomEncounter()
         {
             if (spawnTable == null || spawnTable.Count == 0)
                 throw new InvalidOperationException("스폰 테이블 비어있음");

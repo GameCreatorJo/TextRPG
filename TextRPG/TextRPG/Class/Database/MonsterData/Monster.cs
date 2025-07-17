@@ -8,7 +8,7 @@ using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Database.MonsterData
 {
-    internal class Monster : DefaultCharacter
+    public class Monster : DefaultCharacter
     {
 
         public Monster

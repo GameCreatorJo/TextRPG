@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Data
 {
-    internal abstract class DefaultItem
+    public abstract class DefaultItem
     {
         // 아이템의 식별자 (무기인지 방어구인지)
         public enum ItemID

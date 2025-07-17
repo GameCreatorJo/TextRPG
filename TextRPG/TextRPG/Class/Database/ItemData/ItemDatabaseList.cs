@@ -1,7 +1,7 @@
 using TextRPG.Class.Database.ItemData;
 using ItemID = TextRPG.Class.Data.DefaultItem.ItemID;
 
-internal class ItemDatabaseList
+public class ItemDatabaseList
 {
     private Dictionary<string, Item> itemDictionary;
     public Dictionary<string, Item> ItemDictionary

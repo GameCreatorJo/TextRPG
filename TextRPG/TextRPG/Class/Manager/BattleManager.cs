@@ -11,7 +11,7 @@ using TextRPG.Class.Data;
 namespace TextRPG.Class.Manager
 {
     
-    internal class BattleManager
+    public class BattleManager
     {
         //4:22
         private List<Monster> monsters = new List<Monster>();

@@ -11,7 +11,7 @@ using TextRPG.Class.Scenes;
 
 namespace TextRPG.Class.Manager
 {
-    internal class GameManager
+    public class GameManager
     {
         private CreateManager _createManager;
         public CreateManager CreateManager => _createManager;
