@@ -172,8 +172,9 @@ namespace TextRPG.Class.Manager
         public void CreateQuest()
         { 
             QuestDatabase questDatabase = new QuestDatabase();
+            QuestUI questUI = new QuestUI(questDatabase);
             _questManager = QuestManager.Instance;
-            _questManager.Initialize(questDatabase);
+            _questManager.Initialize(questDatabase, questUI);
             Console.WriteLine("Quest database created and QuestManager initialized!");
         }
         public void CreateSave()

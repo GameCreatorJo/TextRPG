@@ -22,8 +22,12 @@ namespace TextRPG.Class.Database.QuestData
 
         //진행중인 퀘스트들
         private Dictionary<int, QuestData> _acceptedQuests = new Dictionary<int, QuestData>();
+        public Dictionary<int, QuestData> GetAcceptedQuests()
+        {
+            return _acceptedQuests;
+        }
 
-        public Dictionary<int, QuestData> AcceptedQuests
+        public Dictionary<int, QuestData> AcceptedQuestList
         {
             get { return _acceptedQuests; }
         }
@@ -84,10 +88,7 @@ namespace TextRPG.Class.Database.QuestData
             return _acceptedQuests.TryGetValue(id, out QuestData quest) ? quest : null;
         }
 
-        public Dictionary<int, QuestData> GetAcceptedQuests()
-        {
-            return _acceptedQuests;
-        }
+        
         public bool IsQuestAccepted(int id)
         {
             return _acceptedQuests.ContainsKey(id);

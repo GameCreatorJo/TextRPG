@@ -86,10 +86,10 @@ namespace TextRPG.Class.Manager
 
                         _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
                         _scene.Render();
-                        //QuestManager.Instance.ShowQuestMenu();
+                        
 
-                        _scene.ChangeScene("QuestScene");
-                        QuestManager.Instance.ShowQuestMenu();
+                        
+                        QuestManager.Instance.OpenQuestMenu();
 
                         break;
                     case "6":

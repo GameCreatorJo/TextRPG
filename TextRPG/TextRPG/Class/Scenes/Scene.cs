@@ -46,10 +46,21 @@ namespace TextRPG.Class.Scenes
                     GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
                     break;
                 case "QuestScene":
+<<<<<<< Updated upstream
                     GameManager.Instance.QuestManager.ShowQuestMenu();
                     break;
                 case "InnScene":
                     RenderInnScene();
+=======
+                    RenderQuestScene();
+<<<<<<< Updated upstream
+=======
+                    //GameManager.Instance.QuestManager.OpenQuestMenu();
+                    break;
+                case "InnScene":
+                    RenderInnScene();
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                     break;
                 default:
                     Console.WriteLine("알 수 없는 씬입니다.");
