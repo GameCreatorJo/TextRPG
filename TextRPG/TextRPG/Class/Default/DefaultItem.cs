@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Data
 {
-    public abstract class DefaultItem
+	public abstract class DefaultItem
     {
-        // 아이템의 식별자 (무기인지 방어구인지)
-        public enum ItemID
-        {
-            // 무기
-            Weapon = 0,
-            // 방어구
-            Armor = 1
-        }
+		public enum ItemID
+		{
+			// 무기
+			Weapon = 0,
+			// 방어구
+			Armor = 1
+		}
 
-        // 아이템 식별자
-        protected int _id;
+		// 아이템 식별자
+		protected int _id;
         // 아이템 이름
         protected string _name = "";
         // 아이템 설명

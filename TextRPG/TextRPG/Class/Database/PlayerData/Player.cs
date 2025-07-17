@@ -16,7 +16,7 @@ namespace TextRPG.Class.Database.PlayerData
         private int _maxEXP = 50;
         private string _weapon = "";
         private string _armor = "";
-
+        //캐릭터 생성용 생성자
         public Player(string inputName, string input) 
         {
             if (input == "1")
@@ -72,8 +72,43 @@ namespace TextRPG.Class.Database.PlayerData
                 this._inventory = new List<Item>();
             }
         }
+		//save데이터 불러오기용 생성자
+		public Player(PlayerSaveData other)
+        {
+            this._lv = other.Lv;
+            this._name = other.Name;
+            this._job = other.Job;
+            this._str = other.Str;
+            this.plusStr = other.PlusStr;
+            this._armorPoint = other.ArmorPoint;
+            this.plusArmorPoint = other.PlusArmorPoint;
+            this._maxHp = other.MaxHp;
+            this._plusHp = other.PlusHp;
+            this._hp = other.Hp;
+            this._maxMp = other.MaxMp;
+            this._plusMp = other.PlusMp;
+            this._mp = other.Mp;
+            this._gold = other.Gold;
+            this._exp = other.Exp;
+            this._criticalRate = other.CriticalRate;
+            this._dodgeRate = other.DodgeRate;
+			this._inventory = new List<Item>();
+			for (int i = 0; i < other.InventorySaveData.Count; i++)
+			{
+				var itemSave = other.InventorySaveData[i];
+				this._inventory.Add(new Item(
+					itemSave.Id,
+					itemSave.Name,
+					itemSave.Description,
+					itemSave.PlusStr,
+					itemSave.PlusArmorPoint,
+					itemSave.Gold,
+					itemSave.ItemType
+				));
+			}
+		}
 
-        public override void ShowInfo()
+		public override void ShowInfo()
         {
             // 캐릭터의 능력치를 보여주는 메소드
             // 무기 칸이나 방어구 칸에 이름이 있다면 장비를 착용 중인 것으로 판별
@@ -344,16 +379,6 @@ namespace TextRPG.Class.Database.PlayerData
         {
             // 아이템 획득 메소드
             this._inventory.Add(item);
-        }
-
-        public void Save()
-        {
-            // 데이터 저장 메소드
-        }
-
-        public void Load()
-        {
-            // 데이터 불러오기 메소드
         }
 
         public void ConsumeMp(int requireMp)

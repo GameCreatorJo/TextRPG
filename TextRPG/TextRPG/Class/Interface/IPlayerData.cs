@@ -49,6 +49,6 @@ namespace TextRPG.Class.Interface
         public int DodgeRate { get; set; }
 
         // 캐릭터의 인벤토리
-        public List<Item> Inventory { get; set; }
+        public List<ItemSaveData> InventorySaveData { get; set; } = new();
     }
 }

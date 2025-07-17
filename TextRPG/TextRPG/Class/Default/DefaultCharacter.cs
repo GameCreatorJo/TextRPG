@@ -108,9 +108,26 @@ namespace TextRPG.Class.Data
         {
             get { return _dodgeRate; }
         }
+        public int PlusStr
+        {
+            get { return plusStr; }
+		}
+        public int PlusArmorPoint
+        {
+            get { return plusArmorPoint; }
+        }
+        public int PlusHp
+        {
+            get { return _plusHp; }
+        }
+        public int PlusMp
+        {
+            get { return _plusMp; }
+        }
 
 
-        public DefaultCharacter()
+
+		public DefaultCharacter()
         {
             
         }

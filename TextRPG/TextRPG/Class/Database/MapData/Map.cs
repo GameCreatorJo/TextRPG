@@ -200,7 +200,7 @@ namespace TextRPG.Class.Database.MapData
             statLines[5] = $"Gold  : {player.Gold}";
             statLines[6] = $"Job   : {player.Job}";
             statLines[7] = $"Name  : {player.Name}";
-            statLines[8] = $"Inventory";
+            statLines[8] = $"Inventory {player.Inventory.Count} {player.Inventory[1].Name}";
 
             int inventoryStartLine = 9;
             for (int i = 0; i < player.Inventory.Count && (inventoryStartLine + i) < Height; i++)

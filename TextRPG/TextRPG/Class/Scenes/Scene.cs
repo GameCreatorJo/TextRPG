@@ -152,9 +152,12 @@ namespace TextRPG.Class.Scenes
                     }
                     break;
                 case "2":
-                    GameManager.Instance.CreateManager.Player.Save();
+                    GameManager.Instance.CreateManager.CreateSave();
                     Console.WriteLine("게임이 저장되었습니다.");
-                    break;
+					Console.WriteLine("enter를 눌러 나갑니다.");
+					string nt = Console.ReadLine();
+
+					break;
                 case "3":
                     Console.WriteLine("여관을 나갑니다.");
                     break;
