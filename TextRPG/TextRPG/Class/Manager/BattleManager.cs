@@ -70,6 +70,8 @@ namespace TextRPG.Class.Manager
             var dungeonMonsters = new List<Monster>();
             var monsterDict = GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary;
             var monsterKeys = monsterDict.Keys.ToList();
+            
+
 
             int count = random.Next(1, 5);
 
