@@ -102,5 +102,11 @@ namespace TextRPG.Class.Database.QuestData
 
 
         }
+
+       
+
+
+
+
     }
 }
