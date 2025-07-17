@@ -71,29 +71,24 @@ namespace TextRPG.Class.Manager
                 switch (input)
                 {
                     case "1":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["StatusScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("StatusScene");
                         break;
                     case "2":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["DungeonScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("DungeonScene");
                         _battleManager.Battle(_createManager.Player);GameManager.Instance.CreateManager.Player.ShowInfo();
                         break;
                     case "3":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["ShopScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("ShopScene");
                         break;
                     case "4":
                         var mapManager = new MapManager();
                         mapManager.StartMap("Town");
                         mapManager.RunMapLoop();
 
-                        _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("MainScene");
                         break;
                     case "5":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
-                        _scene.Render();
+                        _scene.ChangeScene("QuestScene");
                         //QuestManager.Instance.ShowQuestMenu();
                         break;
                     case "6":

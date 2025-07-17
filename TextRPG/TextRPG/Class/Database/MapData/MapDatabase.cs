@@ -15,29 +15,48 @@ namespace TextRPG.Class.Database.MapData
         // Town 빌딩/포탈 정보(중심좌표, 패턴, 타입, 다음맵, 다음맵 등장좌표)
         public static readonly List<BuildingInfo> TownBuildings = new()
         {
-            new BuildingInfo(7, 5, BuildingInfo.InnPattern, "Inn"),
-            new BuildingInfo(15, 5, BuildingInfo.ShopPattern, "Shop"),
-            new BuildingInfo(10, 15, BuildingInfo.PortalCavePattern, "Dungeon", "Dungeon", 10, 16)
+            new BuildingInfo(3, 4, BuildingInfo.BuildingPattern, "Inn"),
+            new BuildingInfo(2, 1, BuildingInfo.InnPannelPattern, "Inn"),
+            new BuildingInfo(8, 4, BuildingInfo.BuildingPattern, "Shop"),
+            new BuildingInfo(9, 1, BuildingInfo.ShopPannelPattern, "Shop"),
+            new BuildingInfo(15, 4, BuildingInfo.BuildingPattern, "Guild"),
+            new BuildingInfo(15, 1, BuildingInfo.GuildPannelPattern, "Guild"),
+            new BuildingInfo(4, 15, BuildingInfo.PortalCavePattern, "Dungeon"),
+            new BuildingInfo(4, 13, BuildingInfo.DungeonPannelPattern, "Dungeon"),
+            new BuildingInfo(15, 15, BuildingInfo.PortalCave2Pattern, "Dungeon2"),
+            new BuildingInfo(15, 11, BuildingInfo.DungeonPannelPattern, "Dungeon2"),
+
         };
 
         // 던전 출구 정보 추가 (포탈 역할)
         public static readonly List<BuildingInfo> DungeonBuildings = new()
         {
-            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit", "Town", 10, 10),
+            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit"),
             new BuildingInfo(10, 10, BuildingInfo.MonsterPattern, "Monster", "Battle")
         };
 
         public static readonly List<BuildingInfo> ShopBuildings = new()
         {
             new BuildingInfo(10, 8, BuildingInfo.ShopInPattern, "Shop"),
-            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit", "Town", 10, 10)
+            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
 
         };
 
         public static readonly List<BuildingInfo> InnBuildings = new()
         {
             new BuildingInfo(10, 8, BuildingInfo.InnInPattern, "Inn"),
-            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit", "Town", 10, 10)
+            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
+        };
+        public static readonly List<BuildingInfo> GuildBuildings = new()
+        {
+            new BuildingInfo(10, 8, BuildingInfo.GuildInPattern, "Guild"),
+            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
+        };
+        public static readonly List<BuildingInfo> Dungeon2Buildings = new()
+        {
+            new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit"),
+            new BuildingInfo(5, 5, BuildingInfo.MonsterPattern, "Monster", "Battle"),
+            new BuildingInfo(5, 10, BuildingInfo.MonsterPattern, "Monster", "Battle")
         };
 
 
@@ -55,17 +74,9 @@ namespace TextRPG.Class.Database.MapData
             town.BuildBuildings();
             maps["Town"] = town;
 
-            var dungeonMonsters = new List<Monster>();
-            foreach (var m in GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary.Values)
-                dungeonMonsters.Add(new Monster(m));
-
             var dungeon = new Map(20, 20, 0.2, DungeonBuildings);
             dungeon.Initialize();
             dungeon.BuildBuildings();
-
-            // 플레이어 시작 위치 명확히 지정
-            dungeon.PlayerX = DungeonSpawn.x;
-            dungeon.PlayerY = DungeonSpawn.y;
 
             maps["Dungeon"] = dungeon;
 
@@ -79,6 +90,16 @@ namespace TextRPG.Class.Database.MapData
             inn.Initialize();
             inn.BuildBuildings();
             maps["Inn"] = inn;
+
+            var guild = new Map(20, 20, 0.0, GuildBuildings);
+            guild.Initialize();
+            guild.BuildBuildings();
+            maps["Guild"] = guild;
+
+            var dungeon2 = new Map(20, 20, 0.0, Dungeon2Buildings);
+            dungeon2.Initialize();
+            dungeon2.BuildBuildings();
+            maps["Dungeon2"] = dungeon2;
         }
 
         public void AddMap(string name, Map map)

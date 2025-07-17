@@ -90,6 +90,11 @@ namespace TextRPG.Class.Manager
             Console.WriteLine("직업을 선택해주세요!");
             Console.WriteLine("1. 전사 2. 마법사");
             string inputJob = Console.ReadLine();
+            while (inputJob != "1" && inputJob != "2")
+            {
+                Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
+                inputJob = Console.ReadLine();
+            }
             player = new Player(playerName, inputJob);
             player.TakeItem();
             Console.WriteLine("Player data created!");
