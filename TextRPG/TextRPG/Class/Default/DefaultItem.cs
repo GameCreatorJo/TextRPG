@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Data
 {
-	public abstract class DefaultItem
+    public abstract class DefaultItem
     {
 		public enum ItemID
 		{
