@@ -19,21 +19,53 @@ namespace TextRPG.Class.Manager
         private Player player;
         private int totalGoldReward = 0;
         private int totalExpReward = 0;
-   
+        //난이도 별 보정치
+        private Dictionary<Monster, (int extraHp, int extraStr, int extraLv)> difficultyModifiers = new();
         public void SearchHP(Player player, Monster monster)
         {
             Console.WriteLine($"{player.Name}의 HP: {player.Hp}/{player.MaxHp}");
-            Console.WriteLine($"{monster.Name}의 HP: {monster.Hp}/{monster.MaxHp}");
+            Console.WriteLine($"{monster.Name}의 HP: {GetEffectiveMonsterHp(monster)}/{monster.MaxHp + difficultyModifiers[monster].extraHp}");
         }
-        public void Battle(Player initPlayer)
+
+        public void StartDungeonBattle(Player initPlayer)
+        {
+            player = initPlayer;
+
+            string input;
+            int difficulty = -1;
+
+            while (true)
+            {
+                Console.Write(">> ");
+                input = Console.ReadLine();
+
+                if (int.TryParse(input, out difficulty) && difficulty >= 0 && difficulty <= 3)
+                {
+                    break;
+                }
+                Console.WriteLine("잘못된 입력입니다. 0~3 사이의 숫자를 입력하세요.");
+            }
+
+            if (difficulty == 0)
+            {
+                Console.WriteLine("마을로 돌아갑니다.");
+                return;
+            }
+
+            monsters = GenerateDungeonMonsters(difficulty);
+
+            Console.WriteLine("\n전투 시작!\n");
+            SearchHP(player, monsters[0]);
+
+            Battle();
+        }
+
+        public void Battle()
         {/*
             if (player == null)
             {
                 throw new ArgumentNullException(nameof(player));
             }*/
-
-            player = initPlayer;
-            monsters = GenerateDungeonMonsters();
 
             /*몬스터와 플레이어 HP 확인(테스트용
             Console.WriteLine($"몬스터 수: {monsters.Count}");
@@ -45,8 +77,6 @@ namespace TextRPG.Class.Manager
             */
 
             //Console.Clear();
-            Console.WriteLine("전투 시작\n");
-            SearchHP(player, monsters[0]);
             while (player.Hp > 0 && monsters.Any(m => m.Hp > 0))
             {
                 ShowBattleStatus();
@@ -64,7 +94,7 @@ namespace TextRPG.Class.Manager
             BattleResult();
         }
 
-        public List<Monster> GenerateDungeonMonsters()
+        public List<Monster> GenerateDungeonMonsters(int difficulty)
         {
             var dungeonMonsters = new List<Monster>();
             var monsterDict = GameManager.Instance.CreateManager.MonsterDatabase.MonsterDictionary;
@@ -77,6 +107,14 @@ namespace TextRPG.Class.Manager
                 string key = monsterKeys[random.Next(monsterKeys.Count)];
                 Monster original = monsterDict[key];
                 var clone = new Monster(original);
+
+                //난이도 별 추가 스텟
+                int extraHp = 10 * (difficulty - 1);
+                int extraStr = 5 * (difficulty - 1);
+                int extraLv = 1 * (difficulty - 1);
+
+                difficultyModifiers[clone] = (extraHp, extraStr, extraLv);
+
                 Console.WriteLine($"몬스터 생성: {original.Name} (Lv.{original.Lv}){original.Hp},{original.MaxHp}");
 
                 dungeonMonsters.Add(clone);
@@ -96,7 +134,7 @@ namespace TextRPG.Class.Manager
                 var m = monsters[i];
                 if (m.Hp <= 0)
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($"{i + 1}. Lv.{m.Lv} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {m.Hp}")}");
+                Console.WriteLine($"{i + 1}. Lv.{GetEffectiveMonsterLv(m)} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {GetEffectiveMonsterHp(m)}")}");
                 Console.ResetColor();
             }
 
@@ -311,16 +349,32 @@ namespace TextRPG.Class.Manager
             {
                 if (monster.Hp <= 0) continue;
 
-                int damage = monster.Str;
-                
+                int damage = GetEffectiveMonsterStr(monster);
+
                 player.TakeDamage(damage, monster.CriticalRate);
                 Console.WriteLine($"\n{monster.Name}의 공격 {player.Name}에게 {damage}의 데미지");
             }
         }
 
-        public void UseMP(int Use)
+        private int GetEffectiveMonsterHp(Monster monster)
         {
+            if (difficultyModifiers.TryGetValue(monster, out var mod))
+                return monster.Hp + mod.extraHp;
+            return monster.Hp;
+        }
 
+        private int GetEffectiveMonsterStr(Monster monster)
+        {
+            if (difficultyModifiers.TryGetValue(monster, out var mod))
+                return monster.Str + mod.extraStr;
+            return monster.Str;
+        }
+
+        private int GetEffectiveMonsterLv(Monster monster)
+        {
+            if (difficultyModifiers.TryGetValue(monster, out var mod))
+                return monster.Lv + mod.extraLv;
+            return monster.Lv;
         }
 
         public void BattleResult()
