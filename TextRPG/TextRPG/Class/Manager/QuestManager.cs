@@ -71,27 +71,7 @@ namespace TextRPG.Class.Manager
             }
         }
 
-        //퀘스트 중복수락 방지 로직
-        //public void AcceptQuest(int questId)
-        //{
-        //    var quest = _questDatabase.GetQuestById(questId);
-        //    if (quest == null)
-        //    {
-        //        Console.WriteLine("해당 ID의 퀘스트를 찾을 수 없습니다.");
-        //        return;
-        //    }
-
-        //    if (!_questDatabase.AcceptedQuests.ContainsKey(questId))
-        //    {
-        //        _questDatabase.AcceptedQuests[questId] = quest;
-        //        quest.State = QuestState.InProgress;
-        //        Console.WriteLine($"퀘스트 '{quest.Title}'을 수락했습니다.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("이미 수락한 퀘스트입니다.");
-        //    }
-        //}
+       
         public void AcceptQuest(int questId)
         {
             if (_questDatabase == null)
@@ -159,16 +139,16 @@ namespace TextRPG.Class.Manager
         {
             return _questDatabase.GetAllQuests().Values.ToArray();
         }
-
+        //퀘스트 메뉴 진행되는 메서드
         public void ShowQuestMenu()
         {
             while (true)
             {
-                Console.WriteLine("╔══════════ 📜 퀘스트 메뉴 ══════════╗");
-                Console.WriteLine("║ 1. 진행 중인 퀘스트 보기            ║");
-                Console.WriteLine("║ 2. 전체 퀘스트 목록                 ║");
-                Console.WriteLine("║ 0. 뒤로가기                         ║");
-                Console.WriteLine("╚═════════════════════════════════════╝");
+                Console.WriteLine("+========== 📜 퀘스트 메뉴 ==========+");
+                Console.WriteLine("| 1. 진행 중인 퀘스트 보기            |");
+                Console.WriteLine("| 2. 전체 퀘스트 목록                 |");
+                Console.WriteLine("| 0. 뒤로가기                         |");
+                Console.WriteLine("+=====================================+");
                 Console.WriteLine("\n1. 진행중인 퀘스트 보기 2. 전체 퀘스트 목록 0. 뒤로가기");
                 string input = Console.ReadLine();
                 switch (input)
@@ -179,7 +159,7 @@ namespace TextRPG.Class.Manager
                         if (active != null)
                         {
                             Console.WriteLine(active.GetQuestInfo()); //퀘스트 정보출력
-                            do
+                            while (true)
                             {
                                 Console.WriteLine("0. 돌아가기");
                                 string back = Console.ReadLine();
@@ -193,14 +173,14 @@ namespace TextRPG.Class.Manager
 
 
                                 }
-                            } while (true);
+                            } 
                             
                         }
                         else
                         { 
                             Console.WriteLine("진행 중인 퀘스트가 없습니다.\n퀘스트를 수락해주세요.");
 
-                            do 
+                            while (true)
                             {
                                 Console.WriteLine("0. 돌아가기");
                                 string back = Console.ReadLine();
@@ -214,7 +194,7 @@ namespace TextRPG.Class.Manager
 
 
                                 }
-                            } while (true);
+                            } 
                             
                         }
                             
@@ -227,9 +207,8 @@ namespace TextRPG.Class.Manager
                         Console.ReadLine();
                         break;
                     case "0":
-                        
-                        //메인씬으로 돌아가는 로직을 넣으면 어떨까? GameManager.Instance.Scene.ChangeScene("MainScene");
-                        //문제점. 위 코드를 사용해 메인씬으로 돌아가면 다음 행동이 실행되지 않음. 
+
+                         
                         return;
 
                     default:
