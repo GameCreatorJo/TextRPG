@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using TextRPG.Class.Database.MapData;
 using TextRPG.Class.Manager;

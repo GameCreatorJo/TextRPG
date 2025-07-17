@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TextRPG.Class.Default;
 using TextRPG.Class.Manager;
 

@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -62,7 +62,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: »óÅÂÃ¢ 2: ´øÀü, 3: »óÁ¡, 4: ¸ÊÀ¸·Î ÀÌµ¿, 5: Äù½ºÆ® 6: °ÔÀÓÁ¾·á");
+                Console.WriteLine("1: ìƒíƒœì°½ 2: ë˜ì „ 3: ìƒì  4: ë§µ ì§„ì… 5: í€˜ìŠ¤íŠ¸ ë©”ë‰´ 6: ê²Œì„ ì¢…ë£Œ");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -93,10 +93,10 @@ namespace TextRPG.Class.Manager
 
                         break;
                     case "6":
-                        Console.WriteLine("°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù.");
+                        Console.WriteLine("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
                         return;
                     default:
-                        Console.WriteLine("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
+                        Console.WriteLine("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ô´Ï´ï¿½.");
                         break;
                 }
             }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TextRPG.Class.Manager;
 using TextRPG.Class.Test;
 class Program
