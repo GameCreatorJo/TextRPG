@@ -64,7 +64,8 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("| 2. 던전으로 이동                       |");
             Console.WriteLine("| 3. 상점으로 이동                       |");
             Console.WriteLine("| 4. 맵으로 이동                        |");
-            Console.WriteLine("| 5. 종료                               |");
+            Console.WriteLine("| 5. 퀘스트 메뉴                        |");
+            Console.WriteLine("| 6. 종료                               |");
             Console.WriteLine("+======================================+");
         }
 

@@ -209,7 +209,7 @@ namespace TextRPG.Class.Manager
                     case "0":
 
                          
-                        break;
+                        return;
 
                     default:
                         Console.WriteLine("잘못된 선택입니다.");
