@@ -8,7 +8,7 @@ class Program
         GameManager gameManager = new GameManager();
         gameManager.StartGame();
         
-        //SystemTest.Run();
+        
     }
 
 }
