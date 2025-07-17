@@ -75,7 +75,6 @@ namespace TextRPG.Class.Manager
                         break;
                     case "2":
                         _scene.ChangeScene("DungeonScene");
-                        _battleManager.Battle(_createManager.Player);GameManager.Instance.CreateManager.Player.ShowInfo();
                         break;
                     case "3":
                         _scene.ChangeScene("ShopScene");
