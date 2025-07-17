@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Database.MonsterData;
+using TextRPG.Class.Database.QuestData; //아래에 Battle Result 메서드에 퀘스트 진행 로직 추가시 활성화할것
 using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
@@ -128,6 +129,7 @@ namespace TextRPG.Class.Manager
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 Attack();
+                QuestManager.Instance.PromptKillProgress(target);
                 return;
             }
 
@@ -222,6 +224,7 @@ namespace TextRPG.Class.Manager
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 AlphaStrike();
+                QuestManager.Instance.PromptKillProgress(target);
                 return;
             }
 
@@ -238,6 +241,7 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
                 totalGoldReward += target.Gold;
                 totalExpReward += target.Exp;
+                QuestManager.Instance.PromptKillProgress(target);
             }
                 
         }
@@ -274,6 +278,7 @@ namespace TextRPG.Class.Manager
                     aliveMonsters.RemoveAt(index);
                     totalGoldReward += target.Gold;
                     totalExpReward += target.Exp;
+                    QuestManager.Instance.PromptKillProgress(target);
                 }
             }
         }
@@ -338,6 +343,14 @@ namespace TextRPG.Class.Manager
             {
                 Console.WriteLine("승리");
                 Console.WriteLine($"던전에서 몬스터 {defeatedCount}마리를 잡았습니다.\n");
+                //퀘스트 처치수 업데이트
+                              
+                foreach (var monster in monsters.Where(m => m.Hp <= 0))
+                {
+                    QuestManager.Instance.UpdateQuestKillCount(monster.Name);
+                }
+                
+
 
                 Console.WriteLine("[캐릭터 정보]");
                 Console.WriteLine($"Lv.{player.Lv} {player.Name}");

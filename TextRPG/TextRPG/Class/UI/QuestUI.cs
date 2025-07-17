@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Manager;
+using TextRPG.Class.Database.MonsterData;
 
 namespace TextRPG.Class.UI
 {
@@ -96,11 +97,7 @@ namespace TextRPG.Class.UI
         // 퀘스트 보상을 넣으면 좋을지도..?
 
         //진행도
-        public void PromptKillProgress()
-        {
-            Console.WriteLine("\n 처치 이벤트 발생!");
-            QuestManager.Instance.UpdateQuestKillCount();
-        }
+        
         
 
 
