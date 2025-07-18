@@ -50,6 +50,7 @@ namespace TextRPG.Class.Manager
             InitializeGame();
             _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"];
             _scene.Render();
+            CreateManager.MusicManager.PlayBgm4();
             SelectAction();
 
         }
@@ -74,6 +75,7 @@ namespace TextRPG.Class.Manager
                         _scene.ChangeScene("StatusScene");
                         break;
                     case "2":
+                        CreateManager.MusicManager.PlayBgm3();
                         _mapManager.StartMap("Town");
                         _mapManager.RunMapLoop();
                         break;
