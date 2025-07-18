@@ -169,11 +169,8 @@ namespace TextRPG.Class.Database.PlayerData
             }
         }
 
-        public void ManageEquipment()
+        public void ShowInventoryWithNum()
         {
-            // 아이템 장착 관리 메소드
-            Console.WriteLine("\n인벤토리: ");
-
             if (this._inventory == null)
             {
                 return;
@@ -192,6 +189,31 @@ namespace TextRPG.Class.Database.PlayerData
                 }
                 i++;
             }
+        }
+
+        public void ManageEquipment()
+        {
+            // 아이템 장착 관리 메소드
+            Console.WriteLine("\n인벤토리: ");
+            ShowInventoryWithNum();
+            //if (this._inventory == null)
+            //{
+            //    return;
+            //}
+
+            //int i = 1;
+            //foreach (Item item in _inventory)
+            //{
+            //    if (item.Name == this._armor || item.Name == this._weapon)
+            //    {
+            //        Console.WriteLine(" - " + i + " [E]" + item.Name);
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine(" - " + i + " " + item.Name);
+            //    }
+            //    i++;
+            //}
             Console.WriteLine("+======================================+");
 
             bool isInput = false;
@@ -385,6 +407,30 @@ namespace TextRPG.Class.Database.PlayerData
         {
             // 스킬 사용시 마나 소모 메소드
             this._mp -= requireMp;
+        }
+
+        public void SellItem(int num)
+        {
+            if (num > _inventory.Count)
+            {
+                return;
+            }
+
+            // 해당 장비가 장착되어 있다면 장착 이름을 지우고 스텟을 반영해야 함
+            if (this._weapon == _inventory[num].Name)
+            {
+                TakeStat(_inventory[num], false);
+                this._weapon = "";
+            }
+            else if (this._armor == _inventory[num].Name)
+            {
+                TakeStat(_inventory[num], false);
+                this._armor = "";
+            }
+            
+            this._gold += _inventory[num].Gold;
+
+            _inventory.RemoveAt(num);
         }
     }
 }

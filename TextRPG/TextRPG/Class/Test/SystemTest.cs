@@ -43,7 +43,7 @@ namespace TextRPG.Class.Test
 
             // 4. 전투 매니저 생성 및 전투 시작
             var battleManager = new BattleManager();
-            battleManager.Battle(player); // 실제 몬스터 생성 및 전투 진행
+            battleManager.Battle(); // 실제 몬스터 생성 및 전투 진행
 
             // 5. 퀘스트 상태 확인
             var activeQuests = QuestManager.Instance.GetActiveQuests();
