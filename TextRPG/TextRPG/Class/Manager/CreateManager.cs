@@ -42,6 +42,12 @@ namespace TextRPG.Class.Manager
             get { return _questManager; }
         }
 
+        private ShopManager _shopManager;
+        public ShopManager ShopManager
+        {
+            get { return _shopManager; }
+        }
+
         public SceneDatabase SceneDatabase { get; private set; }
         private MapDatabase _mapDatabase;
         public MapDatabase MapDatabase
@@ -166,6 +172,7 @@ namespace TextRPG.Class.Manager
             CreateMap();
             //퀘스트 추가
             CreateQuest();
+            CreateShop();
             Console.WriteLine("Game world created!");
         }
         //퀘스트관련
@@ -190,5 +197,11 @@ namespace TextRPG.Class.Manager
 			File.WriteAllText("player.json", json);
 			Console.WriteLine("게임이 저장되었습니다.");
 		}
+
+        public void CreateShop()
+        {
+            _shopManager = ShopManager.Instance;
+            _shopManager.AddItems();
+        }
     }
 }

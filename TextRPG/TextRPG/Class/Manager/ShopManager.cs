@@ -8,7 +8,7 @@ using TextRPG.Class.Manager;
 
 namespace TextRPG.Class.Manager
 {
-    internal class ShopManager
+    public class ShopManager
     {
         private static ShopManager instance;
         public static ShopManager Instance
