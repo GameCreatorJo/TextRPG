@@ -185,19 +185,19 @@ namespace TextRPG.Class.Manager
             //공격력 10% 오차처리
             int damage = random.Next(minDamage, maxDamage + 1);
 
-            target.TakeDamage(damage, player.CriticalRate);
+            DecreaseMonsterHp(target, damage);
 
             Console.WriteLine($"\n{player.Name}의 공격!");
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
 
-            if (target.Hp <= 0)
+            if (GetEffectiveMonsterHp(target) <= 0)
             {
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
-                //처치하면 전투결과때 얻을 골드와 경험치가 늘어남
                 totalGoldReward += target.Gold;
                 totalExpReward += target.Exp;
+                QuestManager.Instance.PromptKillProgress(target);
             }
-                
+
 
 
         }
