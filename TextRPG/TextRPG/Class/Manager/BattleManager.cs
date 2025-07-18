@@ -135,7 +135,7 @@ namespace TextRPG.Class.Manager
             for (int i = 0; i < monsters.Count; i++)
             {
                 var m = monsters[i];
-                if (m.Hp <= 0)
+                if (GetEffectiveMonsterHp(m) <= 0)
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"{i + 1}. Lv.{GetEffectiveMonsterLv(m)} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {GetEffectiveMonsterHp(m)}")}");
                 Console.ResetColor();
@@ -153,8 +153,13 @@ namespace TextRPG.Class.Manager
             Console.WriteLine("\n대상을 선택하세요.");
             for (int i = 0; i < monsters.Count; i++)
             {
+<<<<<<< HEAD
                 if (monsters[i].Hp > 0)
                     Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
+=======
+                if (GetEffectiveMonsterHp(monsters[i]) > 0)
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {GetEffectiveMonsterHp(monsters[i])}/{GetEffectiveMonsterMaxHp(monsters[i])})");
+>>>>>>> enhance#29
             }
             Console.Write(">> ");
             if (!int.TryParse(Console.ReadLine(), out int index) || index < 1 || index > monsters.Count)
@@ -165,11 +170,10 @@ namespace TextRPG.Class.Manager
             }
 
             Monster target = monsters[index - 1];
-            if (target.Hp <= 0)
+            if (GetEffectiveMonsterHp(target) <= 0)
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 Attack();
-                QuestManager.Instance.PromptKillProgress(target);
                 return;
             }
 
@@ -246,7 +250,7 @@ namespace TextRPG.Class.Manager
             Console.WriteLine("\n대상을 선택하세요.");
             for(int i = 0; i < monsters.Count; i++)
             {
-                if(monsters[i].Hp > 0)
+                if(GetEffectiveMonsterHp(monsters[i]) > 0)
                 {
                     Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
                 }
@@ -260,11 +264,10 @@ namespace TextRPG.Class.Manager
             }
 
             Monster target = monsters[index - 1];
-            if(target.Hp <= 0)
+            if(GetEffectiveMonsterHp(target) <= 0)
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 AlphaStrike();
-                QuestManager.Instance.PromptKillProgress(target);
                 return;
             }
 
@@ -276,7 +279,7 @@ namespace TextRPG.Class.Manager
             Console.WriteLine($"\n스킬 : 알파 스트라이크을(를) 사용했다!");
             Console.WriteLine($"{target.Name}에게 {damage}의 피해를 입혔다.");
 
-            if (target.Hp <= 0)
+            if (GetEffectiveMonsterHp(target) <= 0)
             {
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
                 totalGoldReward += target.Gold;
