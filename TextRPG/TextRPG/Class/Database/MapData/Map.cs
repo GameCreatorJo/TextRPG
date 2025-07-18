@@ -20,7 +20,6 @@ namespace TextRPG.Class.Database.MapData
 
         private readonly List<Monster> spawnTable;
         private readonly Random spawnRng = new Random();
-        private int _inventoryCursor = 0;
 
         public Map(int width, int height, double encounterRate, List<BuildingInfo> buildings)
             : base(width, height, encounterRate)

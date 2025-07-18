@@ -13,7 +13,7 @@ namespace TextRPG.Class.Database.MapData
         public static (int x, int y) DungeonSpawn = (1, 1);
 
         // Town 빌딩/포탈 정보(중심좌표, 패턴, 타입, 다음맵, 다음맵 등장좌표)
-        public static readonly List<BuildingInfo> TownBuildings = new()
+        public static  List<BuildingInfo> TownBuildings = new()
         {
             new BuildingInfo(3, 4, BuildingInfo.BuildingPattern, "Inn"),
             new BuildingInfo(2, 1, BuildingInfo.InnPannelPattern, "Inn"),
@@ -29,25 +29,25 @@ namespace TextRPG.Class.Database.MapData
         };
 
         // 던전 출구 정보 추가 (포탈 역할)
-        public static readonly List<BuildingInfo> DungeonBuildings = new()
+        public static  List<BuildingInfo> DungeonBuildings = new()
         {
             new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit"),
             new BuildingInfo(10, 10, BuildingInfo.MonsterPattern, "Monster", "Battle")
         };
 
-        public static readonly List<BuildingInfo> ShopBuildings = new()
+        public static  List<BuildingInfo> ShopBuildings = new()
         {
             new BuildingInfo(10, 8, BuildingInfo.ShopInPattern, "Shop"),
             new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
 
         };
 
-        public static readonly List<BuildingInfo> InnBuildings = new()
+        public static  List<BuildingInfo> InnBuildings = new()
         {
             new BuildingInfo(10, 8, BuildingInfo.InnInPattern, "Inn"),
             new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
         };
-        public static readonly List<BuildingInfo> GuildBuildings = new()
+        public static  List<BuildingInfo> GuildBuildings = new()
         {
             new BuildingInfo(10, 8, BuildingInfo.GuildInPattern, "Guild"),
             new BuildingInfo(10, 18, BuildingInfo.DungeonExitPattern, "Exit")
@@ -102,13 +102,6 @@ namespace TextRPG.Class.Database.MapData
             dungeon2.Initialize();
             dungeon2.BuildBuildings();
             maps["Dungeon2"] = dungeon2;
-        }
-
-        public void AddMap(string name, Map map)
-        {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("맵 이름 null 불가", nameof(name));
-            if (map == null) throw new ArgumentNullException(nameof(map));
-            maps[name] = map;
         }
 
         public Map GetMap(string name)
