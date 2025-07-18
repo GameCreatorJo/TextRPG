@@ -55,12 +55,18 @@ namespace TextRPG.Class.Manager
             get { return _mapDatabase; }
         }
 
+        private MusicManager _musicManager;
+        public MusicManager MusicManager
+        {
+            get { return _musicManager; }
+        }
         public CreateManager()
         {
             monsterDatabase = new MonsterDatabase();
             _itemDatabas = new ItemDatabaseList();
             SceneDatabase = new SceneDatabase();
             _mapDatabase = new MapDatabase();
+            _musicManager = new MusicManager();
             //퀘스트시스템 초기화 추가
             QuestDatabase questDatabase = new QuestDatabase();
             QuestUI questUI = new QuestUI(questDatabase);
