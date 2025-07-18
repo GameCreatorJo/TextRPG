@@ -48,6 +48,8 @@ namespace TextRPG.Class.Interface
         // 캐릭터의 회피 확률
         public int DodgeRate { get; set; }
 
+        public string Weapon { get; set; } = "None"; // 장착한 무기
+        public string Armor { get; set; } = "None"; // 장착한 갑옷
         // 캐릭터의 인벤토리
         public List<ItemSaveData> InventorySaveData { get; set; } = new();
     }

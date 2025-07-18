@@ -196,21 +196,15 @@ namespace TextRPG.Class.Database.MapData
             statLines[1] = $"Player: @{PlayerX},{PlayerY}";
             statLines[2] = $"Lv    : {player.Lv}";
             statLines[3] = $"HP    : {player.Hp} / {player.MaxHp}";
-            statLines[4] = $"MP    : 10 / 10";  // 임시
+            statLines[4] = $"MP    : {player.Mp} / {player.MaxMp}";
             statLines[5] = $"Gold  : {player.Gold}";
             statLines[6] = $"Job   : {player.Job}";
             statLines[7] = $"Name  : {player.Name}";
-            statLines[8] = $"Inventory {player.Inventory.Count} {player.Inventory[1].Name}";
-
-            int inventoryStartLine = 9;
-            for (int i = 0; i < player.Inventory.Count && (inventoryStartLine + i) < Height; i++)
-            {
-                string prefix = (i == inventoryCursor) ? "> " : "  ";
-                statLines[inventoryStartLine + i] = prefix + player.Inventory[i].Name;
-            }
-
-            for (int i = inventoryStartLine + player.Inventory.Count; i < Height; i++)
-                statLines[i] = "";
+            statLines[8] = $"Weapon: {player.Weapon}";
+            statLines[9] = $"Str   : {player.Str} + {player.PlusStr}";
+            statLines[10] = $"Armor : {player.Armor}";
+            statLines[11] = $"ArmorPoint : {player.ArmorPoint} + {player.PlusArmorPoint}";
+            statLines[12] = $"Exp   : {player.Exp}";
 
             for (int y = 0; y < Height; y++)
             {
@@ -237,9 +231,6 @@ namespace TextRPG.Class.Database.MapData
                 else
                     Console.Write(new string(' ', 18));
             }
-
-            if (inventoryCursor >= 0)
-                Console.SetCursorPosition(21, inventoryStartLine + inventoryCursor);
         }
 
 
