@@ -83,7 +83,6 @@ namespace TextRPG.Class.Manager
         public void CreateItem()
         {
             _itemDatabas.CreateItem();
-            // 인스턴스 생성 메소드 호출
             Console.WriteLine("Item database created!");
         }
         public void CreateScene()
@@ -102,22 +101,17 @@ namespace TextRPG.Class.Manager
 			if (!File.Exists("player.json"))
 			{
 				Console.WriteLine("세이브 데이터가 없습니다.!");
-                // Console.WriteLine("세이브 데이터가 없습니다.!");
                 Console.WriteLine("생성할 플레이어 이름을 입력해주세요!");
-                // Console.WriteLine("생성할 플레이어 이름을 입력해주세요!");
 				string playerName = Console.ReadLine();
 
 				string inputJob = "";
 				while (inputJob != "1" && inputJob != "2")
 				{
 					Console.WriteLine("직업을 선택해주세요!");
-					// Console.WriteLine("직업을 선택해주세요!");
 					Console.WriteLine("1. 전사 2. 마법사");
-					// Console.WriteLine("1. 전사 2. 마법사");
 					inputJob = Console.ReadLine();
 					if (inputJob != "1" && inputJob != "2")
 						Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
-						// Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
 				}
 
 				player = new Player(playerName, inputJob);
@@ -130,13 +124,10 @@ namespace TextRPG.Class.Manager
 				while (input != "1" && input != "2")
 				{
 					Console.WriteLine("세이브 데이터가 있습니다. 불러옵니까?");
-					// Console.WriteLine("세이브 데이터가 있습니다. 불러옵니까?");
 					Console.WriteLine("1. 예 2. 아니오");
-					// Console.WriteLine("1. 예 2. 아니오");
 					input = Console.ReadLine();
 					if (input != "1" && input != "2")
 						Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
-						// Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
 				}
 
 				if (input == "1")
@@ -149,12 +140,9 @@ namespace TextRPG.Class.Manager
 					PlayerSaveData loadedPlayer = JsonSerializer.Deserialize<PlayerSaveData>(json, options);
 					player = new Player(loadedPlayer);
 					Console.WriteLine("게임 데이터가 성공적으로 불러와졌습니다.");
-					// Console.WriteLine("게임 데이터가 성공적으로 불러와졌습니다.");
 					input = Console.ReadLine();
                     Console.WriteLine("게임을 시작합니다.");
-                    // Console.WriteLine("게임을 시작합니다.");
                     Console.WriteLine($"인벤토리1번{player.Inventory[0].Name} 2번{player.Inventory[1].Name} 3번{player.Inventory[2].Name}");
-                    // Console.WriteLine($"인벤토리1번{player.Inventory[0].Name} 2번{player.Inventory[1].Name} 3번{player.Inventory[2].Name}");
 
 
 				}
@@ -162,20 +150,16 @@ namespace TextRPG.Class.Manager
 				{
 					// 새로 생성
 					Console.WriteLine("생성할 플레이어 이름을 입력해주세요!");
-					// Console.WriteLine("생성할 플레이어 이름을 입력해주세요!");
 					string playerName = Console.ReadLine();
 
 					string inputJob = "";
 					while (inputJob != "1" && inputJob != "2")
 					{
 						Console.WriteLine("직업을 선택해주세요!");
-						// Console.WriteLine("직업을 선택해주세요!");
 						Console.WriteLine("1. 전사 2. 마법사");
-						// Console.WriteLine("1. 전사 2. 마법사");
 						inputJob = Console.ReadLine();
 						if (inputJob != "1" && inputJob != "2")
 							Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
-							// Console.WriteLine("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
 					}
 
 					player = new Player(playerName, inputJob);
@@ -191,12 +175,10 @@ namespace TextRPG.Class.Manager
             CreateScene();
             CreatePlayerData();
             CreateMap();
-            //퀘스트 추가
             CreateQuest();
             CreateShop();
             Console.WriteLine("Game world created!");
         }
-        //퀘스트관련
         public void CreateQuest()
         { 
             QuestDatabase questDatabase = new QuestDatabase();
@@ -217,7 +199,6 @@ namespace TextRPG.Class.Manager
 			string json = JsonSerializer.Serialize(playerSaveData, options);
 			File.WriteAllText("player.json", json);
 			Console.WriteLine("게임이 저장되었습니다.");
-			// Console.WriteLine("게임이 저장되었습니다.");
 		}
 
         public void CreateShop()

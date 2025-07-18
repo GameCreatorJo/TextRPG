@@ -128,42 +128,7 @@ namespace TextRPG.Class.Manager
                             }
                         }
                         break;
-                        /*
-                    case GameState.InventorySelect:
-                        CurrentMap.Draw(_inventoryCursor); // 인벤토리 커서 표시
-                        Console.SetCursorPosition(0, CurrentMap.Height + 1);
-                        Console.WriteLine("ESC: 돌아가기, ↑/↓: 이동, Enter: 선택");
-
-                        var invKey = Console.ReadKey(true).Key;
-
-                        if (invKey == ConsoleKey.Escape)
-                        {
-                            _gameState = GameState.MapMove;
-                            break;
-                        }
-
-                        if (invKey == ConsoleKey.UpArrow)
-                        {
-                            if (_inventoryCursor > 0)
-                                _inventoryCursor--;
-                        }
-                        else if (invKey == ConsoleKey.DownArrow)
-                        {
-                            if (_inventoryCursor < player.Inventory.Count - 1)
-                                _inventoryCursor++;
-                        }
-                        else if (invKey == ConsoleKey.Enter)
-                        {
-                            var selectedItem = player.Inventory.ElementAtOrDefault(_inventoryCursor);
-                            if (selectedItem != null)
-                            {
-                                Console.Clear();
-                                Console.WriteLine($"선택한 아이템: {selectedItem.Name}");
-                                Console.WriteLine("아무 키나 눌러 계속...");
-                                Console.ReadKey(true);
-                            }
-                        }*/
-                        break;
+                
                 }
             }
         }

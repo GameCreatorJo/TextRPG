@@ -181,24 +181,9 @@ namespace TextRPG.Class.Database.MapData
             return null;
         }
 
-        /*
-        public Monster GetRandomEncounter()
-        {
-            if (spawnTable == null || spawnTable.Count == 0)
-                throw new InvalidOperationException("스폰 테이블 비어있음");
-            var template = spawnRng.Next(spawnTable.Count);
-            return new Monster(spawnTable[template]);
-        }
-        */
         public void Draw(int inventoryCursor)
         {
             var player = GameManager.Instance.CreateManager.Player;
-
-            if (isInBattle)
-            {
-                //DrawBattleScreen(player);
-                return;
-            }
 
             string[] statLines = new string[Height];
             statLines[0] = "=== Status ===";
@@ -262,78 +247,6 @@ namespace TextRPG.Class.Database.MapData
             }
             return 'B';
         }
-        /*
-        private void StartBattle(Monster monster)
-        {
-            isInBattle = true;
-            currentBattleMonster = monster;
-            battleMessage = "";
-            battleMenuCursor = 0;
-        }
-        public void EndBattle()
-        {
-            isInBattle = false;
-            currentBattleMonster = null;
-            battleMessage = "";
-            battleMenuCursor = 0;
-        }
-
-        private void DrawBattleScreen(Player player)
-        {
-            int leftWidth = BuildingInfo.MonsterPattern.GetLength(1) + 2;  // 몬스터 아스키 너비 + 여유공간
-            int rightStartX = leftWidth + 3;
-
-            // 1) 왼쪽 몬스터 아스키 (BuildingInfo.MonsterPattern 참조)
-            if (currentBattleMonster != null)
-            {
-                for (int y = 0; y < BuildingInfo.MonsterPattern.GetLength(0); y++)
-                {
-                    Console.SetCursorPosition(0, y);
-                    for (int x = 0; x < BuildingInfo.MonsterPattern.GetLength(1); x++)
-                    {
-                        char c = BuildingInfo.MonsterPattern[y, x];
-                        Console.Write(c);
-                    }
-                }
-
-                // 몬스터 HP바
-                int hpBarLength = 20;
-                int hpFilled = (int)((double)currentBattleMonster.Hp / currentBattleMonster.MaxHp * hpBarLength);
-                string hpBar = new string('█', hpFilled) + new string(' ', hpBarLength - hpFilled);
-                Console.SetCursorPosition(0, BuildingInfo.MonsterPattern.GetLength(0) + 1);
-                Console.WriteLine($"HP: [{hpBar}] {currentBattleMonster.Hp} / {currentBattleMonster.MaxHp}");
-            }
-
-            // 2) 오른쪽 플레이어 상태창
-            Console.SetCursorPosition(rightStartX, 0);
-            Console.WriteLine("=== Status ===");
-            Console.SetCursorPosition(rightStartX, 1);
-            Console.WriteLine($"Player: {player.Name} Lv.{player.Lv}");
-            Console.SetCursorPosition(rightStartX, 2);
-            Console.WriteLine($"HP    : {player.Hp} / {player.MaxHp}");
-            Console.SetCursorPosition(rightStartX, 3);
-            Console.WriteLine($"MP    : 10 / 10"); // 임시
-            Console.SetCursorPosition(rightStartX, 4);
-            Console.WriteLine($"Gold  : {player.Gold}");
-            Console.SetCursorPosition(rightStartX, 5);
-            Console.WriteLine($"Job   : {player.Job}");
-
-            // 3) 하단 행동 선택 메뉴 (예: 공격, 도망)
-            int bottomStartY = Math.Max(BuildingInfo.MonsterPattern.GetLength(0), 7) + 4; // 몬스터 아스키 높이나 상태창 높이 고려
-            Console.SetCursorPosition(0, bottomStartY);
-            Console.WriteLine("행동 선택:");
-            Console.SetCursorPosition(0, bottomStartY + 1);
-            Console.WriteLine(battleMenuCursor == 0 ? "> 1. 공격" : "  1. 공격");
-            Console.SetCursorPosition(0, bottomStartY + 2);
-            Console.WriteLine(battleMenuCursor == 1 ? "> 2. 도망치기" : "  2. 도망치기");
-
-            // 4) 메시지 출력 (데미지 등)
-            if (!string.IsNullOrEmpty(battleMessage))
-            {
-                Console.SetCursorPosition(0, bottomStartY + 4);
-                Console.WriteLine(battleMessage);
-            }
-        }*/
 
     }
 }
