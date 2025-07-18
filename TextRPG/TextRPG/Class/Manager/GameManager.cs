@@ -107,3 +107,4 @@ namespace TextRPG.Class.Manager
         }
     }
 }
+//이진영
