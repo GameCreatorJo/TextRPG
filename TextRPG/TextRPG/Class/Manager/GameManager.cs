@@ -106,4 +106,4 @@ namespace TextRPG.Class.Manager
             }
         }
     }//테스트 진우
-}
+}//테스트 이진영
