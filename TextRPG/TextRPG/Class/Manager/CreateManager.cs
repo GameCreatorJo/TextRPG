@@ -40,6 +40,12 @@ namespace TextRPG.Class.Manager
             get { return _questManager; }
         }
 
+        private ShopManager _shopManager;
+        public ShopManager ShopManager
+        {
+            get { return _shopManager; }
+        }
+
         public SceneDatabase SceneDatabase { get; private set; }
         private MapDatabase _mapDatabase;
         public MapDatabase MapDatabase
@@ -109,6 +115,7 @@ namespace TextRPG.Class.Manager
             //퀘스트 추가
             CreateQuest();
             Console.WriteLine("Game world created!");
+            CreateShop();
         }
         //퀘스트관련
         public void CreateQuest()
@@ -117,6 +124,12 @@ namespace TextRPG.Class.Manager
             _questManager = QuestManager.Instance;
             _questManager.Initialize(questDatabase);
             Console.WriteLine("Quest database created and QuestManager initialized!");
+        }
+
+        public void CreateShop()
+        {
+            _shopManager = ShopManager.Instance;
+            _shopManager.AddItems();
         }
     }
 }

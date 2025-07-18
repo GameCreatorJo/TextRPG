@@ -116,12 +116,14 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("+======================================+");
             Console.WriteLine("|             🛒 상점 🛒             |");
             Console.WriteLine("+======================================+");
-            Console.WriteLine("| - 포션: 50G                          |");
-            Console.WriteLine("| - 강화석: 100G                       |");
-            Console.WriteLine("| - 무기: 500G                         |");
+            //Console.WriteLine("| - 포션: 50G                          |");
+            //Console.WriteLine("| - 강화석: 100G                       |");
+            //Console.WriteLine("| - 무기: 500G                         |");
+            GameManager.Instance.CreateManager.ShopManager.ShowStoreItems();
             Console.WriteLine("+======================================+");
-            Console.WriteLine("엔터를 눌러 돌아갑니다.");
-            Console.ReadLine();
+            //Console.WriteLine("구매하고 싶은 아이템의 번호를 입력해주세요. 0번을 입력하시면 되돌아갑니다.");
+            //Console.ReadLine();
+            GameManager.Instance.CreateManager.ShopManager.BuyItem();
         }
 
         public void RenderDungeonScene()

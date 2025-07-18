@@ -29,6 +29,9 @@ namespace TextRPG.Class.Manager
         private Scene _scene;
         public Scene Scene => _scene;
 
+        private ShopManager _shopManager;
+        public ShopManager ShopManager => _shopManager;
+
         public static GameManager Instance { get; private set; }
 
         public GameManager()
@@ -40,6 +43,7 @@ namespace TextRPG.Class.Manager
             _mapManager = new MapManager();
             //퀘스트 매니저 삽입
             _questManager = new QuestManager();
+            _shopManager = new ShopManager();
         }
 
         public void StartGame()
