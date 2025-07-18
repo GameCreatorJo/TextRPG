@@ -8,7 +8,6 @@ using TextRPG.Class.Manager;
 
 namespace TextRPG.Class.Manager
 {
-    // 한글 깨짐 테스트
     public class ShopManager
     {
         private static ShopManager instance;
