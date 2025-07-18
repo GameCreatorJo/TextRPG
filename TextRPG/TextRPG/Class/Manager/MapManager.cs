@@ -58,7 +58,7 @@ namespace TextRPG.Class.Manager
                         CurrentMap.Draw(-1); // 인벤토리 커서 숨김
 
                         Console.SetCursorPosition(0, CurrentMap.Height + 1);
-                        Console.WriteLine("화살표 이동, ESC: 인벤토리, Q: 종료");
+                        Console.WriteLine("화살표 이동, Q: 메뉴");
 
                         var key = Console.ReadKey(true).Key;
 
@@ -111,7 +111,7 @@ namespace TextRPG.Class.Manager
                             }
                         }
                         break;
-
+                        /*
                     case GameState.InventorySelect:
                         CurrentMap.Draw(_inventoryCursor); // 인벤토리 커서 표시
                         Console.SetCursorPosition(0, CurrentMap.Height + 1);
@@ -145,7 +145,7 @@ namespace TextRPG.Class.Manager
                                 Console.WriteLine("아무 키나 눌러 계속...");
                                 Console.ReadKey(true);
                             }
-                        }
+                        }*/
                         break;
                 }
             }
