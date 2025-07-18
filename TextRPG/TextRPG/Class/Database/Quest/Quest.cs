@@ -52,9 +52,13 @@ namespace TextRPG.Class.Database.QuestData
             //보상 처리 메서드는 QuestManager에서 처리
         }
         public string GetQuestInfo()// 퀘스트 정보 출력 메서드
-        {
+        {           
             return $"퀘스트 ID: {Id}, 이름: {Title}, 설명: {Description}, 목표 처치 수: {KillTarget}, 현재 처치 수: {KillCount}, 완료 여부: {IsCompleted}";
         }
+
+
+            
+        
     }
 
 }

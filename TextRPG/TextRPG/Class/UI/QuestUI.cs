@@ -83,6 +83,7 @@ namespace TextRPG.Class.UI
                 switch (input)
                 {
                     case "1":
+                        ShowActiveQuest();
                         //QuestData active = QuestManager.Instance.GetActiveQuest();
                         var activeQuests = QuestManager.Instance.GetActiveQuests();
                         foreach (var quest in activeQuests.Values)
@@ -90,44 +91,44 @@ namespace TextRPG.Class.UI
                             Console.WriteLine(quest.GetQuestInfo()); // ✅ 개별 퀘스트에 대해 호출
                         }
 
-                        Console.WriteLine("\n[진행 중인 퀘스트]");
-                        if (activeQuests != null)
-                        {
-                            //Console.WriteLine(activeQuests.GetQuestInfo()); // 진행중인 퀘스트 정보출력
-                            while (true)
-                            {
-                                Console.WriteLine("0. 돌아가기");
-                                string back = Console.ReadLine();
-                                if (back == "0")
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요");
-                                }
-                            }
+                        //Console.WriteLine("\n[진행 중인 퀘스트]");
+                        //if (activeQuests != null)
+                        //{
+                        //    //Console.WriteLine(activeQuests.GetQuestInfo()); // 진행중인 퀘스트 정보출력
+                        //    while (true)
+                        //    {
+                        //        Console.WriteLine("0. 돌아가기");
+                        //        string back = Console.ReadLine();
+                        //        if (back == "0")
+                        //        {
+                        //            break;
+                        //        }
+                        //        else
+                        //        {
+                        //            Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요");
+                        //        }
+                        //    }
 
-                        }
-                        else
-                        {
-                            Console.WriteLine("진행 중인 퀘스트가 없습니다.\n퀘스트를 수락해주세요.");
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine("진행 중인 퀘스트가 없습니다.\n퀘스트를 수락해주세요.");
 
-                            while (true)
-                            {
-                                Console.WriteLine("0. 돌아가기");
-                                string back = Console.ReadLine();
-                                if (back == "0")
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("잘못된 입력입니다.");
+                        //    while (true)
+                        //    {
+                        //        Console.WriteLine("0. 돌아가기");
+                        //        string back = Console.ReadLine();
+                        //        if (back == "0")
+                        //        {
+                        //            break;
+                        //        }
+                        //        else
+                        //        {
+                        //            Console.WriteLine("잘못된 입력입니다.");
 
-                                }
-                            }
-                        }
+                        //        }
+                        //    }
+                        //}
                         break;
 
                     case "2":
@@ -177,27 +178,50 @@ namespace TextRPG.Class.UI
         {
             Console.WriteLine("\n [진행 중인 퀘스트]");
             var activeQuests = QuestManager.Instance.GetActiveQuests();
-                
 
-            if (activeQuests != null && activeQuests.Count > 0)
+           //수정점
+
+            if (activeQuests.Count > 0)
             {
                 foreach (var quest in activeQuests.Values)
-                { 
-                    Console.WriteLine(quest.GetQuestInfo()); 
+                {
+                    Console.WriteLine(quest.GetQuestInfo());
                 }
-                
             }
             else
             {
-                Console.WriteLine(" 진행 중인 퀘스트가 없습니다.");
+                Console.WriteLine("진행 중인 퀘스트가 없습니다.");
             }
+
+            Console.WriteLine("\n0. 돌아가기");
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "0") break;
+                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+            }
+
+
+
+            //if (activeQuests != null && activeQuests.Count > 0)
+            //{
+            //    foreach (var quest in activeQuests.Values)
+            //    { 
+            //        Console.WriteLine(quest.GetQuestInfo()); 
+            //    }
+
+            //}
+            //else
+            //{
+            //    Console.WriteLine(" 진행 중인 퀘스트가 없습니다.");
+            //}
         }
-        
+
         // 퀘스트 보상을 넣으면 좋을지도..?
 
         //진행도
-        
-        
+
+
 
 
     }
