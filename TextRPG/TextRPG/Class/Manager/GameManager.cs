@@ -105,5 +105,5 @@ namespace TextRPG.Class.Manager
                 }
             }
         }
-    }
+    }//강인구 주석
 }
