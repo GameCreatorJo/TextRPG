@@ -28,6 +28,9 @@ namespace TextRPG.Class.Manager
         private Scene _scene;
         public Scene Scene => _scene;
 
+        private ShopManager _shopManager;
+        public ShopManager ShopManager => _shopManager;
+
         public static GameManager Instance { get; private set; }
 
         public GameManager()
@@ -38,6 +41,7 @@ namespace TextRPG.Class.Manager
             _scene = new Scene();
             _mapManager = new MapManager();
             _questManager = new QuestManager();
+            _shopManager = new ShopManager();
         }
 
         public void StartGame()
