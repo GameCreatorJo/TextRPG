@@ -66,7 +66,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 퀘스트 메뉴 6: 종료");
+                Console.WriteLine("1: ?�태�? 2: ?�전, 3: ?�점, 4: �??�동, 5: ?�스??메뉴 6: 종료");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -100,10 +100,10 @@ namespace TextRPG.Class.Manager
                         Console.WriteLine("게임 종료");
                         return;
                     default:
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("?�못???�력?�니??");
                         break;
                 }
             }
         }
-    }
+    }//�׽�Ʈ �ּ�
 }
