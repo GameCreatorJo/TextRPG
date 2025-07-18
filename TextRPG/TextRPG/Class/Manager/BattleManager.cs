@@ -6,12 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Database.MonsterData;
-using TextRPG.Class.Database.QuestData; //아래에 Battle Result 메서드에 퀘스트 진행 로직 추가시 활성화할것
+using TextRPG.Class.Database.QuestData; //아래에 Batle Result 메서드에 퀘스트 진행 로직 추가시 활성화할것
 using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
 {
     
+    //배틀메니저
     public class BattleManager
     {
         //4:22
@@ -21,11 +22,12 @@ namespace TextRPG.Class.Manager
         private int totalGoldReward = 0;
         private int totalExpReward = 0;
         //난이도 별 보정치
-        private Dictionary<Monster, (int extraHp, int extraStr, int extraLv)> difficultyModifiers = new();
+        private Dictionary<Monster, (int extraHp, int extraStr, int extraLv, int extraMaxHp)> difficultyModifiers = new();
+        private Dictionary<Monster, int> currentHpDict = new();
         public void SearchHP(Player player, Monster monster)
         {
             Console.WriteLine($"{player.Name}의 HP: {player.Hp}/{player.MaxHp}");
-            Console.WriteLine($"{monster.Name}의 HP: {GetEffectiveMonsterHp(monster)}/{monster.MaxHp + difficultyModifiers[monster].extraHp}");
+            Console.WriteLine($"{monster.Name}의 HP: {GetEffectiveMonsterHp(monster)}/{GetEffectiveMonsterMaxHp(monster)}");
         }
 
         public void StartDungeonBattle(Player initPlayer)
@@ -44,7 +46,7 @@ namespace TextRPG.Class.Manager
                 {
                     break;
                 }
-                Console.WriteLine("잘못된 입력입니다. 0~3 사이의 숫자를 입력하세요.");
+                Console.WriteLine("잘못된 입력입니다. 0~3 사이의 숫자를 입력하세요");
             }
 
             if (difficulty == 0)
@@ -78,12 +80,12 @@ namespace TextRPG.Class.Manager
             */
 
             //Console.Clear();
-            while (player.Hp > 0 && monsters.Any(m => m.Hp > 0))
+            while (player.Hp > 0 && monsters.Any(m => GetEffectiveMonsterHp(m) > 0))
             {
                 ShowBattleStatus();
                 PlayerTurn();
 
-                if (monsters.All(m => m.Hp <= 0))
+                if (monsters.All(m => GetEffectiveMonsterHp(m) <= 0))
                 {
                     break;
                 }
@@ -115,10 +117,14 @@ namespace TextRPG.Class.Manager
                 int extraHp = 10 * (difficulty - 1);
                 int extraStr = 5 * (difficulty - 1);
                 int extraLv = 1 * (difficulty - 1);
+                int extraMaxHp = 10 * (difficulty - 1);
 
-                difficultyModifiers[clone] = (extraHp, extraStr, extraLv);
+                difficultyModifiers[clone] = (extraHp, extraStr, extraLv, extraMaxHp);
 
-                Console.WriteLine($"몬스터 생성: {original.Name} (Lv.{original.Lv}){original.Hp},{original.MaxHp}");
+                int effectiveMaxHp = clone.MaxHp + extraMaxHp;
+                currentHpDict[clone] = effectiveMaxHp;
+
+                Console.WriteLine($"몬스터 생성: {clone.Name} (Lv.{GetEffectiveMonsterLv(clone)}) {GetEffectiveMonsterHp(clone)}/{GetEffectiveMonsterMaxHp(clone)}");
 
                 dungeonMonsters.Add(clone);
             }
@@ -137,11 +143,11 @@ namespace TextRPG.Class.Manager
                 var m = monsters[i];
                 if (m.Hp <= 0)
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($"{i + 1}. Lv.{GetEffectiveMonsterLv(m)} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {GetEffectiveMonsterHp(m)}")}");
+                Console.WriteLine($"{i + 1}. Lv.{GetEffectiveMonsterLv(m)} {m.Name} {(GetEffectiveMonsterHp(m) <= 0 ? "Dead" : $"HP {GetEffectiveMonsterHp(m)}/{GetEffectiveMonsterMaxHp(m)}")}");
                 Console.ResetColor();
             }
 
-            Console.WriteLine($"\n[내정보]");
+            Console.WriteLine($"\n[내정보");
             Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
             Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
             Console.WriteLine($"MP {player.Mp}/{player.MaxMp}");
@@ -150,11 +156,11 @@ namespace TextRPG.Class.Manager
 
         public void Attack()
         {
-            Console.WriteLine("\n대상을 선택하세요.");
+            Console.WriteLine("\n대상을 선택하세요");
             for (int i = 0; i < monsters.Count; i++)
             {
                 if (monsters[i].Hp > 0)
-                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {GetEffectiveMonsterHp(monsters[i])}/{GetEffectiveMonsterMaxHp(monsters[i])})");
             }
             Console.Write(">> ");
             if (!int.TryParse(Console.ReadLine(), out int index) || index < 1 || index > monsters.Count)
@@ -179,32 +185,32 @@ namespace TextRPG.Class.Manager
             int minDamage = (int)(player.Str - offset);
             int maxDamage = (int)(player.Str + offset);
 
-            //공격력 10% 오차처리
+            //공격력 10% 오차처리 
             int damage = random.Next(minDamage, maxDamage + 1);
 
-            target.TakeDamage(damage, player.CriticalRate);
+            DecreaseMonsterHp(target, damage);
 
             Console.WriteLine($"\n{player.Name}의 공격!");
             Console.WriteLine($"{target.Name}에게 {damage}의 데미지를 입혔습니다!");
 
-            if (target.Hp <= 0)
+            if (GetEffectiveMonsterHp(target) <= 0)
             {
                 Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
-                //처치하면 전투결과때 얻을 골드와 경험치가 늘어남
                 totalGoldReward += target.Gold;
                 totalExpReward += target.Exp;
+                QuestManager.Instance.PromptKillProgress(target);
             }
-                
+
 
 
         }
 
         public void SkillMenu()
         {
-            Console.WriteLine("\n1. 알파 스트라이크 - MP 10");
+            Console.WriteLine("\n1.알파 스트라이크- MP 10");
             Console.WriteLine("   공격력 * 2 로 하나의 적을 공격합니다.");
-            Console.WriteLine("2. 더블 스트라이크 - MP 15");
-            Console.WriteLine("   공격력 * 1.5 로 2명의 적을 랜덤으로 공격합니다.");
+            Console.WriteLine("2. 더블 스트라이크- MP 15");
+            Console.WriteLine("   공격력* 1.5 로 2명의 적을 랜덤으로 공격합니다.");
             Console.WriteLine("0. 취소");
 
             Console.Write("\n원하시는 행동을 입력해주세요 >>");
@@ -243,12 +249,12 @@ namespace TextRPG.Class.Manager
 
         public void AlphaStrike()
         {
-            Console.WriteLine("\n대상을 선택하세요.");
+            Console.WriteLine("\n대상을 선택하세요");
             for(int i = 0; i < monsters.Count; i++)
             {
                 if(monsters[i].Hp > 0)
                 {
-                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {GetEffectiveMonsterHp(monsters[i])}/{GetEffectiveMonsterMaxHp(monsters[i])})");
                 }
             }
             Console.Write(">> ");
@@ -271,10 +277,10 @@ namespace TextRPG.Class.Manager
 
             int damage = (int)(player.Str * 2);
 
-            target.TakeDamage(damage, player.CriticalRate);
+            DecreaseMonsterHp(target, damage);
 
             Console.WriteLine($"\n스킬 : 알파 스트라이크을(를) 사용했다!");
-            Console.WriteLine($"{target.Name}에게 {damage}의 피해를 입혔다.");
+            Console.WriteLine($"{target.Name}에게 {damage}의 피해를 입혔다!");
 
             if (target.Hp <= 0)
             {
@@ -288,8 +294,8 @@ namespace TextRPG.Class.Manager
 
         public void DoubleStrike()
         {
-            var aliveMonsters = monsters.Where(m => m.Hp > 0).ToList();
-            if(aliveMonsters.Count == 0)
+            var aliveMonsters = monsters.Where(m => GetEffectiveMonsterHp(m) > 0).ToList();
+            if (aliveMonsters.Count == 0)
             {
                 Console.WriteLine("공격할 대상이 없습니다");
                 return;
@@ -308,11 +314,11 @@ namespace TextRPG.Class.Manager
 
                 int damage = (int)(player.Str * 1.5);
 
-                target.TakeDamage(damage, player.CriticalRate);
+                DecreaseMonsterHp(target, damage);
 
                 Console.WriteLine($"{target.Name}에게 {damage}의 피해를 입혔다.");
 
-                if(target.Hp <= 0)
+                if(GetEffectiveMonsterHp(target) <= 0)
                 {
                     Console.WriteLine($"{target.Name} 을(를) 처치했습니다!");
                     aliveMonsters.RemoveAt(index);
@@ -326,8 +332,8 @@ namespace TextRPG.Class.Manager
         private void PlayerTurn()
         {
             Console.WriteLine("\n1. 공격");
-            Console.WriteLine("2. 스킬");
-            Console.WriteLine("0. 대기");
+            Console.WriteLine("\n2. 스킬");
+            Console.WriteLine("\n0. 대기");
 
             Console.Write("\n행동을 선택하세요 >> ");
             string input = Console.ReadLine();
@@ -354,7 +360,7 @@ namespace TextRPG.Class.Manager
         {
             foreach (var monster in monsters)
             {
-                if (monster.Hp <= 0) continue;
+                if (GetEffectiveMonsterHp(monster) <= 0) continue;
 
                 int damage = GetEffectiveMonsterStr(monster);
 
@@ -363,11 +369,23 @@ namespace TextRPG.Class.Manager
             }
         }
 
+        //난이도 보정치를 적용한 몬스터 스텟
         private int GetEffectiveMonsterHp(Monster monster)
         {
+            if (currentHpDict.TryGetValue(monster, out int hp))
+                return hp;
+
             if (difficultyModifiers.TryGetValue(monster, out var mod))
                 return monster.Hp + mod.extraHp;
+
             return monster.Hp;
+        }
+
+        private int GetEffectiveMonsterMaxHp(Monster monster)
+        {
+            if (difficultyModifiers.TryGetValue(monster, out var mod))
+                return monster.MaxHp + mod.extraMaxHp;
+            return monster.MaxHp;
         }
 
         private int GetEffectiveMonsterStr(Monster monster)
@@ -384,12 +402,25 @@ namespace TextRPG.Class.Manager
             return monster.Lv;
         }
 
+        // 몬스터 HP 감소 (데미지 적용)
+        private void DecreaseMonsterHp(Monster monster, int damage)
+        {
+            if (!currentHpDict.ContainsKey(monster))
+            {
+                int effectiveMaxHp = monster.MaxHp + (difficultyModifiers.TryGetValue(monster, out var mod) ? mod.extraMaxHp : 0);
+                currentHpDict[monster] = effectiveMaxHp;
+            }
+
+            currentHpDict[monster] = Math.Max(0, currentHpDict[monster] - damage);
+        }
+
+
         public void BattleResult()
         {
             //Console.Clear();
             Console.WriteLine("\n전투결과\n");
 
-            int defeatedCount = monsters.Count(m => m.Hp <= 0);
+            int defeatedCount = monsters.Count(m => GetEffectiveMonsterHp(m) <= 0);
 
             if (player.Hp <= 0)
             {
@@ -400,12 +431,12 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine("승리");
                 Console.WriteLine($"던전에서 몬스터 {defeatedCount}마리를 잡았습니다.\n");
                 //퀘스트 처치수 업데이트
-                              
-                foreach (var monster in monsters.Where(m => m.Hp <= 0))
+
+                foreach (var monster in monsters.Where(m => GetEffectiveMonsterHp(m) <= 0))
                 {
                     QuestManager.Instance.UpdateQuestKillCount(monster.Name);
                 }
-                
+
 
 
                 Console.WriteLine("[캐릭터 정보]");
@@ -418,7 +449,7 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine($"{totalExpReward} Exp\n");
 
                 //전투가 끝나고 한번에 골드와 경험치가 들어감
-                //player.AddGold(totalGoldReward);
+                player.SpendGold(-totalGoldReward);
                 player.TakeEXP(totalExpReward);
             }
 
