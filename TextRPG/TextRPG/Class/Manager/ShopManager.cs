@@ -68,6 +68,72 @@ namespace TextRPG.Class.Manager
             }
         }
 
+        public void ChooseMode()
+        {
+            bool isInput = false;
+            while (!isInput)
+            {
+                Console.WriteLine("아이템 구매는 1번, 아이템 판매 2번, 0번을 입력하시면 되돌아갑니다.");
+                Console.Write(">>> ");
+                string rawInput = Console.ReadLine();
+                int input;
+
+                if (int.TryParse(rawInput, out input))
+                {
+                    switch (input)
+                    {
+                        case 0:
+                            isInput = true;
+                            break;
+                        case 1:
+                            BuyItem();
+                            isInput = true;
+                            break;
+                        case 2:
+                            // 아이템 판매 함수
+                            SellItem();
+                            isInput = true;
+                            break;
+                        default:
+                            Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void SellItem()
+        {
+            GameManager.Instance.CreateManager.Player.ShowInventoryWithNum();
+
+            bool isInput = false;
+            while (!isInput)
+            {
+                Console.WriteLine("판매하고 싶은 아이템의 번호를 입력해주세요. 0번을 입력하시면 되돌아갑니다.");
+                Console.Write(">>> ");
+
+                string rawInput = Console.ReadLine();
+                int input;
+                if (int.TryParse(rawInput,out input))
+                {
+                    if (input > 0 && input <= GameManager.Instance.CreateManager.Player.Inventory.Count)
+                    {
+                        GameManager.Instance.CreateManager.Player.SellItem(input - 1);
+                        isInput = true;
+                    }
+                    else if (input == 0)
+                    {
+                        isInput = true;
+                        ChooseMode();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\n잘못된 입력입니다. 다시 입력해주세요.");
+                }
+            }
+        }
+
         public void BuyItem()
         {
             bool isInput = false;
@@ -106,6 +172,8 @@ namespace TextRPG.Class.Manager
                 else if (int.TryParse(rawInput, out input) && input == 0)
                 {
                     isInput = true;
+                    Console.WriteLine();
+                    ChooseMode();
                 }
                 else
                 {
