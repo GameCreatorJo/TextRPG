@@ -43,7 +43,6 @@ namespace TextRPG.Class.Scenes
                     break;
                 case "DungeonScene":
                     RenderDungeonScene();
-                    GameManager.Instance.BattleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
                     break;
                 case "QuestScene":
                     RenderQuestScene();                    
@@ -181,7 +180,6 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("| 3. 어려운 난이도                      |");
             Console.WriteLine("| 0. 마을로 돌아가기                    |");
             Console.WriteLine("+======================================+");
-            Console.WriteLine("엔터를 눌러 돌아갑니다.");
         }
         //퀘스트씬 작업
         public void RenderQuestScene()
