@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TextRPG.Class.Default;
 using TextRPG.Class.Manager;
 
@@ -45,21 +45,10 @@ namespace TextRPG.Class.Scenes
                     RenderDungeonScene();
                     break;
                 case "QuestScene":
-<<<<<<< Updated upstream
                     RenderQuestScene();                    
                     break;
                 case "InnScene":
-                    RenderInnScene();                   
-=======
-                    RenderQuestScene();
-<<<<<<< Updated upstream
-=======
-                    //GameManager.Instance.QuestManager.OpenQuestMenu();
-                    break;
-                case "InnScene":
                     RenderInnScene();
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                     break;
                 default:
                     Console.WriteLine("알 수 없는 씬입니다.");
@@ -199,7 +188,7 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("|           퀘스트 관리소              |");
             Console.WriteLine("+======================================+");
 
-            QuestManager.Instance.ShowQuestMenu();
+            //QuestManager.Instance.ShowQuestMenu();
 
             
 
