@@ -87,14 +87,8 @@ namespace TextRPG.Class.Manager
                         break;
                     case "5":
                         _scene.ChangeScene("QuestScene");
-
                         _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
-                        _scene.Render();
                         
-
-                        
-                        QuestManager.Instance.OpenQuestMenu();
-
                         break;
                     case "6":
                         Console.WriteLine("게임 종료");
@@ -104,7 +98,7 @@ namespace TextRPG.Class.Manager
                         break;
                 }
             }
-        }// 테스트 강인구
-    }//테스트 진우
-}//테스트 이진영
-// 테스트 주용진
+        }
+    }
+}
+
