@@ -12,7 +12,7 @@ using TextRPG.Class.Data;
 namespace TextRPG.Class.Manager
 {
     
-    //배틀메니저
+    //배틀메니저2
     public class BattleManager
     {
         //4:22
