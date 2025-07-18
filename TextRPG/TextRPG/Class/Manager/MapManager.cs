@@ -86,30 +86,7 @@ namespace TextRPG.Class.Manager
                             {
                                 if (nextMap == "Battle")
                                 {
-                                    GameManager.Instance.BattleManager.Battle();
-                                }//던전이면 맵 선택할 수 있게
-                                else if ((nextMap == "Dungeon") || (nextMap=="Dungeon2"))
-                                {
-                                    GameManager.Instance.Scene.ChangeScene("DungeonScene");
-                                    GameManager.Instance.BattleManager.StartDungeonBattle(player);
-                                    CurrentMap = mapDatabase.GetMap(nextMap);
-                                    CurrentMap.Initialize();
-                                    CurrentMap.BuildBuildings();
-
-                                    if (spawnX.HasValue && spawnY.HasValue)
-                                    {
-                                        CurrentMap.PlayerX = spawnX.Value;
-                                        CurrentMap.PlayerY = spawnY.Value;
-                                    }
-                                    else
-                                    {
-                                        CurrentMap.PlayerX = CurrentMap.Width / 2;
-                                        CurrentMap.PlayerY = CurrentMap.Height / 2;
-                                    }
-
-                                    Console.Clear();
-                                    Console.WriteLine($"{nextMap} 맵으로 이동!");
-
+                                    StartBattleScene();
                                 }
                                 else
                                 {
