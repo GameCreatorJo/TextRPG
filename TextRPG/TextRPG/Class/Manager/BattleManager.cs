@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TextRPG.Class.Database.PlayerData;
 using TextRPG.Class.Database.MonsterData;
-using TextRPG.Class.Database.QuestData; //아래에 Batle Result 메서드에 퀘스트 진행 로직 추가시 활성화할것
+using TextRPG.Class.Database.QuestData; //아래에 Battle Result 메서드에 퀘스트 진행 로직 추가시 활성화할것
 using TextRPG.Class.Data;
 
 namespace TextRPG.Class.Manager
@@ -146,7 +146,7 @@ namespace TextRPG.Class.Manager
                 Console.ResetColor();
             }
 
-            Console.WriteLine($"\n[내정보");
+            Console.WriteLine($"\n[내정보]");
             Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.Job})");
             Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
             Console.WriteLine($"MP {player.Mp}/{player.MaxMp}");
