@@ -86,7 +86,30 @@ namespace TextRPG.Class.Manager
                             {
                                 if (nextMap == "Battle")
                                 {
-                                    StartBattleScene();
+                                    GameManager.Instance.BattleManager.Battle();
+                                }//던전이면 맵 선택할 수 있게
+                                else if ((nextMap == "Dungeon") || (nextMap=="Dungeon2"))
+                                {
+                                    GameManager.Instance.Scene.ChangeScene("DungeonScene");
+                                    GameManager.Instance.BattleManager.StartDungeonBattle(player);
+                                    CurrentMap = mapDatabase.GetMap(nextMap);
+                                    CurrentMap.Initialize();
+                                    CurrentMap.BuildBuildings();
+
+                                    if (spawnX.HasValue && spawnY.HasValue)
+                                    {
+                                        CurrentMap.PlayerX = spawnX.Value;
+                                        CurrentMap.PlayerY = spawnY.Value;
+                                    }
+                                    else
+                                    {
+                                        CurrentMap.PlayerX = CurrentMap.Width / 2;
+                                        CurrentMap.PlayerY = CurrentMap.Height / 2;
+                                    }
+
+                                    Console.Clear();
+                                    Console.WriteLine($"{nextMap} 맵으로 이동!");
+
                                 }
                                 else
                                 {
@@ -155,7 +178,7 @@ namespace TextRPG.Class.Manager
         private void StartBattleScene()
         {
             var battleManager = GameManager.Instance.BattleManager;
-            battleManager.Battle(GameManager.Instance.CreateManager.Player);
+            battleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
             Console.WriteLine("전투가 종료되었습니다. 아무 키나 눌러 계속...");
             Console.ReadKey(true);
         }
