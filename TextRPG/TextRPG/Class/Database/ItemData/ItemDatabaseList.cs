@@ -1,4 +1,4 @@
-using TextRPG.Class.Database.ItemData;
+﻿using TextRPG.Class.Database.ItemData;
 using ItemID = TextRPG.Class.Data.DefaultItem.ItemID;
 
 public class ItemDatabaseList
