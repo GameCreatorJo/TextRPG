@@ -1,0 +1,152 @@
+using System;
+using System.Linq;
+using System.Xml.Linq;
+using TextRPG.Class.Database.MapData;
+using TextRPG.Class.Manager;
+
+namespace TextRPG.Class.Manager
+{
+    public enum GameState
+    {
+        MapMove,        // 일반 맵 이동 모드
+        InventorySelect // 인벤토리 메뉴 선택 모드
+    }
+
+    public class MapManager
+    {
+        public Map CurrentMap { get; private set; }
+        private GameState _gameState = GameState.MapMove;
+
+        private string _lastDungeonMap = null;
+
+        public MapManager()
+        {
+        }
+
+        public void StartMap(string mapName)
+        {
+            var mapDatabase = GameManager.Instance.CreateManager.MapDatabase;
+
+            if (!mapDatabase.Maps.ContainsKey(mapName))
+                throw new ArgumentException($"맵 '{mapName}' 없음");
+
+            //맵 초기화
+            CurrentMap = mapDatabase.GetMap(mapName);
+            CurrentMap.Initialize();
+            CurrentMap.BuildBuildings();
+
+            CurrentMap.PlayerX = CurrentMap.Width / 2;
+            CurrentMap.PlayerY = CurrentMap.Height / 2;
+
+            Console.Clear();
+            _gameState = GameState.MapMove;
+        }
+
+
+        public void RunMapLoop()
+        {
+            var mapDatabase = GameManager.Instance.CreateManager.MapDatabase;
+            var player = GameManager.Instance.CreateManager.Player;
+
+            while (true)
+            {
+                Console.Clear();
+
+                switch (_gameState)
+                {
+                    case GameState.MapMove:
+                        CurrentMap.Draw(-1); // 인벤토리 커서 숨김
+
+                        Console.SetCursorPosition(0, CurrentMap.Height + 1);
+                        Console.WriteLine("화살표 이동, Q: 메뉴");
+
+                        var key = Console.ReadKey(true).Key;
+
+                        if (key == ConsoleKey.Q)
+                            return;
+
+                        if (key == ConsoleKey.Escape)
+                        {
+                            _gameState = GameState.InventorySelect;
+                            break;
+                        }
+
+                        bool moved = CurrentMap.TryMove(key);
+                        if (moved)
+                        {
+                            string nextMap = CurrentMap.GetAutoTransferTarget(
+                                mapDatabase.Maps.FirstOrDefault(x => x.Value == CurrentMap).Key,
+                                CurrentMap.PlayerX,
+                                CurrentMap.PlayerY,
+                                out int? spawnX,
+                                out int? spawnY);
+
+                            if (!string.IsNullOrEmpty(nextMap))
+                            {
+                                if ((nextMap == "Dungeon") || (nextMap == "Dungeon2"))
+                                {
+                                    GameManager.Instance.CreateManager.MusicManager.PlayBgm2();
+                                    Console.Clear();
+                                    Console.WriteLine($"{nextMap} 맵으로 이동 중...");
+                                    GotoDunGeon();
+                                    _lastDungeonMap = nextMap; // 전투 전 던전 이름 저장
+                                }
+                                else if (nextMap == "Battle")
+                                {
+                                    GameManager.Instance.CreateManager.MusicManager.PlayBgm1();
+
+                                    StartBattleScene();
+                                    // 전투 종료 후 던전 복귀
+                                    if (!string.IsNullOrEmpty(_lastDungeonMap))
+                                    {
+                                        nextMap = _lastDungeonMap;
+                                    }
+                                }
+                                else
+                                {
+                                    if (!GameManager.Instance.CreateManager.MusicManager.IsTownMusicPlaying)
+                                        GameManager.Instance.CreateManager.MusicManager.PlayBgm3();
+                                }
+
+                                CurrentMap = mapDatabase.GetMap(nextMap);
+                                CurrentMap.Initialize();
+                                CurrentMap.BuildBuildings();
+
+                                if (spawnX.HasValue && spawnY.HasValue)
+                                {
+                                    CurrentMap.PlayerX = spawnX.Value;
+                                    CurrentMap.PlayerY = spawnY.Value;
+                                }
+                                else
+                                {
+                                    CurrentMap.PlayerX = CurrentMap.Width / 2;
+                                    CurrentMap.PlayerY = CurrentMap.Height / 2;
+                                }
+
+                                Console.Clear();
+                                Console.WriteLine($"{nextMap} 맵으로 이동!");
+                            }
+                        }
+                        break;
+                
+                }
+            }
+        }
+
+
+        private void GotoDunGeon()
+        {
+            var battleManager = GameManager.Instance.BattleManager;
+            GameManager.Instance.Scene.ChangeScene("DungeonScene");
+            battleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
+            Console.ReadKey(true);
+        }
+        private void StartBattleScene()
+        {
+            var battleManager = GameManager.Instance.BattleManager;
+            battleManager.Battle();
+            Console.ReadKey(true);
+
+        }
+    }
+}

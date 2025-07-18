@@ -1,30 +1,35 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TextRPG.Class.Database.MapData;
+using TextRPG.Class.Database.QuestData;
 using TextRPG.Class.Scenes;
+
 
 namespace TextRPG.Class.Manager
 {
-    internal class GameManager
+    public class GameManager
     {
         private CreateManager _createManager;
-        public CreateManager CreateManager
-        {
-            get { return _createManager; }
-        }
-        private BattleManager battleManager;
-        public BattleManager BattleManager
-        {
-            get { return battleManager; }
-        }
+        public CreateManager CreateManager => _createManager;
+
+        private BattleManager _battleManager;
+        public BattleManager BattleManager => _battleManager;
+
+        private MapManager _mapManager;
+        public MapManager MapManager => _mapManager;
+
+        private QuestManager _questManager;
+        public QuestManager QuestManager => _questManager;
+
         private Scene _scene;
-        public Scene Scene
-        {
-            get { return _scene; }
-        }
+        public Scene Scene => _scene;
+
+        private ShopManager _shopManager;
+        public ShopManager ShopManager => _shopManager;
 
         public static GameManager Instance { get; private set; }
 
@@ -32,60 +37,60 @@ namespace TextRPG.Class.Manager
         {
             Instance = this;
             _createManager = new CreateManager();
-            _scene = new Scene(); // Initialize with a default scene
-            battleManager = new BattleManager();
+            _battleManager = new BattleManager();
+            _scene = new Scene();
+            _mapManager = new MapManager();
+            _questManager = new QuestManager();
+            _shopManager = new ShopManager();
         }
 
         public void StartGame()
         {
             Console.WriteLine("Game started!");
             InitializeGame();
-            GameManager.Instance.Scene.Render();
+            _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"];
+            _scene.Render();
+            CreateManager.MusicManager.PlayBgm4();
             SelectAction();
 
-            // Initialize game components here
         }
+
         public void InitializeGame()
         {
+            QuestManager.Instance.Initialize(new QuestDatabase());
+
             _createManager.CreateGameWorld();
             Console.WriteLine("Game initialized!");
-            // Load game settings, characters, etc.
         }
+
         public void SelectAction()
         {
             while (true)
             {
+                Console.WriteLine("1: 상태창, 2: 맵 이동, 3: 퀘스트 메뉴 4: 종료");
                 string input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("상태창 선택됨.");
-                        _scene = _createManager.SceneDatabase.SceneDictionary["StatusScene"]; // Use SceneDatabase dictionary
-                        _scene.Render(); // 상태창 씬 렌더링
+                        _scene.ChangeScene("StatusScene");
                         break;
                     case "2":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["DungeonScene"]; // Use SceneDatabase dictionary
-                        _scene.Render(); // 상태창 씬 렌더링
-                        GameManager.Instance.BattleManager.Battle(GameManager.Instance.CreateManager.Player);
-                        Console.WriteLine("전투하기 선택됨.");
-                        // 전투 호출
+                        CreateManager.MusicManager.PlayBgm3();
+                        _mapManager.StartMap("Town");
+                        _mapManager.RunMapLoop();
                         break;
                     case "3":
-                        _scene = _createManager.SceneDatabase.SceneDictionary["ShopScene"]; // Use SceneDatabase dictionary
-                        _scene.Render(); // 상태창 씬 렌더링
-                        Console.WriteLine("상점가기 선택됨.");
+                        _scene.ChangeScene("QuestScene");
                         break;
                     case "4":
-                        Console.WriteLine("게임 종료 선택됨.");
-                        // 게임 종료
-                        break;
+                        Console.WriteLine("게임 종료");
+                        return;
                     default:
-                        Console.WriteLine("잘못된 입력입니다. 다시 시도하세요.");
-                        continue;
+                        Console.WriteLine("잘못된 입력입니다.");
+                        break;
                 }
-                _scene = _createManager.SceneDatabase.SceneDictionary["MainScene"]; // Use SceneDatabase dictionary
-                _scene.Render();
             }
         }
     }
 }
+

@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TextRPG.Class.Data;
+
+namespace TextRPG.Class.Database.MonsterData
+{
+    public class MonsterDatabase
+    {
+        private List<Monster> monsterDatabaseList = new List<Monster>();
+        private Dictionary<string, Monster> monsterDictionary = new Dictionary<string, Monster>();
+        public Dictionary<string, Monster> MonsterDictionary
+        {
+            get { return monsterDictionary; }
+        }
+
+        Monster 미니언 = new Monster(2, "미니언", "enemy", 3, 0, 1, 0, 15, 1, 0, 0, 1);
+        Monster 대포미니언 = new Monster(5, "대포 미니언", "enemy", 3, 0, 5, 0, 25, 5, 0, 0, 3);
+        Monster 공허충 = new Monster(3, "공허충", "enemy", 3, 0, 3, 0, 10, 1, 0, 0, 2);
+
+        public MonsterDatabase()
+        {
+
+        }
+
+        public void CreateMonster()
+        {
+            monsterDictionary.Add("minion", 미니언);
+            monsterDictionary.Add("siegeMinion", 대포미니언);
+            monsterDictionary.Add("siegeMinion2", 공허충);
+        }
+    }
+}

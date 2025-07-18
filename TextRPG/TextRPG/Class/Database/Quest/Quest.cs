@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TextRPG.Class.Database.Quest
+namespace TextRPG.Class.Database.QuestData
 {
-    public class Quest
+    public class QuestData
     {
         public int Id { get; }
         public string Title { get; }
@@ -15,7 +15,17 @@ namespace TextRPG.Class.Database.Quest
         public int KillCount { get; private set; }
         public bool IsCompleted { get; private set; }
 
-        public Quest(int id, string title, string description, int killTarget, int killCount)
+        public string TargetMonsterKey;
+        public QuestState State { get; set; }
+        public enum QuestState
+        { 
+            None,
+            InProgress,
+            Completed,
+            Failed
+
+        }
+        public QuestData(int id, string title, string description, int killTarget, int killCount, string targetMonsterKey)
         {
             Id = id;// 퀘스트 ID
             Title = title;// 퀘스트 제목
@@ -23,7 +33,12 @@ namespace TextRPG.Class.Database.Quest
             KillTarget = killTarget;// 목표 처치 수
             KillCount = killCount;// 현재 처치 수
             IsCompleted = false;// 완료 여부
+            TargetMonsterKey = targetMonsterKey;
+           
         }
+
+
+        
         public void UpdateKill()// 퀘스트 진행도 업데이트 메서드
         {
             if (!IsCompleted)
@@ -42,9 +57,13 @@ namespace TextRPG.Class.Database.Quest
             //보상 처리 메서드는 QuestManager에서 처리
         }
         public string GetQuestInfo()// 퀘스트 정보 출력 메서드
-        {
+        {           
             return $"퀘스트 ID: {Id}, 이름: {Title}, 설명: {Description}, 목표 처치 수: {KillTarget}, 현재 처치 수: {KillCount}, 완료 여부: {IsCompleted}";
         }
+
+
+            
+        
     }
 
 }

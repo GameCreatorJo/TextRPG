@@ -6,20 +6,28 @@ using System.Threading.Tasks;
 
 namespace TextRPG.Class.Data
 {
-    internal abstract class DefaultItem
+    public abstract class DefaultItem
     {
-        // ¾ÆÀÌÅÛ ½Äº°ÀÚ
-        protected int _id;
-        // ¾ÆÀÌÅÛ ÀÌ¸§
+		public enum ItemID
+		{
+			Weapon = 0,
+			Armor = 1
+		}
+
+		//ì•„ì´í…œ ì•„ì´ë””
+		protected int _id;
+        // ì•„ì´í…œ ì´ë¦„
         protected string _name = "";
-        // ¾ÆÀÌÅÛ ¼³¸í
+        // ì•„ì´í…œ ì„¤ëª…
         protected string _description = "";
-        // ¾ÆÀÌÅÛÀÇ Plus Strength
+        // ì•„ì´í…œ ê³µê²©ë ¥ Plus Strength
         protected int _plusStr;
-        // ¾ÆÀÌÅÛÀÇ Plus Armor Point
+        // ì•„ì´í…œ ë°©ì–´ë ¥ Plus Armor Point
         protected int _plusArmorPoint;
-        // ¾ÆÀÌÅÛÀÇ Gold Value
+        // ì•„ì´í…œ ê°€ê²© Gold Value
         protected int _gold;
+        // ì•„ì´í…œ ì¢…ë¥˜ID
+        protected ItemID _itemID;
 
         public int Id => _id;
         public string Name => _name;
@@ -27,13 +35,14 @@ namespace TextRPG.Class.Data
         public int PlusStr => _plusStr;
         public int PlusArmorPoint => _plusArmorPoint;
         public int Gold => _gold;
+        public ItemID itemID => _itemID;
 
         public DefaultItem()
         {
-            // ±âº» »ı¼ºÀÚ
+            // ê¸°ë³¸ ìƒì„±ì
         }
 
-        public DefaultItem(int id, string name, string description, int plusStr, int plusArmorPoint, int gold)
+        public DefaultItem(int id, string name, string description, int plusStr, int plusArmorPoint, int gold, ItemID itemID)
         {
             _id = id;
             _name = name;
@@ -41,6 +50,7 @@ namespace TextRPG.Class.Data
             _plusStr = plusStr;
             _plusArmorPoint = plusArmorPoint;
             _gold = gold;
+            _itemID = itemID;
         }
        
 

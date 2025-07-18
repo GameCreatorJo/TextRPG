@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +7,10 @@ using TextRPG.Class.Database.ItemData;
 
 namespace TextRPG.Class.Data
 {
-    internal abstract class DefaultCharacter
+    public abstract class DefaultCharacter
     {
+        private Random random = new Random();
+
         protected int _lv;
         protected string _name;
         protected string _job;
@@ -30,13 +32,26 @@ namespace TextRPG.Class.Data
         // 현재 체력
         protected int _hp;
 
+        // 기본 마나
+        protected int _maxMp;
+        // 아이템 장착 마나
+        protected int _plusMp;
+        // 현재 마나
+        protected int _mp;
+
         // 현재 보유 골드
         protected int _gold;
         // 캐릭터의 경험치
         protected int _exp;
 
+        // 캐릭터의 치명타 확률
+        protected int _criticalRate;
+        // 캐릭터의 회피 확률
+        protected int _dodgeRate;
+
         // 캐릭터의 인벤토리
         protected List<Item> _inventory;
+
         public List<Item> Inventory
         {
             get { return _inventory; }
@@ -69,6 +84,14 @@ namespace TextRPG.Class.Data
         {
             get { return _hp; }
         }
+        public int MaxMp
+        {
+            get { return  (_maxMp + _plusMp); }
+        }
+        public int Mp
+        {
+            get { return _mp; }
+        }
         public int Gold
         {
             get { return _gold; }
@@ -77,10 +100,34 @@ namespace TextRPG.Class.Data
         {
             get { return _exp; }
         }
+        public int CriticalRate
+        {
+            get { return _criticalRate; }
+        }
+        public int DodgeRate
+        {
+            get { return _dodgeRate; }
+        }
+        public int PlusStr
+        {
+            get { return plusStr; }
+		}
+        public int PlusArmorPoint
+        {
+            get { return plusArmorPoint; }
+        }
+        public int PlusHp
+        {
+            get { return _plusHp; }
+        }
+        public int PlusMp
+        {
+            get { return _plusMp; }
+        }
 
 
 
-        public DefaultCharacter()
+		public DefaultCharacter()
         {
             
         }
@@ -96,16 +143,38 @@ namespace TextRPG.Class.Data
             Console.WriteLine("Gold: " + _gold + " G");
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage, int opponentCritRate)
         {
             // 캐릭터끼리 데미지를 주고받는 메소드
-            this._hp -= damage;
+            // 데미지를 받을 때 적의 치명타 확률과 본인의 회피율을 통해 데미지를 계산한다.
+            this._hp -= ( damage * CriticalDamage(opponentCritRate) * AvoidDamage() );
 
             if (this._hp <= 0)
             {
                 this._hp = 0;
                 Death();
             }
+        }
+
+        // 치명타 확률은 받는 캐릭터의 치명타 확률이 아니라 데미지를 주는 캐릭터의 치명타 확률에 따름
+        public virtual int CriticalDamage(int criticalRate)
+        {
+            int randomNum = random.Next(0, 100);
+
+            if (randomNum < criticalRate)
+                return 2;
+            else
+                return 1;
+        }
+
+        public virtual int AvoidDamage()
+        {
+            int randomNum = random.Next(0, 100);
+
+            if (randomNum < this._dodgeRate)
+                return 0;
+            else
+                return 1;
         }
 
         public virtual void Death()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TextRPG.Class.Manager;
 class Program
 {
@@ -6,6 +6,8 @@ class Program
     {
         GameManager gameManager = new GameManager();
         gameManager.StartGame();
+        
+        
     }
 
 }
