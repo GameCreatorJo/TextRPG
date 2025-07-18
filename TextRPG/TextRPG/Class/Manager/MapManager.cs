@@ -100,7 +100,6 @@ namespace TextRPG.Class.Manager
                                     if (!string.IsNullOrEmpty(_lastDungeonMap))
                                     {
                                         nextMap = _lastDungeonMap;
-                                        _lastDungeonMap = null; // 복귀 후 초기화
                                     }
                                 }
                                 else
