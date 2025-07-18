@@ -135,7 +135,7 @@ namespace TextRPG.Class.Manager
                 var m = monsters[i];
                 if (m.Hp <= 0)
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($"{i + 1}. Lv.{GetEffectiveMonsterLv(m)} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {GetEffectiveMonsterHp(m)}")}");
+                Console.WriteLine($"{i + 1}. Lv.{GetEffectiveMonsterLv(m)} {m.Name} {(m.Hp <= 0 ? "Dead" : $"HP {GetEffectiveMonsterHp(m)}/{m.MaxHp + difficultyModifiers[m].extraHp}")}");
                 Console.ResetColor();
             }
 
@@ -152,7 +152,7 @@ namespace TextRPG.Class.Manager
             for (int i = 0; i < monsters.Count; i++)
             {
                 if (monsters[i].Hp > 0)
-                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {GetEffectiveMonsterHp(monsters[i])}/{monsters[i].MaxHp + difficultyModifiers[monsters[i]].extraHp})");
             }
             Console.Write(">> ");
             if (!int.TryParse(Console.ReadLine(), out int index) || index < 1 || index > monsters.Count)
@@ -246,7 +246,7 @@ namespace TextRPG.Class.Manager
             {
                 if(monsters[i].Hp > 0)
                 {
-                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {monsters[i].Hp})");
+                    Console.WriteLine($"{i + 1}. {monsters[i].Name} (HP: {GetEffectiveMonsterHp(monsters[i])}/{monsters[i].MaxHp + difficultyModifiers[monsters[i]].extraHp})");
                 }
             }
             Console.Write(">> ");
@@ -416,7 +416,7 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine($"{totalExpReward} Exp\n");
 
                 //전투가 끝나고 한번에 골드와 경험치가 들어감
-                //player.AddGold(totalGoldReward);
+                player.SpendGold(-totalGoldReward);
                 player.TakeEXP(totalExpReward);
             }
 
