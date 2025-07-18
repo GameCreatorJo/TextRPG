@@ -104,6 +104,6 @@ namespace TextRPG.Class.Manager
                         break;
                 }
             }
-        }
-    }//강인구 주석
-}
+        }// 테스트 강인구
+    }//테스트 진우
+}//테스트 이진영
