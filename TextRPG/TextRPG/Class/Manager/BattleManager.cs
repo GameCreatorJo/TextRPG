@@ -57,6 +57,8 @@ namespace TextRPG.Class.Manager
 
             Console.WriteLine("\n전투 시작!\n");
             SearchHP(player, monsters[0]);
+
+            Battle();
         }
 
         public void Battle()
