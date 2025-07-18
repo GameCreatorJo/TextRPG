@@ -85,6 +85,7 @@ namespace TextRPG.Class.Manager
                             {
                                 if ((nextMap == "Dungeon") || (nextMap == "Dungeon2"))
                                 {
+                                    GameManager.Instance.CreateManager.MusicManager.PlayBgm2();
                                     Console.Clear();
                                     Console.WriteLine($"{nextMap} 맵으로 이동 중...");
                                     GotoDunGeon();
@@ -92,6 +93,8 @@ namespace TextRPG.Class.Manager
                                 }
                                 else if (nextMap == "Battle")
                                 {
+                                    GameManager.Instance.CreateManager.MusicManager.PlayBgm1();
+
                                     StartBattleScene();
                                     // 전투 종료 후 던전 복귀
                                     if (!string.IsNullOrEmpty(_lastDungeonMap))
@@ -100,6 +103,11 @@ namespace TextRPG.Class.Manager
                                         _lastDungeonMap = null; // 복귀 후 초기화
                                     }
                                 }
+                                else
+                                {
+                                    GameManager.Instance.CreateManager.MusicManager.PlayBgm3();
+                                }
+
                                 CurrentMap = mapDatabase.GetMap(nextMap);
                                 CurrentMap.Initialize();
                                 CurrentMap.BuildBuildings();

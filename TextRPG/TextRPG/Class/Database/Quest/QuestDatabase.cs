@@ -33,9 +33,9 @@ namespace TextRPG.Class.Database.QuestData
         }
 
         // 퀘스트 객체 미리 정의
-        QuestData quest1 = new QuestData(1, "첫 번째 퀘스트", "미니언 5마리 처치", 5, 0);
-        QuestData quest2 = new QuestData(2, "두 번째 퀘스트", "대포 미니언 처치", 1, 0);
-        QuestData quest3 = new QuestData(3, "세 번째 퀘스트", "공허충 처치.", 10, 0);
+        QuestData quest1 = new QuestData(1, "첫 번째 퀘스트", "몬스터 5마리 처치", 5, 0, "enemy");
+        QuestData quest2 = new QuestData(2, "두 번째 퀘스트", "몬스터 10마리 처치", 10, 0,"enemy");
+        QuestData quest3 = new QuestData(3, "세 번째 퀘스트", "몬스터 12마리 처치.", 12, 0, "enemy");
 
         public QuestDatabase()
         {
@@ -45,6 +45,11 @@ namespace TextRPG.Class.Database.QuestData
 
         public void CreateQuest()
         {
+            quest1.TargetMonsterKey = "enemy";
+            quest2.TargetMonsterKey = "enemy";
+            quest3.TargetMonsterKey = "enemy";
+
+
             AddQuest(quest1);
             AddQuest(quest2);
             AddQuest(quest3);
@@ -59,7 +64,7 @@ namespace TextRPG.Class.Database.QuestData
             }
             else
             {
-                Console.WriteLine($"⚠️ 퀘스트 ID {quest.Id}는 이미 존재합니다.");
+                Console.WriteLine($" 퀘스트 ID {quest.Id}는 이미 존재합니다.");
             }
         }
 

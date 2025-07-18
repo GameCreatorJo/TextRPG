@@ -431,7 +431,7 @@ namespace TextRPG.Class.Manager
 
                 foreach (var monster in monsters.Where(m => GetEffectiveMonsterHp(m) <= 0))
                 {
-                    QuestManager.Instance.UpdateQuestKillCount(monster.Name);
+                    //QuestManager.Instance.UpdateQuestKillCount(monster.Job);
                 }
 
 
