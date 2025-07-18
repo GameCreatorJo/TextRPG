@@ -15,7 +15,15 @@ namespace TextRPG.Class.Database.PlayerData
     {
         private int _maxEXP = 50;
         private string _weapon = "";
+        public string Weapon
+        {
+            get { return _weapon; }
+        }
         private string _armor = "";
+        public string Armor
+        {
+            get { return _armor; }
+        }
         //캐릭터 생성용 생성자
         public Player(string inputName, string input) 
         {
@@ -106,7 +114,9 @@ namespace TextRPG.Class.Database.PlayerData
 					itemSave.ItemType
 				));
 			}
-		}
+            this._weapon = other.Weapon;
+            this._armor = other.Armor;
+        }
 
 		public override void ShowInfo()
         {
