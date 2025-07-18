@@ -35,17 +35,10 @@ namespace TextRPG.Class.Manager
                 Console.WriteLine($"BGM{index} 파일을 찾을 수 없습니다: {path}");
                 return;
             }
-
-            try
-            {
-                _soundPlayer.Stop();          
-                _soundPlayer.SoundLocation = path;
-                _soundPlayer.Load();
-                _soundPlayer.PlayLooping();
-            }
-            catch (Exception ex)
-            {
-            }
+            _soundPlayer.Stop();          
+            _soundPlayer.SoundLocation = path;
+            _soundPlayer.Load();
+            _soundPlayer.PlayLooping();
         }
 
         public void PlayBgm1() => PlayBgm(1);
