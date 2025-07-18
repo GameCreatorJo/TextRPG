@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Xml.Linq;
 using TextRPG.Class.Database.MapData;
 using TextRPG.Class.Manager;
 
@@ -16,7 +17,7 @@ namespace TextRPG.Class.Manager
         public Map CurrentMap { get; private set; }
         private GameState _gameState = GameState.MapMove;
 
-        private int _inventoryCursor = 0;
+        private string _lastDungeonMap = null;
 
         public MapManager()
         {
@@ -39,7 +40,6 @@ namespace TextRPG.Class.Manager
 
             Console.Clear();
             _gameState = GameState.MapMove;
-            _inventoryCursor = 0;
         }
 
 
@@ -68,7 +68,6 @@ namespace TextRPG.Class.Manager
                         if (key == ConsoleKey.Escape)
                         {
                             _gameState = GameState.InventorySelect;
-                            _inventoryCursor = 0;
                             break;
                         }
 
@@ -84,30 +83,40 @@ namespace TextRPG.Class.Manager
 
                             if (!string.IsNullOrEmpty(nextMap))
                             {
-                                if (nextMap == "Battle")
+                                if ((nextMap == "Dungeon") || (nextMap == "Dungeon2"))
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine($"{nextMap} 맵으로 이동 중...");
+                                    GotoDunGeon();
+                                    _lastDungeonMap = nextMap; // 전투 전 던전 이름 저장
+                                }
+                                else if (nextMap == "Battle")
                                 {
                                     StartBattleScene();
+                                    // 전투 종료 후 던전 복귀
+                                    if (!string.IsNullOrEmpty(_lastDungeonMap))
+                                    {
+                                        nextMap = _lastDungeonMap;
+                                        _lastDungeonMap = null; // 복귀 후 초기화
+                                    }
+                                }
+                                CurrentMap = mapDatabase.GetMap(nextMap);
+                                CurrentMap.Initialize();
+                                CurrentMap.BuildBuildings();
+
+                                if (spawnX.HasValue && spawnY.HasValue)
+                                {
+                                    CurrentMap.PlayerX = spawnX.Value;
+                                    CurrentMap.PlayerY = spawnY.Value;
                                 }
                                 else
                                 {
-                                    CurrentMap = mapDatabase.GetMap(nextMap);
-                                    CurrentMap.Initialize();
-                                    CurrentMap.BuildBuildings();
-
-                                    if (spawnX.HasValue && spawnY.HasValue)
-                                    {
-                                        CurrentMap.PlayerX = spawnX.Value;
-                                        CurrentMap.PlayerY = spawnY.Value;
-                                    }
-                                    else
-                                    {
-                                        CurrentMap.PlayerX = CurrentMap.Width / 2;
-                                        CurrentMap.PlayerY = CurrentMap.Height / 2;
-                                    }
-
-                                    Console.Clear();
-                                    Console.WriteLine($"{nextMap} 맵으로 이동!");
+                                    CurrentMap.PlayerX = CurrentMap.Width / 2;
+                                    CurrentMap.PlayerY = CurrentMap.Height / 2;
                                 }
+
+                                Console.Clear();
+                                Console.WriteLine($"{nextMap} 맵으로 이동!");
                             }
                         }
                         break;
@@ -152,13 +161,19 @@ namespace TextRPG.Class.Manager
         }
 
 
+        private void GotoDunGeon()
+        {
+            var battleManager = GameManager.Instance.BattleManager;
+            GameManager.Instance.Scene.ChangeScene("DungeonScene");
+            battleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
+            Console.ReadKey(true);
+        }
         private void StartBattleScene()
         {
             var battleManager = GameManager.Instance.BattleManager;
-            battleManager.StartDungeonBattle(GameManager.Instance.CreateManager.Player);
-            Console.WriteLine("전투가 종료되었습니다. 아무 키나 눌러 계속...");
+            battleManager.Battle();
             Console.ReadKey(true);
-        }
 
+        }
     }
 }

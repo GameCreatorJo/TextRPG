@@ -58,10 +58,6 @@ namespace TextRPG.Class.Manager
 
             monsters = GenerateDungeonMonsters(difficulty);
 
-            Console.WriteLine("\n전투 시작!\n");
-            SearchHP(player, monsters[0]);
-            
-            
         }
 
         public void Battle()
@@ -81,6 +77,8 @@ namespace TextRPG.Class.Manager
             */
 
             //Console.Clear();
+            Console.WriteLine("\n전투 시작!\n");
+            SearchHP(player, monsters[0]);
             while (player.Hp > 0 && monsters.Any(m => GetEffectiveMonsterHp(m) > 0))
             {
                 ShowBattleStatus();
