@@ -77,6 +77,13 @@ namespace TextRPG.Class.Manager
             */
 
             //Console.Clear();
+
+            if (monsters.All(m => GetEffectiveMonsterHp(m) <= 0))
+            {
+                Console.WriteLine("이미 쓰러트린 몬스터입니다.");
+                return;
+            }
+
             Console.WriteLine("\n전투 시작!\n");
             SearchHP(player, monsters[0]);
             while (player.Hp > 0 && monsters.Any(m => GetEffectiveMonsterHp(m) > 0))
