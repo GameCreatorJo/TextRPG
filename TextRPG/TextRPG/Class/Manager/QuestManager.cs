@@ -148,7 +148,7 @@ namespace TextRPG.Class.Manager
             }
 
             Console.WriteLine("\n처치 이벤트 발생!");
-            UpdateQuestKillCount(monster.Name); // 또는 monster.Job, monster.Key
+            UpdateQuestKillCount(monster.Job); // 또는 monster.Job, monster.Key
         }
              
 

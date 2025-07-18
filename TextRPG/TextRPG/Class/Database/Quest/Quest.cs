@@ -25,7 +25,7 @@ namespace TextRPG.Class.Database.QuestData
             Failed
 
         }
-        public QuestData(int id, string title, string description, int killTarget, int killCount)
+        public QuestData(int id, string title, string description, int killTarget, int killCount, string targetMonsterKey)
         {
             Id = id;// 퀘스트 ID
             Title = title;// 퀘스트 제목
@@ -33,7 +33,12 @@ namespace TextRPG.Class.Database.QuestData
             KillTarget = killTarget;// 목표 처치 수
             KillCount = killCount;// 현재 처치 수
             IsCompleted = false;// 완료 여부
+            TargetMonsterKey = targetMonsterKey;
+           
         }
+
+
+        
         public void UpdateKill()// 퀘스트 진행도 업데이트 메서드
         {
             if (!IsCompleted)
