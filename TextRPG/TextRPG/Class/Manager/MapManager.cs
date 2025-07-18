@@ -105,7 +105,8 @@ namespace TextRPG.Class.Manager
                                 }
                                 else
                                 {
-                                    GameManager.Instance.CreateManager.MusicManager.PlayBgm3();
+                                    if (!GameManager.Instance.CreateManager.MusicManager.IsTownMusicPlaying)
+                                        GameManager.Instance.CreateManager.MusicManager.PlayBgm3();
                                 }
 
                                 CurrentMap = mapDatabase.GetMap(nextMap);

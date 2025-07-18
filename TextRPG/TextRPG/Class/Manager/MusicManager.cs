@@ -41,6 +41,8 @@ namespace TextRPG.Class.Manager
             _soundPlayer.PlayLooping();
         }
 
+        public bool IsTownMusicPlaying =>
+            _soundPlayer?.SoundLocation == bgmPaths[3];
         public void PlayBgm1() => PlayBgm(1);
         public void PlayBgm2() => PlayBgm(2);
         public void PlayBgm3() => PlayBgm(3);
