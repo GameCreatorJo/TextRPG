@@ -66,7 +66,7 @@ namespace TextRPG.Class.Manager
         {
             while (true)
             {
-                Console.WriteLine("1: 상태창, 2: 던전, 3: 상점, 4: 맵 이동, 5: 퀘스트 메뉴 6: 종료");
+                Console.WriteLine("1: 상태창, 2: 맵 이동, 3: 퀘스트 메뉴 4: 종료");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -74,23 +74,13 @@ namespace TextRPG.Class.Manager
                         _scene.ChangeScene("StatusScene");
                         break;
                     case "2":
-                        _scene.ChangeScene("DungeonScene");
-                        break;
-                    case "3":
-                        _scene.ChangeScene("ShopScene");
-                        break;
-                    case "4":
                         _mapManager.StartMap("Town");
                         _mapManager.RunMapLoop();
-
-                        _scene.ChangeScene("MainScene");
                         break;
-                    case "5":
+                    case "3":
                         _scene.ChangeScene("QuestScene");
-                        _scene = _createManager.SceneDatabase.SceneDictionary["QuestScene"];
-                        
                         break;
-                    case "6":
+                    case "4":
                         Console.WriteLine("게임 종료");
                         return;
                     default:
