@@ -1,6 +1,7 @@
 ﻿using System;
 using TextRPG.Class.Default;
 using TextRPG.Class.Manager;
+using TextRPG.Class.UI;
 
 namespace TextRPG.Class.Scenes
 {
@@ -191,9 +192,9 @@ namespace TextRPG.Class.Scenes
             Console.WriteLine("|           퀘스트 관리소              |");
             Console.WriteLine("+======================================+");
 
-            //QuestManager.Instance.ShowQuestMenu();
+            QuestUI.Instance.ShowQuestMenu();
 
-            
+
 
 
         }

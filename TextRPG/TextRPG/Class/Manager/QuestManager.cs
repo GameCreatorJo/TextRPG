@@ -37,8 +37,16 @@ namespace TextRPG.Class.Manager
         private QuestData? _activeQuest;
         private QuestDatabase? _questDatabase;
 
+        public QuestDatabase GetDatabase()
+        {
+            if (_questDatabase == null)
+            {
+                _questDatabase = new QuestDatabase(); // 필요 시 초기화
+            }
+            return _questDatabase;
+        }
 
-        
+
         private QuestUI? _questUI;
 
         public void Initialize(QuestDatabase database, QuestUI? questUI = null)
@@ -59,29 +67,8 @@ namespace TextRPG.Class.Manager
             {
                 Console.WriteLine("QuestUI가 연결되지 않았습니다.");
             }
-        }
-
-
-        //퀘스트 수락
-        public void SelectQuest(int questId)
-        {
-            AcceptQuest(questId);
-            QuestData quest = _questDatabase.GetQuestById(questId);
-            if (quest != null )
-            {
-                
-                _activeQuest = quest;
-                Console.WriteLine($"퀘스트 '{_activeQuest.Title}'을(를) 수락했습니다.");
-                //Console.WriteLine("Enter를 누르면 퀘스트 메뉴로 돌아갑니다.");
-                
-            }
-            else
-            {
-                Console.WriteLine("퀘스트를 찾을 수 없습니다.");
-            }
-        }
+        }          
         
-
 
         public void AcceptQuest(int questId)
         {
@@ -135,10 +122,7 @@ namespace TextRPG.Class.Manager
                         // 보상 지급 로직 추가 가능
                     }
                 }
-            }
-
-
-           
+            }          
 
         }
         
@@ -153,8 +137,8 @@ namespace TextRPG.Class.Manager
         {
             return _questDatabase.GetAllQuests().Values.ToArray();
         }
-        //퀘스트 메뉴 진행되는 메서드
-       
+        
+        //퀘스트 메뉴 진행되는 메서드       
         public void PromptKillProgress(Monster? monster)
         {
             if (monster == null)
@@ -166,9 +150,7 @@ namespace TextRPG.Class.Manager
             Console.WriteLine("\n처치 이벤트 발생!");
             UpdateQuestKillCount(monster.Name); // 또는 monster.Job, monster.Key
         }
-
-
-       
+             
 
         
         
